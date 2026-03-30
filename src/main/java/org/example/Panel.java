@@ -15,6 +15,7 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener{
     private Menu menu;
 
 
+
     private int x,sx;
     private int y,sy;
 //    private int width;

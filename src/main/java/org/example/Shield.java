@@ -29,6 +29,7 @@ public class Shield implements MouseMotionListener {
         this.s_h = s_h;
 
     }
+
     public void vykresleniObr(Graphics g) {
         g.drawImage(image,s_x,s_y,s_w,s_h,null);
     }

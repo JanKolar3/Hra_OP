@@ -8,7 +8,12 @@ import java.awt.event.ActionListener;
 public class Menu extends JPanel {
 
     public String SOUBOR_MENU = "src/main/resources/menuBackground.png";
-    private Image image;
+    private String BUTTON_START = "src/main/resources/button_play - kopie.png";
+    private String BUTTON_EXIT = "src/main/resources/button_exit - kopie.png";
+
+    private Image i_menu;
+    private Image i_button_play;
+    private Image i_button_stop;
     Panel panel;
     private int x;
     private int y;
@@ -16,7 +21,9 @@ public class Menu extends JPanel {
     private int h;
 
     public Menu(int x,int y,int w,int h) {
-        image = new ImageIcon(SOUBOR_MENU).getImage();
+        i_menu = new ImageIcon(SOUBOR_MENU).getImage();
+        i_button_play = new ImageIcon(BUTTON_START).getImage();
+        i_button_stop = new ImageIcon(BUTTON_EXIT).getImage();
 //        setBackground(Color.white);
         this.x=x;
         this.y=y;
@@ -33,11 +40,12 @@ public class Menu extends JPanel {
         setLayout(new FlowLayout(FlowLayout.CENTER));
         add(button);
         add(button1);
+
         button.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                image=null;
+                i_menu=null;
                 button.setVisible(false);
                 button1.setVisible(false);
 
@@ -59,7 +67,7 @@ public class Menu extends JPanel {
 
     public void vykresleniMenu(Graphics g) {
 
-        g.drawImage(image,x,y,w,h,null);
+        g.drawImage(i_menu,x,y,w,h,null);
 
     }
 }
