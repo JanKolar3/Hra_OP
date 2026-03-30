@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Enemy {
 
-    private String SOUBOR_ENEMY = "src/main/resources/untitled.png";
+    private String SOUBOR_ENEMy = "src/main/resources/untitled.png";
 
 
     private int e_id;
@@ -20,7 +20,7 @@ public class Enemy {
     Image image;
 
     public Enemy(int x ,int y ,int e_width, int e_height,int speed) {
-
+        image = new ImageIcon(SOUBOR_ENEMy).getImage();
 
 
         this.e_x = x;
@@ -40,7 +40,7 @@ public class Enemy {
     }
 
     public void vykresleniObr(Graphics g) {
-        g.drawImage(SOUBOR_ENEMY[0],e_x,e_y,e_width,e_height,null);
+        g.drawImage(image,e_x,e_y,e_width,e_height,null);
     }
 
     public int getMax() {
