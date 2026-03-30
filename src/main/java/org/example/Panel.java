@@ -3,16 +3,22 @@ package org.example;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.util.Map;
+import java.util.Random;
 
 public class Panel extends JPanel implements KeyListener, MouseMotionListener{
 
     private String SOUBOR_POZADI = "src/main/resources/Player/tilemaptry.png";
 
+    ArrayList<Enemy> pole_enemy =new ArrayList<>();
+
     private Image image;
     private Player player;
     private Shield shield;
     private Menu menu;
+    private Enemy enemy;
+
 
 
 
@@ -32,32 +38,40 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener{
 
 
 
-
-
-
-
-
         addKeyListener(this);
         addMouseMotionListener(this);
         setFocusable(true);
 
 
 
-
         new Timer(16, e -> {
 
             shieldRotate();
-
-
-
+            repaint();
             player.playerAnimation();
             player.setIndex(player.getIndex());
-            repaint();
+
+            addEnemy();
+            for(Enemy enemy : pole_enemy){
+                enemy.zaPlayer(player);
+
+            }
+
+
 
         }).start();
 
 
 
+    }
+
+    public void addEnemy(){
+        Random rand = new Random();
+        if (pole_enemy.size() >10){
+            enemy = new Enemy(rand.nextInt(1,400),rand.nextInt(1,400),50,50,10);
+            pole_enemy.add(enemy);
+
+        }
     }
 
     public void shieldRotate(){
@@ -80,12 +94,21 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener{
     @Override
     protected void paintComponent(Graphics g) {
             super.paintComponents(g);
-
-
             g.drawImage(image,x,y,getWidth(),getHeight(),this);
-            player.vykresleniObr(g);
-            shield.vykresleniObr(g);
+
+
+
+            for (Enemy enemy : pole_enemy){
+                enemy.vykresleniObr(g);
+            }
+        player.vykresleniObr(g);
+        shield.vykresleniObr(g);
         menu.vykresleniMenu(g);
+
+
+
+
+
 
 
 
