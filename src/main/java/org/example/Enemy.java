@@ -17,7 +17,7 @@ public class Enemy {
     private int e_height;
     private int speed;
 
-    Image image;
+    private Image image;
 
     public Enemy(int x ,int y ,int e_width, int e_height,int speed) {
         image = new ImageIcon(SOUBOR_ENEMy).getImage();
@@ -25,9 +25,10 @@ public class Enemy {
 
         this.e_x = x;
         this.e_y = y;
-    this.e_width = e_width;
-    this.e_height = e_height;
-    this.speed = speed;
+        this.e_width = e_width;
+        this.e_height = e_height;
+        this.speed = speed;
+
 
     }
 
@@ -41,6 +42,7 @@ public class Enemy {
 
     public void vykresleniObr(Graphics g) {
         g.drawImage(image,e_x,e_y,e_width,e_height,null);
+
     }
 
     public int getMax() {

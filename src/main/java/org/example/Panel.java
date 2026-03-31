@@ -17,7 +17,7 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener{
     private Player player;
     private Shield shield;
     private Menu menu;
-    private Enemy enemy;
+    //private Enemy enemy;
 
 
 
@@ -35,12 +35,12 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener{
         player = new Player(40,40,70,70);
         shield = new Shield(16*3,16*3);
         add(menu);
-
-
-
         addKeyListener(this);
         addMouseMotionListener(this);
         setFocusable(true);
+
+
+
 
 
 
@@ -52,6 +52,7 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener{
             player.setIndex(player.getIndex());
 
             addEnemy();
+
             for(Enemy enemy : pole_enemy){
                 enemy.zaPlayer(player);
 
@@ -63,13 +64,15 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener{
 
 
 
+
     }
 
     public void addEnemy(){
-        Random rand = new Random();
-        if (pole_enemy.size() >10){
-            enemy = new Enemy(rand.nextInt(1,400),rand.nextInt(1,400),50,50,10);
+        if (pole_enemy.size() <10){
+            Random rand = new Random();
+            Enemy enemy = new Enemy(rand.nextInt(1,400),rand.nextInt(1,400),64,64,1);
             pole_enemy.add(enemy);
+
 
         }
     }
@@ -101,8 +104,10 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener{
             for (Enemy enemy : pole_enemy){
                 enemy.vykresleniObr(g);
             }
+
         player.vykresleniObr(g);
         shield.vykresleniObr(g);
+        //enemy.vykresleniObr(g);
         menu.vykresleniMenu(g);
 
 
