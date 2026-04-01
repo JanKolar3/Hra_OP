@@ -30,8 +30,16 @@ public class Shield implements MouseMotionListener {
 
     }
 
+    public Rectangle hitBox() {
+        return new Rectangle(s_x+(getS_w()/4),s_y,s_w/2,s_h);
+    }
+    public boolean collision(Enemy enemy) {
+        return enemy.hitBox().intersects(hitBox());
+    }
+
     public void vykresleniObr(Graphics g) {
         g.drawImage(image,s_x,s_y,s_w,s_h,null);
+        g.drawRect(s_x+(getS_w()/4),s_y,s_w/2,s_h);
     }
 
 
@@ -71,5 +79,17 @@ public class Shield implements MouseMotionListener {
     public void setS_y(int s_y) {
         this.s_y = s_y;
     }
+    public int getS_w() {
+        return s_w;
+    }
 
+    public void setS_w(int s_w) {
+        this.s_w = s_w;
+    }
+    public int getS_h() {
+        return s_h;
+    }
+    public void setS_h(int s_h) {
+        this.s_h = s_h;
+    }
 }

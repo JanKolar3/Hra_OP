@@ -10,6 +10,7 @@ public class Player implements KeyListener {
     private String SOUBOR_PLAYER = "src/main/resources/Player1.png";
 //    Image[] PLAYER = SpriteLoader.getFrames("src/main/resources/PlayerAnimace.png",16,16,8);
     private Image img;
+    Enemy enemy;
     private int index = 0;
     private int index_count = 8;
     private int animation_speed = 0;
@@ -18,6 +19,7 @@ public class Player implements KeyListener {
     private int pl_width;
     private int pl_height;
     private int pl_speed = 5;
+    private int health;
 
 
 
@@ -33,10 +35,22 @@ public class Player implements KeyListener {
         this.pl_height = height;
     }
 
+    public Rectangle hitBox() {
+
+        return new Rectangle(pl_x+(getPl_width()/4), pl_y, pl_width/2, pl_height);
+    }
+
+//    public boolean collision() {
+
+//        return enemy.collision().intersects(hitBox());
+//    }
+
     public void vykresleniObr(Graphics g) {
         g.drawImage(img,pl_x,pl_y,pl_height,pl_width,null);
+        g.drawRect(pl_x+(getPl_width()/4), pl_y, pl_width/2, pl_height);
 //        g.drawImage(PLAYER[index],pl_x,pl_y,pl_width,pl_height, null);
     }
+
 
 
     public void playerAnimation() {
@@ -69,7 +83,8 @@ public class Player implements KeyListener {
             pl_x-= pl_speed;
         }if  (znak == 'd') {
             pl_x+= pl_speed;
-            System.out.println("AAAAAAA");}
+//            System.out.println("AAAAAAA");
+            }
 
 
     }
