@@ -118,6 +118,7 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener{
             System.out.println(health);
         }
         if (health == 0) {
+            health =6;
             System.out.println("GAME OVER");
         }
     }
@@ -138,8 +139,6 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener{
                 if (shield.collision(enemy)){
                     System.out.println("Shield collision");
                     pole_enemy.remove(enemy);
-
-
                 }
             }
         player.vykresleniObr(g);

@@ -61,6 +61,7 @@ public class Player implements KeyListener {
                 index = 0;
             }
             animation_speed = 0;
+
         }
     }
 
