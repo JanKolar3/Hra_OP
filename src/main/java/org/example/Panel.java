@@ -127,6 +127,7 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener{
     }
 
 
+
     @Override
     protected void paintComponent(Graphics g) {
             super.paintComponents(g);
