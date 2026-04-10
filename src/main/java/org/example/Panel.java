@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
 
-public class Panel extends JPanel implements KeyListener, MouseMotionListener{
+public class Panel extends JPanel implements KeyListener, MouseMotionListener,MouseListener{
 
     private String SOUBOR_POZADI = "src/main/resources/Player/tilemaptry.png";
 
@@ -38,11 +38,12 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener{
         shield = new Shield(16*3,16*3);
 
 
-        add(menu);
+//        add(menu);
 
 
 
         addKeyListener(this);
+        addMouseListener(this);
         addMouseMotionListener(this);
         setFocusable(true);
 
@@ -89,7 +90,7 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener{
 
     public void addEnemy(){
         Random rand = new Random();
-        if (pole_enemy.size() <1){
+        if (pole_enemy.size() <0){
             enemy = new Enemy(rand.nextInt(1,400),rand.nextInt(1,400),50,50,1);
             pole_enemy.add(enemy);
 
@@ -134,6 +135,7 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener{
             g.drawImage(image,x,y,getWidth(),getHeight(),this);
 
             project.draw(g);
+
 
             for (Enemy enemy : pole_enemy){
                 enemy.vykresleniObr(g);
@@ -182,6 +184,7 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener{
 //        shield.mouseMoved(e);
         sy=e.getY();
         sx=e.getX();
+        menu.mouseMoved(e);
 
     }
 
@@ -196,4 +199,28 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener{
         return y;
     }
 
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        menu.mouseClicked(e);
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
 }
