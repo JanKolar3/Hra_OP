@@ -58,7 +58,7 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
 
             player.playerAnimation();
             player.setIndex(player.getIndex());
-            project.direction(player);
+//            project.direction(player);
 
 
             addEnemy();

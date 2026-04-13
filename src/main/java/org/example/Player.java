@@ -59,7 +59,7 @@ public class Player implements KeyListener {
 
 
     public void vykresleniObr(Graphics g) {
-//        g.drawImage(img,pl_x,pl_y,pl_height,pl_width,null);
+        g.drawImage(img,pl_x,pl_y,pl_height,pl_width,null);
         g.drawRect(pl_x+(getPl_width()/4), pl_y, pl_width/2, pl_height);
 
 

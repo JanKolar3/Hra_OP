@@ -28,6 +28,8 @@ public class Menu extends JPanel implements MouseListener, MouseMotionListener {
 //    private JButton button1;
     private int sx=190,sy=210,sw=26*10,sh=14*10,ex=210,ey=360,ew=22*10,eh=13*10;
     private int x,y,w,h;
+    private Rectangle rect;
+    private Rectangle rect1;
 
 
     public Menu(int x,int y,int w,int h) {
@@ -49,10 +51,19 @@ public class Menu extends JPanel implements MouseListener, MouseMotionListener {
     }
 
     public Rectangle rectangle() {
+
+        Rectangle rect = new Rectangle();
+
             return new Rectangle(sx,sy,sw,sh);
     }
     public Rectangle rectangle1() {
-        return new Rectangle(ex,ey,ew,eh);
+        Rectangle rect1 = new Rectangle(ex,ey,ew,eh);
+        return rect1;
+    }
+
+    public void removeRect(Rectangle rectangle){
+
+        rect1 = null;
     }
 
 //    public void buttons() {
@@ -150,6 +161,11 @@ public class Menu extends JPanel implements MouseListener, MouseMotionListener {
             setI_button_play(null) ;
             setI_button_playPush(null) ;
             setI_button_stop(null) ;
+            setI_button_stopPush(null);
+            removeRect(rectangle());
+
+
+
         }
         if (rectangle1().contains(e.getPoint())) {
             System.exit(0);
