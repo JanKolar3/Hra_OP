@@ -19,12 +19,8 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
     private Shield shield;
     private Menu menu;
     private Enemy enemy;
-    Projectyle project;
+//    Projectyle project;
     int health = 6;
-
-
-
-
 
     private int x,sx;
     private int y,sy;
@@ -75,6 +71,7 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
             }
             for (Projectyle projectyle:pole_proj){
                 projectyle.direction(player);
+//                healthBar();
 
             }
 //
@@ -95,11 +92,7 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
 
         }).start();
 
-
-
     }
-
-
 
     public void addEnemy(){
         Random rand = new Random();
@@ -115,7 +108,6 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
 //        pole_proj.add(project);
 //    }
 //    }
-
     public void shieldRotate(){
         double radius = 50;
 
@@ -123,10 +115,8 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
         double dy = sy - player.getPl_y();
         double angle = Math.atan2(dy, dx);
 
-
         double shieldX = player.getPl_x() + Math.cos(angle) * radius;
         double shieldY = player.getPl_y() + Math.sin(angle) * radius;
-
 
         shield.setS_x((int) shieldX);
         shield.setS_y((int) shieldY);
@@ -152,17 +142,10 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
 
     }
 
-
-
     @Override
     protected void paintComponent(Graphics g) {
             super.paintComponents(g);
             g.drawImage(image,x,y,getWidth(),getHeight(),this);
-
-
-
-
-
 
             for (Enemy enemy : pole_enemy){
                 enemy.vykresleniObr(g);
