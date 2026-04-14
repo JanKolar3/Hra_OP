@@ -37,37 +37,58 @@ public class Enemy {
 
 
     public void zaPlayer(Player player) {
-        int rozmezix;
-        int rozmeziy;
-//        rozmezi = player.getPl_x()+player.getPl_y();
-        rozmezix = player.getPl_x()+e_x/2;
-        rozmeziy = player.getPl_y()+e_y/2;
-//        System.out.println(player.getPl_x()+" "+player.getPl_y()+" "+ e_x+" "+e_y+" "+rozmezix+" "+rozmeziy);
-        if (player.getPl_x() > e_x){
-            e_x += speed;
-            if (rozmeziy < e_x){
-                e_x -= 1;
-            }
-        }
+        double dx = player.getPl_x() - this.e_x;
+        double dy = player.getPl_y() - this.e_y;
 
-        if (player.getPl_x() < e_x){
-            e_x -= speed;
-            if (rozmeziy > e_x){
-                e_x += 1;
-            }
+        double distanceSquared = dx * dx + dy * dy;
+        double radius = 150;
+        double radiusSquared = radius * radius;
+
+        if (distanceSquared < radiusSquared) {
+            this.e_x += (Math.random() - 0.5) * 2;
+            this.e_y += (Math.random() - 0.5) * 2;
+        } else {
+
+            double length = Math.sqrt(distanceSquared);
+
+            dx /= length;
+            dy /= length;
+
+            double speed = 2;
+
+            this.e_x += dx * speed;
+            this.e_y += dy * speed;
         }
-        if (player.getPl_y() > e_y){
-            e_y += speed;
-            if (rozmezix < e_y){
-                e_y -= 1;
-            }
-        }
-        if (player.getPl_y() < e_y){
-            e_y -= speed;
-            if (rozmezix > e_y){
-                e_y += 1;
-            }
-        }
+//        rozmezi = player.getPl_x()+player.getPl_y();
+//        rozmezix = player.getPl_x()+e_x/2;
+//        rozmeziy = player.getPl_y()+e_y/2;
+//        System.out.println(player.getPl_x()+" "+player.getPl_y()+" "+ e_x+" "+e_y+" "+rozmezix+" "+rozmeziy);
+//        if (player.getPl_x() > e_x){
+//            e_x += speed;
+//
+//            if (rozmeziy < e_x){
+//                e_x -= 1;
+//            }
+//        }
+//
+//        if (player.getPl_x() < e_x){
+//            e_x -= speed;
+//            if (rozmeziy > e_x){
+//                e_x += 1;
+//            }
+//        }
+//        if (player.getPl_y() > e_y){
+//            e_y += speed;
+//            if (rozmezix < e_y){
+//                e_y -= 1;
+//            }
+//        }
+//        if (player.getPl_y() < e_y){
+//            e_y -= speed;
+//            if (rozmezix > e_y){
+//                e_y += 1;
+//            }
+//        }
     }
     public Rectangle hitBox(){
         return new Rectangle(e_x+(getE_width()/4),e_y+(getE_width()/4),e_width/2,e_height/2);
@@ -80,8 +101,7 @@ public class Enemy {
 
     public void vykresleniObr(Graphics g) {
         g.drawImage(image,e_x,e_y,e_width,e_height,null);
-        g.drawRect(e_x+(getE_width()/4),e_y+(getE_width()/4),e_width/2,e_height/2);;
-
+        g.drawRect(e_x+(getE_width()/4),e_y+(getE_width()/4),e_width/2,e_height/2);
     }
 
     public int getMax() {

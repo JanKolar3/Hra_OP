@@ -10,6 +10,7 @@ public class Shield implements MouseMotionListener {
     private String SOUBOR_SHIELD = "src/main/resources/shield.png";
     private Image image;
     Player player;
+//    Projectyle projectyle;
 
     private int x;
     private int y;
@@ -35,6 +36,10 @@ public class Shield implements MouseMotionListener {
     }
     public boolean collision(Enemy enemy) {
         return enemy.hitBox().intersects(hitBox());
+
+    }
+    public boolean collision1(Projectyle projectyle){
+        return projectyle.hitBox().intersects(hitBox());
     }
 
     public void vykresleniObr(Graphics g) {
