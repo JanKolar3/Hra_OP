@@ -62,7 +62,6 @@ public class Menu extends JPanel implements MouseListener, MouseMotionListener {
     }
 
     public void removeRect(Rectangle rectangle){
-
         rect1 = null;
     }
 

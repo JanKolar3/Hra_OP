@@ -12,12 +12,10 @@ public class Player implements KeyListener {
     private String SOUBOR_PLAYER3 = "src/main/resources/Player/Player_a.png";
 
 
-
-
-
 //    Image[] PLAYER = SpriteLoader.getFrames("src/main/resources/PlayerAnimace.png",16,16,8);
     private Image img, img2, img3;
     Enemy enemy;
+    Projectyle projectyle;
     private int index = 0;
     private int index_count = 8;
     private int animation_speed = 0;
@@ -51,17 +49,16 @@ public class Player implements KeyListener {
         return new Rectangle(pl_x+(getPl_width()/4), pl_y, pl_width/2, pl_height);
     }
 
-//    public boolean collision() {
+    public boolean collision(Projectyle projectyle) {
 
-//        return enemy.collision().intersects(hitBox());
-//    }
+        return projectyle.hitBox().intersects(hitBox());
+    }
 
 
 
     public void vykresleniObr(Graphics g) {
         g.drawImage(img,pl_x,pl_y,pl_height,pl_width,null);
         g.drawRect(pl_x+(getPl_width()/4), pl_y, pl_width/2, pl_height);
-
 
         if (direction == "up") {
             g.drawImage(img2,pl_x,pl_y,pl_width,pl_height,null);

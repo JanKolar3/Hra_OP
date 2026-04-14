@@ -19,7 +19,7 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
     private Shield shield;
     private Menu menu;
     private Enemy enemy;
-//    Projectyle project;
+    Projectyle project;
     int health = 6;
 
     private int x,sx;
@@ -56,22 +56,24 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
 
             player.playerAnimation();
             player.setIndex(player.getIndex());
-//            project.direction(player);
-
 //            addProj();
             addEnemy();
             for(Enemy enemy : pole_enemy){
                 enemy.zaPlayer(player);
                 healthBar();
                 enemy.cooldownProj(player,pole_proj);
-                if (shield.collision(enemy)){
 
+                if (shield.collision(enemy)){
 //                    System.out.println("Shield collision");
                 }
             }
             for (Projectyle projectyle:pole_proj){
                 projectyle.direction(player);
-//                healthBar();
+                healthBar();
+                if (player.collision(projectyle)){
+//                    healthBar();
+                    System.out.println("adahduagd");
+                }
 
             }
 //
@@ -100,14 +102,14 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
             enemy = new Enemy(rand.nextInt(1,400),rand.nextInt(1,400),50,50,1);
             pole_enemy.add(enemy);
         }
-    }
+//    }
 //    public void addProj() {
 //        Random random = new Random();
 //        if (pole_proj.size() < 1){
 //            project = new Projectyle(random.nextInt(1, 400), random.nextInt(1, 400), 50, 50);
 //        pole_proj.add(project);
 //    }
-//    }
+    }
     public void shieldRotate(){
         double radius = 50;
 
@@ -128,7 +130,7 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
             System.out.println(health);
 
         }
-//        if (project.collision(player)){
+//        if (player.collision(project)){
 //            health -= 1;
 //            System.out.println(health);
 //        }
@@ -151,14 +153,17 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
                 enemy.vykresleniObr(g);
                 if (shield.collision(enemy)){
                     System.out.println("Shield collision");
-                    pole_enemy.remove(enemy);
+//                    pole_enemy.remove(enemy);
                 }
             }
-            for (Projectyle projectyle:pole_proj){
+        for (int i = 0; i < pole_proj.size(); i++) {
+            Projectyle projectyle = pole_proj.get(i);
                 projectyle.draw(g);
+
                 if (shield.collision1(projectyle)){
                     System.out.println("coll");
                     pole_proj.remove(projectyle);
+                    i--;
                 }
             }
         player.vykresleniObr(g);

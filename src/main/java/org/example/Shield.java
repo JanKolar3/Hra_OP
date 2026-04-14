@@ -36,7 +36,6 @@ public class Shield implements MouseMotionListener {
     }
     public boolean collision(Enemy enemy) {
         return enemy.hitBox().intersects(hitBox());
-
     }
     public boolean collision1(Projectyle projectyle){
         return projectyle.hitBox().intersects(hitBox());
@@ -45,6 +44,9 @@ public class Shield implements MouseMotionListener {
     public void vykresleniObr(Graphics g) {
         g.drawImage(image,s_x,s_y,s_w,s_h,null);
         g.drawRect(s_x+(getS_w()/4),s_y,s_w/2,s_h);
+    }
+    public void pohyb(){
+
     }
 
 
