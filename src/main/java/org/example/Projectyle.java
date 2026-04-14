@@ -7,14 +7,14 @@ public class Projectyle {
     private String SOUBOR_PROJECTYLE = "src/main/resources/red_proj (1).gif";
 
 
-//    Player player;
+    Player player;
     private Image image;
 
     private int x;
     private int y;
     private int width;
     private int height;
-    private int speed=1;
+    private int speed=2;
 //    private double kx, ky;
     private double dx, dy;
 
@@ -26,7 +26,6 @@ public class Projectyle {
         this.x = x;
         this.width = width;
         this.height = height;
-
 //        direction();
 
 
@@ -45,8 +44,6 @@ public class Projectyle {
     }
     public boolean collision(Player player){
         return player.hitBox().intersects(hitBox());
-
-
     }
 
     public void draw(Graphics g){
@@ -77,5 +74,9 @@ public class Projectyle {
 
     public int getHeight() {
         return height;
+    }
+
+    public int getSpeed() {
+        return speed;
     }
 }

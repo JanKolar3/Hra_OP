@@ -8,8 +8,13 @@ public class Enemy {
 
     private String SOUBOR_ENEMy = "src/main/resources/untitled.png";
 
+    Projectyle projectyle;
     Shield shield;
     Player player;
+//    ArrayList<Projectyle> pole_proj = new ArrayList<>();
+    private int cooldown = 240;
+    private int shootcooldown = 0;
+//    private int x,y,pspeed = 1;
     private int e_id;
     private int max;
     private int e_x;
@@ -32,7 +37,28 @@ public class Enemy {
     this.e_height = e_height;
     this.speed = speed;
 
+
+
     }
+
+    public void cooldownProj(Player player,ArrayList<Projectyle> projectyl){
+//        zaPlayer(player);
+//        projectyle.direction(player);
+
+
+
+
+        shootcooldown --;
+        if (shootcooldown<=0){
+
+            projectyl.add(new Projectyle(e_x,e_y,50,50));
+
+            shootcooldown = cooldown;
+        }
+
+    }
+
+
 
 
 
@@ -41,7 +67,7 @@ public class Enemy {
         double dy = player.getPl_y() - this.e_y;
 
         double distanceSquared = dx * dx + dy * dy;
-        double radius = 150;
+        double radius = 200;
         double radiusSquared = radius * radius;
 
         if (distanceSquared < radiusSquared) {
