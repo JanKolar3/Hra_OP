@@ -62,7 +62,7 @@ public class Enemy {
 
 
 
-    public void zaPlayer(Player player) {
+    public void enemyMove(Player player) {
         double dx = player.getPl_x() - this.e_x;
         double dy = player.getPl_y() - this.e_y;
 

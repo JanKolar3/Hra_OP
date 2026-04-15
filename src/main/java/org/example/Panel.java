@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class Panel extends JPanel implements KeyListener, MouseMotionListener,MouseListener{
 
-    private String SOUBOR_POZADI = "src/main/resources/Player/tilemaptry.png";
+    private String SOUBOR_POZADI = "src/main/resources/floor.png";
 
     ArrayList<Enemy> pole_enemy =new ArrayList<>();
     ArrayList<Projectyle> pole_proj = new ArrayList<>();
@@ -24,8 +24,8 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
 
     private int x,sx;
     private int y,sy;
-//    private int width;
-//    private int height;
+    private int width=320*1;
+    private int height=320*1;
 
 
     public Panel() {
@@ -59,7 +59,7 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
 //            addProj();
             addEnemy();
             for(Enemy enemy : pole_enemy){
-                enemy.zaPlayer(player);
+                enemy.enemyMove(player);
                 healthBar();
                 enemy.cooldownProj(player,pole_proj);
 
@@ -147,8 +147,7 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
     @Override
     protected void paintComponent(Graphics g) {
             super.paintComponents(g);
-            g.drawImage(image,x,y,getWidth(),getHeight(),this);
-
+            g.drawImage(image,x,y,width,height,this);
             for (Enemy enemy : pole_enemy){
                 enemy.vykresleniObr(g);
                 if (shield.collision(enemy)){
