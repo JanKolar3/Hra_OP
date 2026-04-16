@@ -30,23 +30,15 @@ public class Enemy {
 
         image = new ImageIcon(SOUBOR_ENEMy).getImage();
 
-
         this.e_x = x;
         this.e_y = y;
     this.e_width = e_width;
     this.e_height = e_height;
     this.speed = speed;
 
-
-
     }
 
     public void cooldownProj(Player player,ArrayList<Projectyle> projectyl){
-//        zaPlayer(player);
-//        projectyle.direction(player);
-
-
-
 
         shootcooldown --;
         if (shootcooldown<=0){

@@ -23,8 +23,9 @@ public class Player implements KeyListener {
     private int pl_y;
     private int pl_width;
     private int pl_height;
-    private int pl_speed = 5;
+    private int pl_speed = 3;
     private int health;
+    private boolean up,down,left,right;
 
     private String direction;
 
@@ -60,19 +61,15 @@ public class Player implements KeyListener {
         g.drawImage(img,pl_x,pl_y,pl_height,pl_width,null);
         g.drawRect(pl_x+(getPl_width()/4), pl_y, pl_width/2, pl_height);
 
+
         if (direction == "up") {
             g.drawImage(img2,pl_x,pl_y,pl_width,pl_height,null);
-
         }
-
         if (direction == "right") {
             g.drawImage(img,pl_x,pl_y,pl_width,pl_height,null);
-
-
         }
         if (direction == "left") {
             g.drawImage(img3,pl_x,pl_y,pl_width,pl_height,null);
-
         }
         if (direction == "down") {
             g.drawImage(img,pl_x,pl_y,pl_width,pl_height,null);
@@ -99,9 +96,27 @@ public class Player implements KeyListener {
                 index = 0;
             }
             animation_speed = 0;
-
         }
     }
+    public void moveMent() {
+        if (up) {
+            pl_y -= pl_speed;
+            direction = "up";
+        }
+        if (down) {
+            pl_y += pl_speed;
+            direction = "down";
+        }
+        if (left) {
+            pl_x -= pl_speed;
+            direction = "left";
+        }
+        if (right) {
+            pl_x += pl_speed;
+            direction = "right";
+        }
+    }
+
 
 
 
@@ -114,26 +129,39 @@ public class Player implements KeyListener {
     public void keyPressed(KeyEvent e) {
         char znak = e.getKeyChar();
         if  (znak == 'w') {
-            pl_y-= pl_speed;
-            direction = "up";
-
+            up = true;
+//            pl_y-= pl_speed;
+//            direction = "up";
         }if  (znak == 's') {
-            pl_y+= pl_speed;
-            direction = "down";
+            down = true;
+//            pl_y+= pl_speed;
+//            direction = "down";
         }if  (znak == 'a') {
-            pl_x-= pl_speed;
-            direction = "left";
+            left = true;
+//            pl_x-= pl_speed;
+//            direction = "left";
         }if  (znak == 'd') {
-            pl_x+= pl_speed;
-            direction = "right";
-//            System.out.println("AAAAAAA");
+            right=true;
+//            pl_x+= pl_speed;
+//            direction = "right";
             }
+
 
 
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
+        char znak = e.getKeyChar();
+        if  (znak == 'w') {
+            up = false;
+        }if  (znak == 's') {
+            down = false;
+        }if  (znak == 'a') {
+            left = false;
+        }if  (znak == 'd') {
+            right=false;
+        }
     }
 
 

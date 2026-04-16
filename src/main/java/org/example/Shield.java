@@ -2,11 +2,9 @@ package org.example;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 
-public class Shield implements MouseMotionListener {
+public class Shield implements MouseMotionListener, KeyListener {
     private String SOUBOR_SHIELD = "src/main/resources/shield.png";
     private Image image;
     Player player;
@@ -45,11 +43,6 @@ public class Shield implements MouseMotionListener {
         g.drawImage(image,s_x,s_y,s_w,s_h,null);
         g.drawRect(s_x+(getS_w()/4),s_y,s_w/2,s_h);
     }
-    public void pohyb(){
-
-    }
-
-
     @Override
     public void mouseDragged(MouseEvent e) {
 
@@ -98,5 +91,28 @@ public class Shield implements MouseMotionListener {
     }
     public void setS_h(int s_h) {
         this.s_h = s_h;
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        char znk = e.getKeyChar();
+        if (znk == 'r'){
+
+
+            System.out.println("RRRRR");
+
+
+        }
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
     }
 }

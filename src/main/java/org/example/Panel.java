@@ -53,11 +53,13 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
 
 
 
-
+            player.moveMent();
             player.playerAnimation();
             player.setIndex(player.getIndex());
 //            addProj();
             addEnemy();
+
+
             for(Enemy enemy : pole_enemy){
                 enemy.zaPlayer(player);
                 healthBar();
@@ -69,10 +71,11 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
             }
             for (Projectyle projectyle:pole_proj){
                 projectyle.direction(player);
-                healthBar();
-                if (player.collision(projectyle)){
-//                    healthBar();
-                    System.out.println("adahduagd");
+//                healthBar();
+                if (projectyle.collision(player)){
+
+                    health -=1;
+                    System.out.println(health);
                 }
 
             }
@@ -125,12 +128,12 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
     }
     public void healthBar() {
 
-        if (enemy.collision(player)) {
-            health -= 1;
-            System.out.println(health);
-
-        }
-//        if (player.collision(project)){
+//        if (enemy.collision(player)) {
+//            health -= 1;
+//            System.out.println(health);
+//
+//        }
+//        if (project.collision(player)){
 //            health -= 1;
 //            System.out.println(health);
 //        }
@@ -165,7 +168,12 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
                     pole_proj.remove(projectyle);
                     i--;
                 }
+                if (projectyle.collision(player)){
+                    pole_proj.remove(projectyle);
+                    i--;
+                }
             }
+
         player.vykresleniObr(g);
         shield.vykresleniObr(g);
         menu.vykresleniMenu(g);
@@ -179,12 +187,15 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
 
     @Override
     public void keyPressed(KeyEvent e) {
+        shield.keyPressed(e);
         player.keyPressed(e);
+
 
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
+        player.keyReleased(e);
 
     }
 
