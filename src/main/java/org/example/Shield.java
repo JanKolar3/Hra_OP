@@ -36,9 +36,13 @@ public class Shield implements MouseMotionListener, KeyListener {
     }
 
     public Rectangle hitBox() {
-        return new Rectangle(s_x+(getS_w()/4),s_y,s_w/2,s_h);
+            return new Rectangle(s_x + (getS_w() / 4), s_y, s_w / 2, s_h);
+
     }
-    public Rectangle hitBoxk(){return new Rectangle(s_x+(getS_w()/4),s_y,s_w/2,s_h);}
+    public Rectangle hitBoxodr(){
+            return new Rectangle(s_x + (getS_w() / 4), s_y, s_w / 2, s_h);
+    }
+
     public boolean collision(Enemy enemy) {
         return enemy.hitBox().intersects(hitBox());
     }
@@ -64,6 +68,7 @@ public class Shield implements MouseMotionListener, KeyListener {
 
         g.drawImage(image,s_x,s_y,s_w,s_h,null);
 //        g.drawRect(s_x+(getS_w()/4),s_y,s_w/2,s_h);
+
         if (je == true){
 
 
