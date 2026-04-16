@@ -25,6 +25,7 @@ public class Player implements KeyListener {
     private int pl_height;
     private int pl_speed = 3;
     private int health;
+    private boolean k = true;
     private boolean up,down,left,right;
 
     private String direction;
@@ -46,33 +47,37 @@ public class Player implements KeyListener {
     }
 
     public Rectangle hitBox() {
-
         return new Rectangle(pl_x+(getPl_width()/4), pl_y, pl_width/2, pl_height);
     }
-
     public boolean collision(Projectyle projectyle) {
-
         return projectyle.hitBox().intersects(hitBox());
     }
 
 
 
     public void vykresleniObr(Graphics g) {
-        g.drawImage(img,pl_x,pl_y,pl_height,pl_width,null);
-        g.drawRect(pl_x+(getPl_width()/4), pl_y, pl_width/2, pl_height);
+//        g.drawImage(img,pl_x,pl_y,pl_height,pl_width,null);
+//        g.drawRect(pl_x+(getPl_width()/4), pl_y, pl_width/2, pl_height);
 
+        if (k){
+            g.drawImage(img,pl_x,pl_y,pl_height,pl_width,null);
+        }
 
         if (direction == "up") {
             g.drawImage(img2,pl_x,pl_y,pl_width,pl_height,null);
+            k=false;
         }
         if (direction == "right") {
             g.drawImage(img,pl_x,pl_y,pl_width,pl_height,null);
+            k=false;
         }
         if (direction == "left") {
             g.drawImage(img3,pl_x,pl_y,pl_width,pl_height,null);
+            k=false;
         }
         if (direction == "down") {
             g.drawImage(img,pl_x,pl_y,pl_width,pl_height,null);
+            k=false;
         }
 //                case "L":
 //                direction = "L";
