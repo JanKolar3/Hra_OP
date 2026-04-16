@@ -13,10 +13,11 @@ public class Frame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
-        Panel panel = new Panel();
-
-        add(panel);
-
+//        Panel panel = new Panel();
+//
+//        add(panel);
+        GameManager gameManager = new GameManager();
+        add(gameManager);
 
 
 

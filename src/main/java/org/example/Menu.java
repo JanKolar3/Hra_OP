@@ -65,6 +65,8 @@ public class Menu extends JPanel implements MouseListener, MouseMotionListener {
         rect1 = null;
     }
 
+
+
 //    public void buttons() {
 //        button = new JButton("PLAY");
 //

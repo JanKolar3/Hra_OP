@@ -2,22 +2,25 @@ package org.example;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 
-public class Shield implements MouseMotionListener {
+public class Shield implements MouseMotionListener, KeyListener {
     private String SOUBOR_SHIELD = "src/main/resources/shield.png";
-    private Image image;
-    Player player;
-//    Projectyle projectyle;
+    private String SOUBOR_SH = "src/main/resources/shield - kopie.png";
 
+    private Image image;
+    private Image img;
+    Player player;
+
+    Projectyle projectyle;
+    private int cooldown=60;
     private int x;
     private int y;
     private int s_x ;
     private int s_y ;
     private int s_w ;
     private int s_h;
+    private boolean je= false;
 
 
 
@@ -25,6 +28,7 @@ public class Shield implements MouseMotionListener {
 
     public Shield(int s_w, int s_h) {
         image = new ImageIcon(SOUBOR_SHIELD).getImage();
+        img = new ImageIcon(SOUBOR_SH).getImage();
 
         this.s_w = s_w;
         this.s_h = s_h;
@@ -32,8 +36,13 @@ public class Shield implements MouseMotionListener {
     }
 
     public Rectangle hitBox() {
-        return new Rectangle(s_x+(getS_w()/4),s_y,s_w/2,s_h);
+            return new Rectangle(s_x + (getS_w() / 4), s_y, s_w / 2, s_h);
+
     }
+    public Rectangle hitBoxodr(){
+            return new Rectangle(s_x + (getS_w() / 4), s_y, s_w / 2, s_h);
+    }
+
     public boolean collision(Enemy enemy) {
         return enemy.hitBox().intersects(hitBox());
     }
@@ -41,15 +50,36 @@ public class Shield implements MouseMotionListener {
         return projectyle.hitBox().intersects(hitBox());
     }
 
+
+
+
+
+
+
+
+    public void cooldown(){
+        if(je) {
+            cooldown--;
+        }
+    }
+
+
     public void vykresleniObr(Graphics g) {
+
         g.drawImage(image,s_x,s_y,s_w,s_h,null);
-        g.drawRect(s_x+(getS_w()/4),s_y,s_w/2,s_h);
+//        g.drawRect(s_x+(getS_w()/4),s_y,s_w/2,s_h);
+
+        if (je == true){
+
+
+            g.drawImage(img,s_x,s_y,s_w,s_h,null);
+
+                    if (cooldown == 0) {
+                        je = false;
+                        cooldown =60;
+                    }
+        }
     }
-    public void pohyb(){
-
-    }
-
-
     @Override
     public void mouseDragged(MouseEvent e) {
 
@@ -63,12 +93,8 @@ public class Shield implements MouseMotionListener {
 //        s_x = e.getX() - (s_w / 2);
 //        s_y = e.getY() - (s_w / 2);
 
-
-
-
-
-
     }
+
 
 
     public int getS_x() {
@@ -98,5 +124,33 @@ public class Shield implements MouseMotionListener {
     }
     public void setS_h(int s_h) {
         this.s_h = s_h;
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        char znk = e.getKeyChar();
+        if (znk == 'r'){
+
+            je = true;
+
+
+            System.out.println("RRRRR");
+
+
+        }
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        char znk = e.getKeyChar();
+        if (znk == 'r') {
+            je = false;
+        }
     }
 }

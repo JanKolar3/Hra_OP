@@ -19,8 +19,10 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
     private Shield shield;
     private Menu menu;
     private Enemy enemy;
+    private int score = 0;
     Projectyle project;
     int health = 6;
+
 
     private int x,sx;
     private int y,sy;
@@ -53,11 +55,13 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
 
 
 
-
+            player.moveMent();
             player.playerAnimation();
             player.setIndex(player.getIndex());
 //            addProj();
             addEnemy();
+
+
             for(Enemy enemy : pole_enemy){
                 enemy.enemyMove(player);
                 healthBar();
@@ -68,34 +72,20 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
                 }
             }
             for (Projectyle projectyle:pole_proj){
-                projectyle.direction(player);
-                healthBar();
-                if (player.collision(projectyle)){
-//                    healthBar();
-                    System.out.println("adahduagd");
-                }
-
-            }
-//
-//
-//            }
+                projectyle.direction(player,enemy);
 //                healthBar();
+                if (projectyle.collision(player)){
 
-
-//                if(shield.collision1(projectyle)){
-//                    System.out.println("ADADAD");
-//                }
-
-//            }
-
+                    health -=1;
+                    System.out.println(health);
+                }
+                if (shield.collision1(projectyle)){
+                    projectyle.lp = true;
+                }
+            }
             repaint();
-
-
-
         }).start();
-
     }
-
     public void addEnemy(){
         Random rand = new Random();
         if (pole_enemy.size() <2){
@@ -125,12 +115,12 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
     }
     public void healthBar() {
 
-        if (enemy.collision(player)) {
-            health -= 1;
-            System.out.println(health);
-
-        }
-//        if (player.collision(project)){
+//        if (enemy.collision(player)) {
+//            health -= 1;
+//            System.out.println(health);
+//
+//        }
+//        if (project.collision(player)){
 //            health -= 1;
 //            System.out.println(health);
 //        }
@@ -154,17 +144,33 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
                     System.out.println("Shield collision");
 //                    pole_enemy.remove(enemy);
                 }
+
+
             }
         for (int i = 0; i < pole_proj.size(); i++) {
             Projectyle projectyle = pole_proj.get(i);
                 projectyle.draw(g);
 
-                if (shield.collision1(projectyle)){
-                    System.out.println("coll");
+//                if (shield.collision1(projectyle)){
+//
+//                    System.out.println("coll");
+//                    pole_proj.remove(projectyle);
+//                    i--;
+//                }
+                if (projectyle.collision(player)) {
                     pole_proj.remove(projectyle);
                     i--;
                 }
+                    if (projectyle.lp == true) {
+                        if (projectyle.collision1(enemy)){
+                            pole_enemy.remove(enemy);
+                            pole_proj.remove(projectyle);
+                            score +=10;
+                            System.out.println("score: "+score);
+                        }
+                }
             }
+
         player.vykresleniObr(g);
         shield.vykresleniObr(g);
         menu.vykresleniMenu(g);
@@ -178,12 +184,15 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
 
     @Override
     public void keyPressed(KeyEvent e) {
+        shield.keyPressed(e);
         player.keyPressed(e);
+
 
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
+        player.keyReleased(e);
 
     }
 

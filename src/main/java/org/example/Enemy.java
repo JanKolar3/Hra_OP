@@ -30,23 +30,16 @@ public class Enemy {
 
         image = new ImageIcon(SOUBOR_ENEMy).getImage();
 
-
-        this.e_x = x;
-        this.e_y = y;
+        this.e_x = x*2;
+        this.e_y = y*2;
     this.e_width = e_width;
     this.e_height = e_height;
     this.speed = speed;
 
 
-
     }
 
     public void cooldownProj(Player player,ArrayList<Projectyle> projectyl){
-//        zaPlayer(player);
-//        projectyle.direction(player);
-
-
-
 
         shootcooldown --;
         if (shootcooldown<=0){
@@ -127,7 +120,7 @@ public class Enemy {
 
     public void vykresleniObr(Graphics g) {
         g.drawImage(image,e_x,e_y,e_width,e_height,null);
-        g.drawRect(e_x+(getE_width()/4),e_y+(getE_width()/4),e_width/2,e_height/2);
+//        g.drawRect(e_x+(getE_width()/4),e_y+(getE_width()/4),e_width/2,e_height/2);
     }
 
     public int getMax() {
@@ -140,5 +133,13 @@ public class Enemy {
 
     public int getE_height() {
         return e_height;
+    }
+
+    public int getE_x() {
+        return e_x;
+    }
+
+    public int getE_y() {
+        return e_y;
     }
 }
