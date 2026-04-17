@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class GameManager extends JPanel implements KeyListener, MouseMotionListener, MouseListener {
 
-    private String SOUBOR_POZADI = "src/main/resources/Player/tilemaptry.png";
+    private String SOUBOR_POZADI = "src/main/resources/floorTest (1).png";
 
     ArrayList<Enemy> pole_enemy =new ArrayList<>();
     ArrayList<Projectyle> pole_proj = new ArrayList<>();
@@ -67,7 +67,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
 
             for(Enemy enemy : pole_enemy){
-                enemy.zaPlayer(player);
+                enemy.enemyMove(player);
                 healthBar();
                 enemy.cooldownProj(player,pole_proj);
 

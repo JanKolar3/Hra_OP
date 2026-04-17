@@ -20,6 +20,9 @@ public class Shield implements MouseMotionListener, KeyListener {
     private int s_y ;
     private int s_w ;
     private int s_h;
+
+    private int shiald = 2;
+
     private boolean je= false;
 
 
