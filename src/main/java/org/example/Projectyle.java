@@ -15,7 +15,7 @@ public class Projectyle {
     private int width;
     private int height;
     private int speed=2;
-    boolean lp = false;
+    private int mode=1;
     private double dx, dy;
 
 
@@ -33,12 +33,12 @@ public class Projectyle {
     }
     public void direction(Player player,Enemy enemy) {
 
-        if (lp == false) {
+        if (mode == 1) {
             if (player.getPl_x() > x) x += speed;
             if (player.getPl_x() < x) x -= speed;
             if (player.getPl_y() > y) y += speed;
             if (player.getPl_y() < y) y -= speed;
-        } else if (lp == true) {
+        } else if (mode == 2) {
             speed = 5;
             if (enemy.getE_x() > x) x += speed;
             if (enemy.getE_x() < x) x -= speed;
@@ -94,7 +94,15 @@ public class Projectyle {
         return speed;
     }
 
-    public void setLp(boolean lp) {
-        this.lp = lp;
+//    public void setLp(boolean lp) {
+//        this.lp = lp;
+//    }
+
+    public int getMode() {
+        return mode;
+    }
+
+    public void setMode(int mode) {
+        this.mode = mode;
     }
 }

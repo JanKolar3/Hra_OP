@@ -30,6 +30,10 @@ public class Menu extends JPanel implements MouseListener, MouseMotionListener {
     private int x,y,w,h;
     private Rectangle rect;
     private Rectangle rect1;
+    private boolean mode=true;
+
+    private Rectangle rectangle;
+    private Rectangle rectangle1;
 
 
     public Menu(int x,int y,int w,int h) {
@@ -38,12 +42,9 @@ public class Menu extends JPanel implements MouseListener, MouseMotionListener {
         i_button_playPush = new ImageIcon(BUTTON_STARTPUSH).getImage();
         i_button_stop = new ImageIcon(BUTTON_EXIT).getImage();
         i_button_stopPush = new ImageIcon(BUTTON_EXITPUSH).getImage();
-        rectangle();
-        rectangle();
+        rectangle = new Rectangle(sx,sy,sw,sh);
+        rectangle1 = new Rectangle(ex,ey,ew,eh);
 
-
-
-//        setBackground(Color.white);
         this.x = x;
         this.y = y;
         this.w = w;
@@ -51,19 +52,13 @@ public class Menu extends JPanel implements MouseListener, MouseMotionListener {
     }
 
     public Rectangle rectangle() {
-
-        Rectangle rect = new Rectangle();
-
-            return new Rectangle(sx,sy,sw,sh);
+            return rectangle;
     }
     public Rectangle rectangle1() {
-        Rectangle rect1 = new Rectangle(ex,ey,ew,eh);
-        return rect1;
+        return rectangle1;
     }
 
-    public void removeRect(Rectangle rectangle){
-        rect1 = null;
-    }
+
 
 
 
@@ -125,7 +120,7 @@ public class Menu extends JPanel implements MouseListener, MouseMotionListener {
             g.drawImage(i_button_stopPush, ex, ey, ew, eh, null);
         }
 
-        if (getLoccation()==0) {
+        else if (getLoccation()==0) {
             g.drawImage(i_button_play, sx, sy, sw, sh, null);
             g.drawImage(i_button_stop, ex, ey, ew, eh, null);
         }
@@ -139,16 +134,18 @@ public class Menu extends JPanel implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        if (rectangle().contains(e.getPoint())) {
-            loccation = 1;
+
+            if (rectangle().contains(e.getPoint())) {
+                loccation = 1;
 //            System.out.println("ADAADA");
-        }else {
-            loccation = 0;
-//            System.out.println("kkkkk");
-        }
-        if (rectangle1().contains(e.getPoint())) {
-            loccation = 2;
-        }
+            } else {
+                loccation = 0;
+//                System.out.println("kkkkk");
+            }
+            if (rectangle1().contains(e.getPoint())) {
+                loccation = 2;
+            }
+
     }
 
 
@@ -157,20 +154,17 @@ public class Menu extends JPanel implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (rectangle().contains(e.getPoint())) {
-            setI_menu(null) ;
-            setI_button_play(null) ;
-            setI_button_playPush(null) ;
-            setI_button_stop(null) ;
-            setI_button_stopPush(null);
-            removeRect(rectangle());
+        if (mode == true) {
+            if (rectangle().contains(e.getPoint())) {
+                mode = false;
+//                rectangle1 = null;
+//                rectangle = null;
 
+            }
+            if (rectangle1().contains(e.getPoint())) {
+                System.exit(0);
 
-
-        }
-        if (rectangle1().contains(e.getPoint())) {
-            System.exit(0);
-
+            }
         }
 
     }
@@ -217,5 +211,12 @@ public class Menu extends JPanel implements MouseListener, MouseMotionListener {
 
     public void setI_button_stopPush(Image i_button_stopPush) {
         this.i_button_stopPush = i_button_stopPush;
+    }
+
+    public boolean isMode() {
+        return mode;
+    }
+    public void setMode(boolean mode) {
+        this.mode = mode;
     }
 }

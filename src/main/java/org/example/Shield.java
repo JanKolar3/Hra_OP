@@ -21,7 +21,7 @@ public class Shield implements MouseMotionListener, KeyListener {
     private int s_w ;
     private int s_h;
 
-    private int shiald = 2;
+    private int shieldMode=1;
 
     private boolean je= false;
 
@@ -73,13 +73,12 @@ public class Shield implements MouseMotionListener, KeyListener {
 //        g.drawRect(s_x+(getS_w()/4),s_y,s_w/2,s_h);
 
         if (je == true){
-
-
             g.drawImage(img,s_x,s_y,s_w,s_h,null);
-
+            shieldMode = 2;
                     if (cooldown == 0) {
-                        je = false;
                         cooldown =60;
+                        shieldMode = 1;
+                        je = false;
                     }
         }
     }
@@ -155,5 +154,9 @@ public class Shield implements MouseMotionListener, KeyListener {
         if (znk == 'r') {
             je = false;
         }
+    }
+
+    public int getShieldMode() {
+        return shieldMode;
     }
 }

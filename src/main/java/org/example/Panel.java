@@ -80,7 +80,7 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
                     System.out.println(health);
                 }
                 if (shield.collision1(projectyle)){
-                    projectyle.lp = true;
+//                    projectyle.getMode()= 2;
                 }
             }
             repaint();
@@ -161,14 +161,14 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
                     pole_proj.remove(projectyle);
                     i--;
                 }
-                    if (projectyle.lp == true) {
-                        if (projectyle.collision1(enemy)){
-                            pole_enemy.remove(enemy);
-                            pole_proj.remove(projectyle);
-                            score +=10;
-                            System.out.println("score: "+score);
-                        }
-                }
+//                    if (projectyle.lp == true) {
+//                        if (projectyle.collision1(enemy)){
+//                            pole_enemy.remove(enemy);
+//                            pole_proj.remove(projectyle);
+//                            score +=10;
+//                            System.out.println("score: "+score);
+//                        }
+//                }
             }
 
         player.vykresleniObr(g);
