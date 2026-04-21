@@ -9,13 +9,13 @@ import java.util.Objects;
 
 public class SpriteLoader {
 
-//    public static Image load(String path) {
-//        try {
-//            return ImageIO.read(Objects.requireNonNull(SpriteLoader.class.getResource(path)));
-//        } catch (IOException e) {
-//            throw new RuntimeException("Nelze načíst obrázek: " + path, e);
-//        }
-//    }
+    public static Image load(String path) {
+        try {
+            return ImageIO.read(Objects.requireNonNull(SpriteLoader.class.getResource(path)));
+        } catch (IOException e) {
+            throw new RuntimeException("Nelze načíst obrázek: " + path, e);
+        }
+    }
 
     /**
      * Vyřízne a vrátí konkrétní snímek ze sprite sheetu (řady obrázků vedle sebe).

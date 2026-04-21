@@ -7,17 +7,18 @@ import java.awt.event.KeyListener;
 
 public class Player implements KeyListener {
 
-    private String SOUBOR_PLAYER = "src/main/resources/Player/Player1.png";
-    private String SOUBOR_PLAYER2 = "src/main/resources/Player/Player_w.png";
-    private String SOUBOR_PLAYER3 = "src/main/resources/Player/Player_a.png";
+//    private String SOUBOR_PLAYER = "src/main/resources/Player/Player1.png";
+//    private String SOUBOR_PLAYER2 = "src/main/resources/Player/Player_w.png";
+//    private String SOUBOR_PLAYER3 = "src/main/resources/Player/Player_a.png";
 
 
-    Image[] PLAYER = SpriteLoader.getFrames("src/main/resources/PlayerAnimace.png",16,16,8);
+    Image[] PLAYER_DOWN = SpriteLoader.getFrames("/Player/playerAnimDown.png",16,16,2);
+    Image[] PLAYER_UP = SpriteLoader.getFrames("/Player/playerAnimUp.png",16,16,2);
     private Image img, img2, img3;
-    Enemy enemy;
-    Projectyle projectyle;
+//    Enemy enemy;
+//    Projectyle projectyle;
     private int index = 0;
-    private int index_count = 8;
+    private int index_count = 2;
     private int animation_speed = 0;
     private int pl_x;
     private int pl_y;
@@ -25,8 +26,9 @@ public class Player implements KeyListener {
     private int pl_height;
     private int pl_speed = 3;
     private int health;
+    private int cooldown = 15;
     private boolean k = true;
-    private boolean up,down,left,right;
+    private boolean up,down,left,right,muw;
 
     private String direction;
 
@@ -34,9 +36,11 @@ public class Player implements KeyListener {
 
     public Player(int x, int y, int width, int height) {
 
-        img = new ImageIcon(SOUBOR_PLAYER).getImage();
-        img2 = new ImageIcon(SOUBOR_PLAYER2).getImage();
-        img3 = new ImageIcon(SOUBOR_PLAYER3).getImage();
+//        img = new ImageIcon(SOUBOR_PLAYER).getImage();
+//        img2 = new ImageIcon(SOUBOR_PLAYER2).getImage();
+//        img3 = new ImageIcon(SOUBOR_PLAYER3).getImage();
+
+
 //        img = new ImageIcon(PLAYER[index]).getImage();
 
 
@@ -59,26 +63,27 @@ public class Player implements KeyListener {
 //        g.drawImage(img,pl_x,pl_y,pl_height,pl_width,null);
 //        g.drawRect(pl_x+(getPl_width()/4), pl_y, pl_width/2, pl_height);
 
-        if (k){
-            g.drawImage(img,pl_x,pl_y,pl_height,pl_width,null);
+        if (k&&!muw){
+            g.drawImage(PLAYER_UP[0], pl_x,pl_y,pl_height,pl_width,null);
         }
 
-        if (direction == "up") {
-            g.drawImage(img2,pl_x,pl_y,pl_width,pl_height,null);
+        if (direction == "up" && muw) {
+            g.drawImage(PLAYER_UP[index], pl_x,pl_y,pl_width,pl_height,null);
             k=false;
         }
-        if (direction == "right") {
-            g.drawImage(img,pl_x,pl_y,pl_width,pl_height,null);
+        if (direction == "right" && muw) {
+            g.drawImage(PLAYER_DOWN[index], pl_x,pl_y,pl_width,pl_height,null);
             k=false;
         }
-        if (direction == "left") {
-            g.drawImage(img3,pl_x,pl_y,pl_width,pl_height,null);
+        if (direction == "left" && muw) {
+            g.drawImage(PLAYER_DOWN[index], pl_x+80,pl_y,-pl_width,pl_height,null);
             k=false;
         }
-        if (direction == "down") {
-            g.drawImage(img,pl_x,pl_y,pl_width,pl_height,null);
+        if (direction == "down" && muw) {
+            g.drawImage(PLAYER_DOWN[index], pl_x,pl_y,pl_width,pl_height,null);
             k=false;
         }
+        k=true;
 //                case "L":
 //                direction = "L";
 //                break;
@@ -94,31 +99,37 @@ public class Player implements KeyListener {
 
 
     public void playerAnimation() {
-        animation_speed++;
-        if (animation_speed >= 3) {
+        cooldown--;
+        if (cooldown <= 0) {
             index++;
-            if (index >= index_count) {
+            if (index >= 2) {
                 index = 0;
             }
-            animation_speed = 0;
+            cooldown = 15;
         }
+
+
     }
     public void moveMent() {
         if (up) {
             pl_y -= pl_speed;
             direction = "up";
+            muw = true;
         }
         if (down) {
             pl_y += pl_speed;
             direction = "down";
+            muw = true;
         }
         if (left) {
             pl_x -= pl_speed;
             direction = "left";
+            muw = true;
         }
         if (right) {
             pl_x += pl_speed;
             direction = "right";
+            muw = true;
         }
     }
 
@@ -157,6 +168,7 @@ public class Player implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
+        muw = false;
         char znak = e.getKeyChar();
         if  (znak == 'w') {
             up = false;

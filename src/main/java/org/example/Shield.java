@@ -13,7 +13,7 @@ public class Shield implements MouseMotionListener, KeyListener {
     Player player;
 
     Projectyle projectyle;
-    private int cooldown=60;
+    private int cooldown=30;
     private int x;
     private int y;
     private int s_x ;
@@ -76,7 +76,7 @@ public class Shield implements MouseMotionListener, KeyListener {
             g.drawImage(img,s_x,s_y,s_w,s_h,null);
             shieldMode = 2;
                     if (cooldown == 0) {
-                        cooldown =60;
+                        cooldown =30;
                         shieldMode = 1;
                         je = false;
                     }

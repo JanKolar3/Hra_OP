@@ -74,7 +74,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
                     player.setIndex(player.getIndex());
 //            addProj();
                     addEnemy();
-
+                    repaint();
 
                     for (Enemy enemy : pole_enemy) {
                         enemy.enemyMove(player);
@@ -106,7 +106,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
                         }
 
                     }
-                    repaint();
+
                 }
 //            }
         }).start();
