@@ -12,7 +12,7 @@ public class Player implements KeyListener {
     private String SOUBOR_PLAYER3 = "src/main/resources/Player/Player_a.png";
 
 
-//    Image[] PLAYER = SpriteLoader.getFrames("src/main/resources/PlayerAnimace.png",16,16,8);
+    Image[] PLAYER = SpriteLoader.getFrames("src/main/resources/PlayerAnimace.png",16,16,8);
     private Image img, img2, img3;
     Enemy enemy;
     Projectyle projectyle;

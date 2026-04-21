@@ -14,6 +14,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
     ArrayList<Projectyle> pole_proj = new ArrayList<>();
 
     private Image image;
+    private JLabel jLabel;
     private Player player;
     private Shield shield;
     private Menu menu;
@@ -39,8 +40,13 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 //        project = new Projectyle(50,40,50,40);
         player = new Player(40,40,70,70);
         shield = new Shield(16*3,16*3);
+        jLabel = new JLabel("SCORE");
+
+        if (menu.isMode()==false) {
 
 
+            add(jLabel);
+}
 
 //        add(menu);
 
@@ -206,6 +212,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
                     pole_enemy.remove(enemy);
                     pole_proj.remove(projectyle);
                     score +=10;
+                    jLabel.setText(String.valueOf(score));
                     System.out.println("score: "+score);
                 }
             }
@@ -230,7 +237,9 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
         if (menu.isMode() == true){
             menu.vykresleniMenu(g);
         }
-
+//        g.setColor(Color.red);
+//        g.drawRect(200,200,6,2);
+//
 
 
     }

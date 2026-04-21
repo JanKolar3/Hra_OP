@@ -6,7 +6,7 @@ import java.awt.event.*;
 
 public class Shield implements MouseMotionListener, KeyListener {
     private String SOUBOR_SHIELD = "src/main/resources/shield.png";
-    private String SOUBOR_SH = "src/main/resources/shield - kopie.png";
+    private String SOUBOR_SH = "src/main/resources/shieldPush.png";
 
     private Image image;
     private Image img;
