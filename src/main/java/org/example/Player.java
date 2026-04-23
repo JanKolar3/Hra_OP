@@ -29,7 +29,7 @@ public class Player implements KeyListener {
     private int health;
     private int cooldown=15;
     private boolean k = true;
-    private boolean up,down,left,right;
+    private boolean up,down,left,right,num;
 
     private String direction;
 
@@ -62,28 +62,28 @@ public class Player implements KeyListener {
 //        g.drawImage(img,pl_x,pl_y,pl_height,pl_width,null);
 //        g.drawRect(pl_x+(getPl_width()/4), pl_y, pl_width/2, pl_height);
 
-        if (k==true) {
-//            g.drawImage(img, pl_x, pl_y, pl_height, pl_width, null);
+        if (k&&!num) {
+            g.drawImage(img, pl_x, pl_y, pl_height, pl_width, null);
 
-
-            if (direction == "up") {
+        }
+            if (direction == "up"&&num) {
                 g.drawImage(PLAYER_UP[index], pl_x, pl_y, pl_width, pl_height, null);
                 k = false;
             }
-            if (direction == "right") {
+            if (direction == "right"&&num) {
                 g.drawImage(PLAYER_DOWN[index], pl_x, pl_y, pl_width, pl_height, null);
                 k = false;
             }
-            if (direction == "left") {
-                g.drawImage(PLAYER_DOWN[index], pl_x + 60, pl_y, -pl_width, pl_height, null);
+            if (direction == "left"&&num) {
+                g.drawImage(PLAYER_DOWN[index], pl_x + 80, pl_y, -pl_width, pl_height, null);
                 k = false;
             }
-            if (direction == "down") {
+            if (direction == "down"&&num) {
                 g.drawImage(PLAYER_DOWN[index], pl_x, pl_y, pl_width, pl_height, null);
                 k = false;
             }
             k = true;
-        }
+
 
 //                case "L":
 //                direction = "L";
@@ -146,18 +146,22 @@ public class Player implements KeyListener {
         char znak = e.getKeyChar();
         if  (znak == 'w') {
             up = true;
+            num=true;
 //            pl_y-= pl_speed;
 //            direction = "up";
         }if  (znak == 's') {
             down = true;
+            num=true;
 //            pl_y+= pl_speed;
 //            direction = "down";
         }if  (znak == 'a') {
             left = true;
+            num=true;
 //            pl_x-= pl_speed;
 //            direction = "left";
         }if  (znak == 'd') {
             right=true;
+            num=true;
 //            pl_x+= pl_speed;
 //            direction = "right";
             }
@@ -171,12 +175,16 @@ public class Player implements KeyListener {
         char znak = e.getKeyChar();
         if  (znak == 'w') {
             up = false;
+            num=false;
         }if  (znak == 's') {
             down = false;
+            num=false;
         }if  (znak == 'a') {
             left = false;
+            num=false;
         }if  (znak == 'd') {
             right=false;
+            num=false;
         }
     }
 

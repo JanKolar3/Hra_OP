@@ -10,6 +10,7 @@ public class Main {
             @Override
             public void run() {
 
+
                 Frame frame = new Frame();
                 frame.setVisible(true);
                 frame.setResizable(false);
