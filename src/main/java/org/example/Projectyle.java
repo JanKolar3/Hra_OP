@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Projectyle {
-    private String SOUBOR_PROJECTYLE = "src/main/resources/red_proj (1).gif";
+    private String SOUBOR_PROJECTYLE = "src/main/resources/testst.png";
 
 
     Player player;

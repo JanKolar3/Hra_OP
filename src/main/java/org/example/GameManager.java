@@ -9,11 +9,13 @@ import java.util.Random;
 public class GameManager extends JPanel implements KeyListener, MouseMotionListener, MouseListener {
 
     private String SOUBOR_POZADI = "src/main/resources/floorTest (1).png";
+//    private String SOUBOR_HELTH = "src/main/resources/healthtest1.png";
 
     ArrayList<Enemy> pole_enemy =new ArrayList<>();
     ArrayList<Projectyle> pole_proj = new ArrayList<>();
 
     private Image image;
+    private Image image2;
     private JLabel jLabel;
     private Player player;
     private Shield shield;
@@ -36,9 +38,10 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
     public GameManager() {
         image = new ImageIcon(SOUBOR_POZADI).getImage();
+//        image2 = new ImageIcon(SOUBOR_HELTH).getImage();
         menu = new Menu(x,y,640,640);
 //        project = new Projectyle(50,40,50,40);
-        player = new Player(40,40,70,70);
+        player = new Player(40,40,70,70,20,20,48,48,health);
         shield = new Shield(16*3,16*3);
         jLabel = new JLabel("SCORE");
 
@@ -182,6 +185,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
         super.paintComponents(g);
         g.drawImage(image,x,y,getWidth(),getHeight(),this);
 
+
         for (Enemy enemy : pole_enemy){
             enemy.vykresleniObr(g);
             if (shield.collision(enemy)){
@@ -223,6 +227,8 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
         player.vykresleniObr(g);
         shield.vykresleniObr(g);
+//        g.drawImage(image2,50,50,16*3,16*3,this);
+//        g.drawImage(image2,200,200,16*5,16*5,this);
 
 
 

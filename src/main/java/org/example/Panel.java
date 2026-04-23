@@ -34,7 +34,7 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
         image = new ImageIcon(SOUBOR_POZADI).getImage();
         menu = new Menu(x,y,640,640);
 //        project = new Projectyle(50,40,50,40);
-        player = new Player(40,40,70,70);
+//        player = new Player(40,40,70,70);
         shield = new Shield(16*3,16*3);
 
 

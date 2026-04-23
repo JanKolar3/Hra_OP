@@ -44,7 +44,7 @@ public class Enemy {
         shootcooldown --;
         if (shootcooldown<=0){
 
-            projectyl.add(new Projectyle(e_x,e_y,50,50));
+            projectyl.add(new Projectyle(e_x,e_y,32,32));
 
             shootcooldown = cooldown;
         }

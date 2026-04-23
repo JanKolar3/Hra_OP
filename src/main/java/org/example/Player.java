@@ -12,11 +12,15 @@ public class Player implements KeyListener {
 //    private String SOUBOR_PLAYER3 = "src/main/resources/Player/Player_a.png";
 
 
+
     Image[] PLAYER_UP = SpriteLoader.getFrames("/Player/playerAnimUp.png",16,16,2);
     Image[] PLAYER_DOWN = SpriteLoader.getFrames("/Player/playerAnimDown.png",16,16,2);
+    Image[] HEALTHS = SpriteLoader.getFrames("/Player/healts.png",16,16,3);
+
     private Image img, img2, img3;
     Enemy enemy;
     Projectyle projectyle;
+    GameManager gameManager;
     Image image;
     private int index = 0;
     private int index_count = 8;
@@ -27,15 +31,19 @@ public class Player implements KeyListener {
     private int pl_height;
     private int pl_speed = 3;
     private int health;
+    private int hp=2;
+    private int healthMode=0;
     private int cooldown=15;
     private boolean k = true;
     private boolean up,down,left,right,num;
+    private int hX,hY,hW,HH;
 
     private String direction;
 
 
 
-    public Player(int x, int y, int width, int height) {
+    public Player(int x, int y, int width, int height,int hX,int hY,int hW, int hH,int health) {
+
 
         img = new ImageIcon(SOUBOR_PLAYER).getImage();
 //        img2 = new ImageIcon(SOUBOR_PLAYER2).getImage();
@@ -47,6 +55,14 @@ public class Player implements KeyListener {
         this.pl_y = y;
         this.pl_width = width;
         this.pl_height = height;
+
+        this.health = health;
+
+        this.hX = hX;
+        this.hY = hY;
+        this.hW = hW;
+        this.HH = hH;
+
     }
 
     public Rectangle hitBox() {
@@ -55,6 +71,42 @@ public class Player implements KeyListener {
     public boolean collision(Projectyle projectyle) {
         return projectyle.hitBox().intersects(hitBox());
     }
+
+//    public void healt(){
+//
+//        if (health<=6&&health>=4){
+//
+//        }
+//        if (health==4&&health>=2){
+//            if(health/hp<=2){
+//
+//            }
+//
+//
+//        }
+//        if (health==2&&health>=0){
+//            if(health/hp<=1){
+//
+//
+//            }
+//        }
+//
+//
+//
+//
+//        if(health/hp<=3){
+//            healthMode=0;
+//            if(health/hp<=2){
+//
+//                if(health/hp<=1){
+//
+//                }
+//
+//            }
+//        }
+//
+//
+//    }
 
 
 
@@ -95,6 +147,7 @@ public class Player implements KeyListener {
 
 //
 //        g.drawImage(PLAYER[index],pl_x,pl_y,pl_width,pl_height, null);
+        g.drawImage(HEALTHS[healthMode],hX,hY,hW,HH,null);
     }
 
 
