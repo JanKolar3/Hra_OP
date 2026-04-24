@@ -11,16 +11,17 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
     private String SOUBOR_POZADI = "src/main/resources/floorTest (1).png";
 //    private String SOUBOR_HELTH = "src/main/resources/healthtest1.png";
 
-    ArrayList<Enemy> pole_enemy =new ArrayList<>();
+    ArrayList<EnemySettings> pole_enemy =new ArrayList<>();
     ArrayList<Projectyle> pole_proj = new ArrayList<>();
 
+    private EnemySettings enemyS;
     private Image image;
     private Image image2;
     private JLabel jLabel;
     private Player player;
     private Shield shield;
     private Menu menu;
-    private Enemy enemy;
+
     private int score = 0;
     Projectyle project;
     int health = 6;
@@ -79,24 +80,21 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
                     addEnemy();
 
 
-                    for (Enemy enemy : pole_enemy) {
-                        enemy.enemyMove(player);
+                    for (EnemySettings enemyS : pole_enemy) {
+                        enemyS.enemyMove(player);
                         healthBar();
-                        enemy.cooldownProj(player, pole_proj);
+                        enemyS.cooldownProj(player, pole_proj);
 
-                        if (shield.collision(enemy)) {
-//                    System.out.println("Shield collision");
-                        }
                     }
                     for (Projectyle projectyle : pole_proj) {
-                        projectyle.direction(player, enemy);
+                        projectyle.direction(player, enemyS);
 //                healthBar();
                         if (projectyle.collision(player)) {
 
                             health -= 1;
                             System.out.println(health);
                         }
-                        if (shield.collision1(projectyle)) {
+                        if (projectyle.collision2(shield)) {
                             if (shield.getShieldMode() == 2) {
                                 projectyle.setMode(2);
                             }
@@ -120,8 +118,10 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
             max =5;
         }
         if (pole_enemy.size() <max){
-            enemy = new Enemy(rand.nextInt(1,400),rand.nextInt(1,400),50,50,1);
-            pole_enemy.add(enemy);
+            enemyS = new Enemy1(rand.nextInt(1,400),rand.nextInt(1,400),50,50,1);
+            pole_enemy.add(enemyS);
+//            enemyS = new Enemy2(rand.nextInt(1,400),rand.nextInt(1,400),50,50,1);
+//            pole_enemy.add(enemyS);
         }
 
 
@@ -186,9 +186,9 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
         g.drawImage(image,x,y,getWidth(),getHeight(),this);
 
 
-        for (Enemy enemy : pole_enemy){
-            enemy.vykresleniObr(g);
-            if (shield.collision(enemy)){
+        for (EnemySettings enemyS : pole_enemy){
+            enemyS.vykresleniObr(g);
+            if (shield.collision(enemyS)){
                 System.out.println("Shield collision");
 //                    pole_enemy.remove(enemy);
             }
@@ -212,8 +212,8 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
                 i--;
             }
             if (projectyle.getMode() == 2) {
-                if (projectyle.collision1(enemy)){
-                    pole_enemy.remove(enemy);
+                if (projectyle.collision1(enemyS)){
+                    pole_enemy.remove(enemyS);
                     pole_proj.remove(projectyle);
                     score +=10;
                     jLabel.setText(String.valueOf(score));

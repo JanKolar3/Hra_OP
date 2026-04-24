@@ -31,7 +31,7 @@ public class Projectyle {
 
 
     }
-    public void direction(Player player,Enemy enemy) {
+    public void direction(Player player,EnemySettings enemyS) {
 
         if (mode == 1) {
             if (player.getPl_x() > x) x += speed;
@@ -40,10 +40,10 @@ public class Projectyle {
             if (player.getPl_y() < y) y -= speed;
         } else if (mode == 2) {
             speed = 5;
-            if (enemy.getE_x() > x) x += speed;
-            if (enemy.getE_x() < x) x -= speed;
-            if (enemy.getE_y() > y) y += speed;
-            if (enemy.getE_y() < y) y -= speed;
+            if (enemyS.getE_x() > x) x += speed;
+            if (enemyS.getE_x() < x) x -= speed;
+            if (enemyS.getE_y() > y) y += speed;
+            if (enemyS.getE_y() < y) y -= speed;
 
         }
     }
@@ -53,8 +53,11 @@ public class Projectyle {
     public boolean collision(Player player){
         return player.hitBox().intersects(hitBox());
     }
-    public boolean collision1(Enemy enemy){
-        return enemy.hitBox().intersects(hitBox());
+    public boolean collision1(EnemySettings enemyS){
+        return enemyS.hitBox().intersects(hitBox());
+    }
+    public boolean collision2(Shield shield){
+        return shield.hitBox().intersects(hitBox());
     }
 
 

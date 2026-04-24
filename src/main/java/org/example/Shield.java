@@ -46,8 +46,8 @@ public class Shield implements MouseMotionListener, KeyListener {
             return new Rectangle(s_x + (getS_w() / 4), s_y, s_w / 2, s_h);
     }
 
-    public boolean collision(Enemy enemy) {
-        return enemy.hitBox().intersects(hitBox());
+    public boolean collision(EnemySettings enemyS) {
+        return enemyS.hitBox().intersects(hitBox());
     }
     public boolean collision1(Projectyle projectyle){
         return projectyle.hitBox().intersects(hitBox());

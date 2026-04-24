@@ -18,7 +18,7 @@ public class Player implements KeyListener {
     Image[] HEALTHS = SpriteLoader.getFrames("/Player/healts.png",16,16,3);
 
     private Image img, img2, img3;
-    Enemy enemy;
+    Enemy1 enemy;
     Projectyle projectyle;
     GameManager gameManager;
     Image image;
