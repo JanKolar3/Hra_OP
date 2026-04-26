@@ -3,13 +3,16 @@ package org.example;
 import javax.swing.*;
 import java.awt.*;
 
-public class Projectyle {
-    private String SOUBOR_PROJECTYLE = "src/main/resources/testst.png";
+public class ProjectileSettings {
+
+//    private String SOUBOR_PROJECTYLE = "src/main/resources/testst.png";
 
 
     Player player;
     private Image image;
     Shield shield;
+    Image image1;
+    Image image2;
     private int x;
     private int y;
     private int width;
@@ -19,8 +22,8 @@ public class Projectyle {
     private double dx, dy;
 
 
-    public Projectyle(int x, int y,int width, int height){
-        image = new ImageIcon(SOUBOR_PROJECTYLE).getImage();
+    public ProjectileSettings(int x, int y,int width, int height){
+//        image = new ImageIcon(SOUBOR_PROJECTYLE).getImage();
 
 
         this.y = y;
@@ -63,7 +66,8 @@ public class Projectyle {
 
 
     public void draw(Graphics g){
-        g.drawImage(image,x,y,width,height,null);
+        g.drawImage(image1,x,y,width,height,null);
+        g.drawImage(image2,x,y,width,height,null);
 //        g.drawRect(x+(getWidth()/4),y+(getWidth()/4),width/2,height/2);
     }
 
@@ -108,4 +112,5 @@ public class Projectyle {
     public void setMode(int mode) {
         this.mode = mode;
     }
+
 }

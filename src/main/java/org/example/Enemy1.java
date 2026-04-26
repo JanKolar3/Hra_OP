@@ -6,39 +6,20 @@ import java.util.ArrayList;
 
 public class Enemy1 extends EnemySettings{
 
-    private String SOUBOR_ENEMY = "src/main/resources/untitled.png";
-//    private String SOUBOR_ENEMY = "src/main/resources/teststblue.png";
-//    private Image image = new ImageIcon(SOUBOR_ENEMy).getImage();
-    Projectyle projectyle;
-    Shield shield;
-    Player player;
-//    ArrayList<Projectyle> pole_proj = new ArrayList<>();
-    private int cooldown = 240;
-    private int shootcooldown = 0;
-//    private int x,y,pspeed = 1;
-    private int e_id;
-    private int max;
-    private int e_x;
-    private int e_y;
-    private int e_width;
-    private int e_height;
-    private int speed;
-
-
-
+    private String SOUBOR_ENEMY1 = "src/main/resources/untitled.png";
 
     public Enemy1(int x , int y , int e_width, int e_height, int speed) {
         super(x,y,e_width,e_height,speed);
 
 
 
-        image = new ImageIcon(SOUBOR_ENEMY).getImage();
+        image1 = new ImageIcon(SOUBOR_ENEMY1).getImage();
 
     }
 
     @Override
-    public void cooldownProj(Player player, ArrayList<Projectyle> projectyl) {
-        super.cooldownProj(player, projectyl);
+    public void cooldownProj(Player player, ArrayList<ProjectileSettings> projectilS) {
+        super.cooldownProj(player, projectilS);
     }
 
     @Override

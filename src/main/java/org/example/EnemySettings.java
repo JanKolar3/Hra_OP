@@ -7,15 +7,15 @@ public class EnemySettings {
 
 //        private String SOUBOR_ENEMy = "";
 //        Image image = new ImageIcon(SOUBOR_ENEMy).getImage();
-    Image image;
+    Image image1;
     Image image2;
 
-        Projectyle projectyle;
+//        Projectile1 projectyle;
         Shield shield;
         Player player;
         //    ArrayList<Projectyle> pole_proj = new ArrayList<>();
         private int cooldown = 240;
-        private int shootcooldown = 0;
+        private int shootcooldown = 60;
         //    private int x,y,pspeed = 1;
         private int e_id;
         private int max;
@@ -25,6 +25,7 @@ public class EnemySettings {
         private int e_height;
         private int speed;
         private Enemy1 enemy;
+
 
 
 
@@ -41,12 +42,13 @@ public class EnemySettings {
 
     }
 
-        public void cooldownProj(Player player, ArrayList<Projectyle> projectyl){
+        public void cooldownProj(Player player, ArrayList<ProjectileSettings> projectilS){
 
             shootcooldown --;
             if (shootcooldown<=0){
 
-                projectyl.add(new Projectyle(e_x,e_y,32,32));
+                    projectilS.add(new Projectile1(e_x, e_y, 32, 32));
+//                    projectilS.add(new Projectile2(e_x, e_y, 32, 32));
 
                 shootcooldown = cooldown;
             }
@@ -121,7 +123,7 @@ public class EnemySettings {
         }
 
         public void vykresleniObr(Graphics g) {
-            g.drawImage(image,e_x,e_y,e_width,e_height,null);
+            g.drawImage(image1,e_x,e_y,e_width,e_height,null);
             g.drawImage(image2,e_x,e_y,e_width,e_height,null);
 
         }

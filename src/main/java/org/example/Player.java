@@ -19,7 +19,7 @@ public class Player implements KeyListener {
 
     private Image img, img2, img3;
     Enemy1 enemy;
-    Projectyle projectyle;
+    Projectile1 projectyle;
     GameManager gameManager;
     Image image;
     private int index = 0;
@@ -68,7 +68,7 @@ public class Player implements KeyListener {
     public Rectangle hitBox() {
         return new Rectangle(pl_x+(getPl_width()/4), pl_y, pl_width/2, pl_height);
     }
-    public boolean collision(Projectyle projectyle) {
+    public boolean collision(Projectile1 projectyle) {
         return projectyle.hitBox().intersects(hitBox());
     }
 

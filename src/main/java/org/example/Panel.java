@@ -11,7 +11,7 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
     private String SOUBOR_POZADI = "src/main/resources/floor.png";
 
     ArrayList<Enemy1> pole_enemy =new ArrayList<>();
-    ArrayList<Projectyle> pole_proj = new ArrayList<>();
+    ArrayList<Projectile1> pole_proj = new ArrayList<>();
 
     private Image image;
     private Player player;
@@ -19,7 +19,7 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
     private Menu menu;
     private Enemy1 enemy;
     private int score = 0;
-    Projectyle project;
+    Projectile1 project;
     int health = 6;
 
 
@@ -64,13 +64,13 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
             for(Enemy1 enemy : pole_enemy){
                 enemy.enemyMove(player);
                 healthBar();
-                enemy.cooldownProj(player,pole_proj);
+//                enemy.cooldownProj(player,pole_proj);
 
                 if (shield.collision(enemy)){
 //                    System.out.println("Shield collision");
                 }
             }
-            for (Projectyle projectyle:pole_proj){
+            for (Projectile1 projectyle:pole_proj){
                 projectyle.direction(player,enemy);
 //                healthBar();
                 if (projectyle.collision(player)){
@@ -147,7 +147,7 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
 
             }
         for (int i = 0; i < pole_proj.size(); i++) {
-            Projectyle projectyle = pole_proj.get(i);
+            Projectile1 projectyle = pole_proj.get(i);
                 projectyle.draw(g);
 
 //                if (shield.collision1(projectyle)){
