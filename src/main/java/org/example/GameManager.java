@@ -43,7 +43,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 //        image2 = new ImageIcon(SOUBOR_HELTH).getImage();
         menu = new Menu(x,y,640,640);
 //        project = new Projectyle(50,40,50,40);
-        player = new Player(40,40,70,70,20,20,48,48,health);
+        player = new Player(40,40,16*5,16*5,20,20,48,48,health);
         shield = new Shield(16*3,16*3);
         jLabel = new JLabel("SCORE");
 
@@ -81,8 +81,11 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
                     addEnemy();
 
 
+
                     for (EnemySettings enemyS : pole_enemy) {
+                        enemyS.enemyAnimation();
                         enemyS.enemyMove(player);
+
                         healthBar();
                         enemyS.cooldownProj(player, pole_proj);
 
@@ -93,8 +96,12 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
 //                healthBar();
                         if (projectyleS.collision(player)) {
-
+//                            player.setHealth(health);
+                            player.setIndex(player.getIndex()+1);
                             health -= 1;
+                            player.health(health);
+
+
                             System.out.println(health);
                         }
                         if (projectyleS.collision2(shield)) {
@@ -121,7 +128,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
             max =5;
         }
         if (pole_enemy.size() <max){
-            enemyS = new Enemy1(rand.nextInt(1,400),rand.nextInt(1,400),50,50,1);
+            enemyS = new Enemy1(rand.nextInt(1,400),rand.nextInt(1,400),24*3,24*3,1);
             pole_enemy.add(enemyS);
 //            enemyS = new Enemy2(rand.nextInt(1,400),rand.nextInt(1,400),50,50,1);
 //            pole_enemy.add(enemyS);
@@ -323,5 +330,9 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
     @Override
     public void mouseExited(MouseEvent e) {
 
+    }
+
+    public ArrayList<EnemySettings> getPole_enemy() {
+        return pole_enemy;
     }
 }

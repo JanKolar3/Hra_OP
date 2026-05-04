@@ -7,7 +7,7 @@ public class EnemySettings {
 
 //        private String SOUBOR_ENEMy = "";
 //        Image image = new ImageIcon(SOUBOR_ENEMy).getImage();
-    Image image1;
+    Image[] image1;
     Image image2;
 
 //        Projectile1 projectyle;
@@ -25,6 +25,8 @@ public class EnemySettings {
         private int e_height;
         private int speed;
         private Enemy1 enemy;
+        private int index;
+        private int animationCooldown=30;
 
 
 
@@ -82,6 +84,7 @@ public class EnemySettings {
                 this.e_x += dx * speed;
                 this.e_y += dy * speed;
             }
+
 //        rozmezi = player.getPl_x()+player.getPl_y();
 //        rozmezix = player.getPl_x()+e_x/2;
 //        rozmeziy = player.getPl_y()+e_y/2;
@@ -113,6 +116,17 @@ public class EnemySettings {
 //            }
 //        }
         }
+    public void enemyAnimation() {
+        animationCooldown--;
+        if (animationCooldown <= 0) {
+            index++;
+            if (index >= 2) {
+                index = 0;
+            }
+            animationCooldown = 30;
+        }
+    }
+
         public Rectangle hitBox(){
             return new Rectangle(e_x+(getE_width()/4),e_y+(getE_width()/4),e_width/2,e_height/2);
 
@@ -123,8 +137,10 @@ public class EnemySettings {
         }
 
         public void vykresleniObr(Graphics g) {
-            g.drawImage(image1,e_x,e_y,e_width,e_height,null);
-            g.drawImage(image2,e_x,e_y,e_width,e_height,null);
+//            g.drawImage(image1,e_x,e_y,e_width,e_height,null);
+//            g.drawImage(image2,e_x,e_y,e_width,e_height,null);
+            g.drawImage(image1[index],e_x,e_y,e_width,e_height,null);
+
 
         }
 
@@ -147,5 +163,9 @@ public class EnemySettings {
         public int getE_y() {
             return e_y;
         }
+
+    public int getIndex() {
+        return index;
     }
+}
 

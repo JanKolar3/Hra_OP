@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Arrays;
 
 public class Player implements KeyListener {
 
@@ -17,7 +18,9 @@ public class Player implements KeyListener {
     Image[] PLAYER_DOWN = SpriteLoader.getFrames("/Player/playerAnimDown.png",16,16,2);
     Image[] HEALTHS = SpriteLoader.getFrames("/Player/healts.png",16,16,3);
 
-    private Image img, img2, img3;
+
+    private Image img;
+    private Image[] himg1 , himg2, himg3;
     Enemy1 enemy;
     Projectile1 projectyle;
     GameManager gameManager;
@@ -30,9 +33,9 @@ public class Player implements KeyListener {
     private int pl_width;
     private int pl_height;
     private int pl_speed = 3;
-    private int health;
+    private int health=6;
     private int hp=2;
-    private int healthMode=0;
+    private int healthMode=0,mode1,mode2,mode3;
     private int cooldown=15;
     private boolean k = true;
     private boolean up,down,left,right,num;
@@ -46,6 +49,14 @@ public class Player implements KeyListener {
 
 
         img = new ImageIcon(SOUBOR_PLAYER).getImage();
+
+
+
+//        himg1= new Image[mode3];
+
+//        himg1 = new Image[] HEALTH;
+
+
 //        img2 = new ImageIcon(SOUBOR_PLAYER2).getImage();
 //        img3 = new ImageIcon(SOUBOR_PLAYER3).getImage();
 //        img = new ImageIcon(PLAYER[index]).getImage();
@@ -72,41 +83,73 @@ public class Player implements KeyListener {
         return projectyle.hitBox().intersects(hitBox());
     }
 
-//    public void healt(){
+    public void health(int health) {
+//        System.out.println("health changed to " + health);
+        switch (health) {
+            case 6:
+                mode3 = 0;
+                break;
+                case 5:
+                    mode3 = 1;
+                    break;
+                    case 4:
+                        mode3 = 2;
+                        mode2 = 0;
+                        break;
+                        case 3:
+                            mode2 = 1;
+                            break;
+                            case 2:
+                                mode2 = 2;
+                                mode1 = 0;
+                                break;
+                                case 1:
+                                    mode1 = 1;
+                                    break;
+                                    case 0:
+                                        mode1 = 2;
+                                        break;
+        }
+        System.out.println("health: " + health);
 //
-//        if (health<=6&&health>=4){
 //
-//        }
-//        if (health==4&&health>=2){
-//            if(health/hp<=2){
-//
-//            }
-//
-//
-//        }
-//        if (health==2&&health>=0){
-//            if(health/hp<=1){
-//
-//
-//            }
-//        }
-//
-//
-//
-//
-//        if(health/hp<=3){
-//            healthMode=0;
-//            if(health/hp<=2){
-//
-//                if(health/hp<=1){
-//
+//        if (health<=6&&health>=4) {
+//            mode3 = 1;
+//            if (health == 5) {
+//                mode3 = 2;
+//                if (health == 4) {
+//                    mode3 = 3;
 //                }
-//
 //            }
+//
+//        } if (health<4) {mode3 = 3;}
+//
+//        if (health<=4&&health>=2){
+//            mode2=1;
+//            if (health==3){
+//                mode2=2;
+//                if (health==2){
+//                    mode2=3;
+//                }
+//            }
+//
 //        }
+//        if (health<=2&&health>=0){
+//            mode1=1;
+//            if (health==1){
+//                mode1=2;
+//                if (health==0){
+//                    mode1=3;
+//                }
+//            }
 //
-//
-//    }
+//        }
+//        if (health<=4) {mode3 = 3;}
+//        if (health<=2) {mode2 = 3;}
+//        if (health<=0) {mode1 = 3;}
+
+
+    }
 
 
 
@@ -147,7 +190,16 @@ public class Player implements KeyListener {
 
 //
 //        g.drawImage(PLAYER[index],pl_x,pl_y,pl_width,pl_height, null);
-        g.drawImage(HEALTHS[healthMode],hX,hY,hW,HH,null);
+
+            g.drawImage(HEALTHS[mode3], hX * 5, hY, hW, HH, null);
+            g.drawImage(HEALTHS[mode2], hX * 3, hY, hW, HH, null);
+            g.drawImage(HEALTHS[mode1], hX, hY, hW, HH, null);
+
+
+
+//        g.drawImage(HEALTHS[mode2],hX*3,hY,hW,HH,null);
+//        g.drawImage(HEALTHS[mode3],hX*5,hY,hW,HH,null);
+
     }
 
 
@@ -287,5 +339,9 @@ public class Player implements KeyListener {
 
     public String getDirection() {
         return direction;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
     }
 }
