@@ -239,7 +239,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
                 }
 
-
+//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
             if (shield.getShieldMode() == 1){
                 if (shield.collision1 ((ProjectileSettings) projectyleS)) {
 
