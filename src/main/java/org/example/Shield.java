@@ -12,8 +12,9 @@ public class Shield implements MouseMotionListener, KeyListener {
     private Image img;
     Player player;
 
-    Projectyle projectyle;
-    private int cooldown=30;
+//    Projectile1 projectyle;
+    ProjectileSettings projectileS;
+    private int cooldown=60;
     private int x;
     private int y;
     private int s_x ;
@@ -46,11 +47,11 @@ public class Shield implements MouseMotionListener, KeyListener {
             return new Rectangle(s_x + (getS_w() / 4), s_y, s_w / 2, s_h);
     }
 
-    public boolean collision(Enemy enemy) {
-        return enemy.hitBox().intersects(hitBox());
+    public boolean collision(EnemySettings enemyS) {
+        return enemyS.hitBox().intersects(hitBox());
     }
-    public boolean collision1(Projectyle projectyle){
-        return projectyle.hitBox().intersects(hitBox());
+    public boolean collision1(ProjectileSettings projectileS){
+        return projectileS.hitBox().intersects(hitBox());
     }
 
 
@@ -76,7 +77,7 @@ public class Shield implements MouseMotionListener, KeyListener {
             g.drawImage(img,s_x,s_y,s_w,s_h,null);
             shieldMode = 2;
                     if (cooldown == 0) {
-                        cooldown =30;
+                        cooldown =60;
                         shieldMode = 1;
                         je = false;
                     }

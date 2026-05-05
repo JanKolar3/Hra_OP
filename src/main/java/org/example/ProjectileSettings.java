@@ -3,13 +3,16 @@ package org.example;
 import javax.swing.*;
 import java.awt.*;
 
-public class Projectyle {
-    private String SOUBOR_PROJECTYLE = "src/main/resources/red_proj (1).gif";
+public class ProjectileSettings {
+
+//    private String SOUBOR_PROJECTYLE = "src/main/resources/testst.png";
 
 
     Player player;
     private Image image;
     Shield shield;
+    Image image1;
+    Image image2;
     private int x;
     private int y;
     private int width;
@@ -19,8 +22,8 @@ public class Projectyle {
     private double dx, dy;
 
 
-    public Projectyle(int x, int y,int width, int height){
-        image = new ImageIcon(SOUBOR_PROJECTYLE).getImage();
+    public ProjectileSettings(int x, int y,int width, int height){
+//        image = new ImageIcon(SOUBOR_PROJECTYLE).getImage();
 
 
         this.y = y;
@@ -31,7 +34,7 @@ public class Projectyle {
 
 
     }
-    public void direction(Player player,Enemy enemy) {
+    public void direction(Player player,EnemySettings enemyS) {
 
         if (mode == 1) {
             if (player.getPl_x() > x) x += speed;
@@ -40,10 +43,10 @@ public class Projectyle {
             if (player.getPl_y() < y) y -= speed;
         } else if (mode == 2) {
             speed = 5;
-            if (enemy.getE_x() > x) x += speed;
-            if (enemy.getE_x() < x) x -= speed;
-            if (enemy.getE_y() > y) y += speed;
-            if (enemy.getE_y() < y) y -= speed;
+            if (enemyS.getE_x() > x) x += speed;
+            if (enemyS.getE_x() < x) x -= speed;
+            if (enemyS.getE_y() > y) y += speed;
+            if (enemyS.getE_y() < y) y -= speed;
 
         }
     }
@@ -53,14 +56,18 @@ public class Projectyle {
     public boolean collision(Player player){
         return player.hitBox().intersects(hitBox());
     }
-    public boolean collision1(Enemy enemy){
-        return enemy.hitBox().intersects(hitBox());
+    public boolean collision1(EnemySettings enemyS){
+        return enemyS.hitBox().intersects(hitBox());
+    }
+    public boolean collision2(Shield shield){
+        return shield.hitBox().intersects(hitBox());
     }
 
 
 
     public void draw(Graphics g){
-        g.drawImage(image,x,y,width,height,null);
+        g.drawImage(image1,x,y,width,height,null);
+        g.drawImage(image2,x,y,width,height,null);
 //        g.drawRect(x+(getWidth()/4),y+(getWidth()/4),width/2,height/2);
     }
 
@@ -105,4 +112,5 @@ public class Projectyle {
     public void setMode(int mode) {
         this.mode = mode;
     }
+
 }

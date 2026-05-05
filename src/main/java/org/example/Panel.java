@@ -4,23 +4,22 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Random;
 
 public class Panel extends JPanel implements KeyListener, MouseMotionListener,MouseListener{
 
     private String SOUBOR_POZADI = "src/main/resources/floor.png";
 
-    ArrayList<Enemy> pole_enemy =new ArrayList<>();
-    ArrayList<Projectyle> pole_proj = new ArrayList<>();
+    ArrayList<Enemy1> pole_enemy =new ArrayList<>();
+    ArrayList<Projectile1> pole_proj = new ArrayList<>();
 
     private Image image;
     private Player player;
     private Shield shield;
     private Menu menu;
-    private Enemy enemy;
+    private Enemy1 enemy;
     private int score = 0;
-    Projectyle project;
+    Projectile1 project;
     int health = 6;
 
 
@@ -34,7 +33,7 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
         image = new ImageIcon(SOUBOR_POZADI).getImage();
         menu = new Menu(x,y,640,640);
 //        project = new Projectyle(50,40,50,40);
-        player = new Player(40,40,70,70);
+//        player = new Player(40,40,70,70);
         shield = new Shield(16*3,16*3);
 
 
@@ -62,16 +61,16 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
             addEnemy();
 
 
-            for(Enemy enemy : pole_enemy){
+            for(Enemy1 enemy : pole_enemy){
                 enemy.enemyMove(player);
                 healthBar();
-                enemy.cooldownProj(player,pole_proj);
+//                enemy.cooldownProj(player,pole_proj);
 
                 if (shield.collision(enemy)){
 //                    System.out.println("Shield collision");
                 }
             }
-            for (Projectyle projectyle:pole_proj){
+            for (Projectile1 projectyle:pole_proj){
                 projectyle.direction(player,enemy);
 //                healthBar();
                 if (projectyle.collision(player)){
@@ -89,7 +88,7 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
     public void addEnemy(){
         Random rand = new Random();
         if (pole_enemy.size() <2){
-            enemy = new Enemy(rand.nextInt(1,400),rand.nextInt(1,400),50,50,1);
+            enemy = new Enemy1(rand.nextInt(1,400),rand.nextInt(1,400),50,50,1);
             pole_enemy.add(enemy);
         }
 //    }
@@ -138,7 +137,7 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
     protected void paintComponent(Graphics g) {
             super.paintComponents(g);
             g.drawImage(image,x,y,width,height,this);
-            for (Enemy enemy : pole_enemy){
+            for (Enemy1 enemy : pole_enemy){
                 enemy.vykresleniObr(g);
                 if (shield.collision(enemy)){
                     System.out.println("Shield collision");
@@ -148,7 +147,7 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
 
             }
         for (int i = 0; i < pole_proj.size(); i++) {
-            Projectyle projectyle = pole_proj.get(i);
+            Projectile1 projectyle = pole_proj.get(i);
                 projectyle.draw(g);
 
 //                if (shield.collision1(projectyle)){
