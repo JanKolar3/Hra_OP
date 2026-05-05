@@ -21,6 +21,9 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
     private Player player;
     private Shield shield;
     private Menu menu;
+    private int id;
+
+
 
 
     private int score = 0;
@@ -65,6 +68,17 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
 
         new Timer(16, e -> {
+
+
+//
+//                for (ProjectileSettings proeSjectyl : pole_proj) {
+//                    if (enemyS.getE_id() != proeSjectyl.getId()){
+//                        pole_proj.remove(proeSjectyl);
+//                    }
+//                }
+
+
+
 
 //            if(menu.isMode()==false) {
 
@@ -123,13 +137,22 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
         }).start();
     }
     public void addEnemy(){
+        if (enemyS != null){
+            id++;
+        }
+
         Random rand = new Random();
         if (score >= 10){
             max =5;
         }
         if (pole_enemy.size() <max){
-            enemyS = new Enemy1(rand.nextInt(1,400),rand.nextInt(1,400),24*3,24*3,1);
+
+
+
+            enemyS = new Enemy1(rand.nextInt(1,400),rand.nextInt(1,400),24*3,24*3,1,id);
             pole_enemy.add(enemyS);
+            System.out.println(enemyS);
+
 //            enemyS = new Enemy2(rand.nextInt(1,400),rand.nextInt(1,400),50,50,1);
 //            pole_enemy.add(enemyS);
         }
@@ -205,9 +228,18 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
 
         }
+
         for (int i = 0; i < pole_proj.size(); i++) {
             ProjectileSettings projectyleS = (ProjectileSettings) pole_proj.get(i);
             projectyleS.draw(g);
+
+
+                if (enemyS.getE_id() != projectyleS.getId()){
+                    pole_proj.remove(projectyleS);
+
+                }
+
+
             if (shield.getShieldMode() == 1){
                 if (shield.collision1 ((ProjectileSettings) projectyleS)) {
 
@@ -233,6 +265,9 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
 
         }
+
+
+
 
 
         player.vykresleniObr(g);

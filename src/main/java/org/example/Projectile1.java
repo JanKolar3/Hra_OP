@@ -5,8 +5,8 @@ import java.awt.*;
 
 public class Projectile1 extends ProjectileSettings{
     private String SOUBOR_PROJECTYLE1 = "src/main/resources/Projectile/testst.png";
-    public Projectile1(int x, int y, int width, int height){
-       super(x,y,width,height);
+    public Projectile1(int x, int y, int width, int height, int id){
+       super(x,y,width,height, id);
         image1 = new ImageIcon(SOUBOR_PROJECTYLE1).getImage();
     }
     @Override

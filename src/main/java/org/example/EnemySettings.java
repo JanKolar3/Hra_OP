@@ -7,8 +7,8 @@ public class EnemySettings {
 
 //        private String SOUBOR_ENEMy = "";
 //        Image image = new ImageIcon(SOUBOR_ENEMy).getImage();
-    Image[] image1;
-    Image image2;
+        Image[] image1;
+        Image image2;
 
 //        Projectile1 projectyle;
         Shield shield;
@@ -32,7 +32,7 @@ public class EnemySettings {
 
 
 
-    public EnemySettings(int x ,int y ,int e_width, int e_height,int speed) {
+    public EnemySettings(int x ,int y ,int e_width, int e_height,int speed, int id) {
 //        image = new ImageIcon(SOUBOR_ENEMy).getImage();
 
         this.e_x = x;
@@ -40,6 +40,7 @@ public class EnemySettings {
         this.e_width = e_width;
         this.e_height = e_height;
         this.speed = speed;
+        this.e_id = id;
 
 
     }
@@ -49,8 +50,9 @@ public class EnemySettings {
             shootcooldown --;
             if (shootcooldown<=0){
 
-                    projectilS.add(new Projectile1(e_x, e_y, 32, 32));
+                    projectilS.add(new Projectile1(e_x, e_y, 32, 32,e_id));
 //                    projectilS.add(new Projectile2(e_x, e_y, 32, 32));
+                System.out.println(projectilS);
 
                 shootcooldown = cooldown;
             }
@@ -152,6 +154,8 @@ public class EnemySettings {
             return e_width;
         }
 
+        public int getE_id() {return e_id;}
+
         public int getE_height() {
             return e_height;
         }
@@ -164,7 +168,7 @@ public class EnemySettings {
             return e_y;
         }
 
-    public int getIndex() {
+        public int getIndex() {
         return index;
     }
 }

@@ -20,12 +20,13 @@ public class ProjectileSettings {
     private int speed=2;
     private int mode=1;
     private double dx, dy;
+    private int id;
 
 
-    public ProjectileSettings(int x, int y,int width, int height){
+    public ProjectileSettings(int x, int y,int width, int height, int id){
 //        image = new ImageIcon(SOUBOR_PROJECTYLE).getImage();
 
-
+        this.id = id;
         this.y = y;
         this.x = x;
         this.width = width;
@@ -43,10 +44,13 @@ public class ProjectileSettings {
             if (player.getPl_y() < y) y -= speed;
         } else if (mode == 2) {
             speed = 5;
-            if (enemyS.getE_x() > x) x += speed;
-            if (enemyS.getE_x() < x) x -= speed;
-            if (enemyS.getE_y() > y) y += speed;
-            if (enemyS.getE_y() < y) y -= speed;
+
+
+            if (enemyS.getE_x() > x && (enemyS.getE_id() == id)) x += speed;
+            if (enemyS.getE_x() < x && (enemyS.getE_id() == id)) x -= speed;
+            if (enemyS.getE_y() > y && (enemyS.getE_id() == id)) y += speed;
+            if (enemyS.getE_y() < y && (enemyS.getE_id() == id)) y -= speed;
+
 
         }
     }
@@ -81,6 +85,9 @@ public class ProjectileSettings {
         this.x = x;
     }
 
+
+
+
     public int getY() {
         return y;
     }
@@ -95,6 +102,11 @@ public class ProjectileSettings {
 
     public int getHeight() {
         return height;
+    }
+
+
+    public int getId() {
+        return id;
     }
 
     public int getSpeed() {

@@ -21,6 +21,7 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
     private int score = 0;
     Projectile1 project;
     int health = 6;
+    int id;
 
 
     private int x,sx;
@@ -86,9 +87,13 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
         }).start();
     }
     public void addEnemy(){
+        if (enemy != null){
+            id++;
+        }
+
         Random rand = new Random();
         if (pole_enemy.size() <2){
-            enemy = new Enemy1(rand.nextInt(1,400),rand.nextInt(1,400),50,50,1);
+            enemy = new Enemy1(rand.nextInt(1,400),rand.nextInt(1,400),50,50,1,id);
             pole_enemy.add(enemy);
         }
 //    }
