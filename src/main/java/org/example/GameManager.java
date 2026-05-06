@@ -240,6 +240,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
                 }
             }
 
+
             if (projectyleS.collision(player)) {
                 pole_proj.remove(projectyleS);
                 i--;
