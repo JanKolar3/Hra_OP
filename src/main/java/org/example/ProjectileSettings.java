@@ -8,6 +8,7 @@ public class ProjectileSettings {
 //    private String SOUBOR_PROJECTYLE = "src/main/resources/testst.png";
 
 
+
     Player player;
     EnemySettings enemyS;
     private Image image;
