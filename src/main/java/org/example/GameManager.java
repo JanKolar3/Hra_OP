@@ -233,7 +233,6 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
                 if (enemyS.getE_id() != projectyleS.getId()){
                     pole_proj.remove(projectyleS);
-
                 }
 
 ////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
