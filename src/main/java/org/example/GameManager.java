@@ -231,7 +231,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
             for (int i = 0; i < pole_proj.size(); i++) {
                 ProjectileSettings projectyleS = (ProjectileSettings) pole_proj.get(i);
                 projectyleS.draw(g);
-////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
+
             if (shield.getShieldMode() == 1){
                 if (shield.collision1 (projectyleS)) {
                     pole_proj.remove(projectyleS);
