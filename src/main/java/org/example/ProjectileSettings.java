@@ -33,7 +33,6 @@ public class ProjectileSettings {
         this.height = height;
 //        direction();
 
-
     }
     public void direction(Player player,EnemySettings enemyS) {
 
