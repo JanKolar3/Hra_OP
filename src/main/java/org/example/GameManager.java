@@ -272,6 +272,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
             g.drawString("Score: "+score, 150, 400);
         }
 
+
         if (menu.isMode() == true){
             menu.vykresleniMenu(g);
         }
