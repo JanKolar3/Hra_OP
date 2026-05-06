@@ -9,6 +9,7 @@ public class ProjectileSettings {
 
 
     Player player;
+    EnemySettings enemyS;
     private Image image;
     Shield shield;
     Image image1;
@@ -17,39 +18,41 @@ public class ProjectileSettings {
     private int y;
     private int width;
     private int height;
-    private int speed=2;
+    private int speed=1;
     private int mode=1;
     private double dx, dy;
     private int id;
 
 
-    public ProjectileSettings(int x, int y,int width, int height, int id){
+    public ProjectileSettings(int x, int y,int width, int height,int id,EnemySettings enemyS,Player player){
 //        image = new ImageIcon(SOUBOR_PROJECTYLE).getImage();
 
-        this.id = id;
+
         this.y = y;
         this.x = x;
         this.width = width;
         this.height = height;
+        this.id = id;
+
+        this.enemyS = enemyS;
+        this.player = player;
 //        direction();
 
+
     }
-    public void direction(Player player,EnemySettings enemyS) {
+    public void direction(Player player) {
 
         if (mode == 1) {
             if (player.getPl_x() > x) x += speed;
             if (player.getPl_x() < x) x -= speed;
             if (player.getPl_y() > y) y += speed;
             if (player.getPl_y() < y) y -= speed;
-        } else if (mode == 2) {
+        } else if (mode == 2 && enemyS != null) {
             speed = 5;
-
-
-            if (enemyS.getE_x() > x && (enemyS.getE_id() == id)) x += speed;
-            if (enemyS.getE_x() < x && (enemyS.getE_id() == id)) x -= speed;
-            if (enemyS.getE_y() > y && (enemyS.getE_id() == id)) y += speed;
-            if (enemyS.getE_y() < y && (enemyS.getE_id() == id)) y -= speed;
-
+            if (enemyS.getE_x() > x) x += speed;
+            if (enemyS.getE_x() < x) x -= speed;
+            if (enemyS.getE_y() > y) y += speed;
+            if (enemyS.getE_y() < y) y -= speed;
 
         }
     }
@@ -60,7 +63,7 @@ public class ProjectileSettings {
         return player.hitBox().intersects(hitBox());
     }
     public boolean collision1(EnemySettings enemyS){
-        return enemyS.hitBox().intersects(hitBox());
+        return enemyS.hitBox().intersects(this.hitBox());
     }
     public boolean collision2(Shield shield){
         return shield.hitBox().intersects(hitBox());
@@ -84,9 +87,6 @@ public class ProjectileSettings {
         this.x = x;
     }
 
-
-
-
     public int getY() {
         return y;
     }
@@ -101,11 +101,6 @@ public class ProjectileSettings {
 
     public int getHeight() {
         return height;
-    }
-
-
-    public int getId() {
-        return id;
     }
 
     public int getSpeed() {
@@ -123,5 +118,6 @@ public class ProjectileSettings {
     public void setMode(int mode) {
         this.mode = mode;
     }
+
 
 }

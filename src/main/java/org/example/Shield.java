@@ -142,7 +142,7 @@ public class Shield implements MouseMotionListener, KeyListener {
             je = true;
 
 
-            System.out.println("RRRRR");
+//            System.out.println("RRRRR");
 
 
         }

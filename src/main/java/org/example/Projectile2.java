@@ -5,13 +5,13 @@ import java.awt.*;
 
 public class Projectile2 extends ProjectileSettings{
     private String SOUBOR_PROJECTYLE2 = "src/main/resources/Projectile/teststblue.png";
-    public Projectile2(int x, int y, int width, int height,int id) {
-        super(x,y,width,height,id);
+    public Projectile2(int x, int y, int width, int height,int id,EnemySettings enemyS, Player player) {
+        super(x,y,width,height,id,enemyS,player);
         image2 = new ImageIcon(SOUBOR_PROJECTYLE2).getImage();
     }
     @Override
-    public void direction(Player player,EnemySettings enemyS) {
-        super.direction(player,enemyS);
+    public void direction(Player player) {
+        super.direction(player);
     }
     @Override
     public Rectangle hitBox(){

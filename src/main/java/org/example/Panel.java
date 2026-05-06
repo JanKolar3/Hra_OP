@@ -72,7 +72,7 @@ public class Panel extends JPanel implements KeyListener, MouseMotionListener,Mo
                 }
             }
             for (Projectile1 projectyle:pole_proj){
-                projectyle.direction(player,enemy);
+                projectyle.direction(player);
 //                healthBar();
                 if (projectyle.collision(player)){
 

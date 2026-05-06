@@ -24,7 +24,7 @@ public class EnemySettings {
         private int e_width;
         private int e_height;
         private int speed;
-        private Enemy1 enemy;
+        private EnemySettings enemyS;
         private int index;
         private int animationCooldown=30;
 
@@ -42,7 +42,6 @@ public class EnemySettings {
         this.speed = speed;
         this.e_id = id;
 
-
     }
 
         public void cooldownProj(Player player, ArrayList<ProjectileSettings> projectilS){
@@ -50,9 +49,9 @@ public class EnemySettings {
             shootcooldown --;
             if (shootcooldown<=0){
 
-                    projectilS.add(new Projectile1(e_x, e_y, 32, 32,e_id));
+                    projectilS.add(new Projectile1(e_x, e_y, 32, 32,e_id,this,player));
 //                    projectilS.add(new Projectile2(e_x, e_y, 32, 32));
-                System.out.println(projectilS);
+//                System.out.println(projectilS);
 
                 shootcooldown = cooldown;
             }
@@ -137,6 +136,7 @@ public class EnemySettings {
             return player.hitBox().intersects(hitBox());
 
         }
+
 
         public void vykresleniObr(Graphics g) {
 //            g.drawImage(image1,e_x,e_y,e_width,e_height,null);
