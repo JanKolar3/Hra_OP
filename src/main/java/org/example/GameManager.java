@@ -22,6 +22,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
     private Shield shield;
     private Menu menu;
     private int id;
+    private  int timer = 600;
 
 
 
@@ -55,10 +56,6 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
             add(jLabel);
 }
-
-//        add(menu);
-
-
 
         addKeyListener(this);
         addMouseListener(this);
@@ -106,6 +103,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
                     }
                     for (ProjectileSettings projectyleS : pole_proj) {
                         projectyleS.direction(player);
+                        timer--;
 //                        projectyleS.direction1(player, enemyS);
 
 //                healthBar();
@@ -116,7 +114,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
                             player.health(health);
 
 
-                            System.out.println(health);
+                            System.out.println("HP: "+health);
                         }
                         if (projectyleS.collision2(shield)) {
                             if (shield.getShieldMode() == 2) {
@@ -240,7 +238,6 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
                 }
             }
 
-
             if (projectyleS.collision(player)) {
                 pole_proj.remove(projectyleS);
                 i--;
@@ -253,8 +250,13 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
                         i--;
                         score += 10;
                         jLabel.setText(String.valueOf(score));
-                        System.out.println(score);
+                        System.out.println("score: "+ score);
                     }
+            }
+            if (timer <=0){
+                pole_proj.remove(projectyleS);
+                i--;
+                timer =600;
             }
         }
         }
@@ -352,7 +354,4 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
     }
 
-    public ArrayList<EnemySettings> getPole_enemy() {
-        return pole_enemy;
-    }
 }

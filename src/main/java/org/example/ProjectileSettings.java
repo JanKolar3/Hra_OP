@@ -18,7 +18,7 @@ public class ProjectileSettings {
     private int y;
     private int width;
     private int height;
-    private int speed=1;
+    private int speed=2;
     private int mode=1;
     private double dx, dy;
     private int id;

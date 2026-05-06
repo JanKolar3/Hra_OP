@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 public class Player implements KeyListener {
 
-    private String SOUBOR_PLAYER = "src/main/resources/Player/Player1.png";
+//    private String SOUBOR_PLAYER = "src/main/resources/Player/Player1.png";
 //    private String SOUBOR_PLAYER2 = "src/main/resources/Player/Player_w.png";
 //    private String SOUBOR_PLAYER3 = "src/main/resources/Player/Player_a.png";
 
@@ -38,8 +38,9 @@ public class Player implements KeyListener {
     private int healthMode=0,mode1,mode2,mode3;
     private int cooldown=15;
     private boolean k = true;
-    private boolean up,down,left,right,num;
+    private boolean up,down,left,right,num,lf,rg,p;
     private int hX,hY,hW,HH;
+
 
     private String direction;
 
@@ -48,7 +49,7 @@ public class Player implements KeyListener {
     public Player(int x, int y, int width, int height,int hX,int hY,int hW, int hH,int health) {
 
 
-        img = new ImageIcon(SOUBOR_PLAYER).getImage();
+//        img = new ImageIcon(SOUBOR_PLAYER).getImage();
 
 
 
@@ -157,25 +158,43 @@ public class Player implements KeyListener {
 //        g.drawImage(img,pl_x,pl_y,pl_height,pl_width,null);
 //        g.drawRect(pl_x+(getPl_width()/4), pl_y, pl_width/2, pl_height);
 
-        if (k&&!num) {
-            g.drawImage(img, pl_x, pl_y, pl_height, pl_width, null);
+
+
+        if ((k&&!num&&rg)||!p) {
+
+                g.drawImage(PLAYER_DOWN[1], pl_x, pl_y, pl_width, pl_height, null);
+        }
+
+        if (k&&!num&&lf) {
+
+                g.drawImage(PLAYER_DOWN[1], pl_x + 80, pl_y, -pl_width, pl_height, null);
+
 
         }
+
             if (direction == "up"&&num) {
                 g.drawImage(PLAYER_UP[index], pl_x, pl_y, pl_width, pl_height, null);
                 k = false;
+                rg = true;
+                lf = false;
             }
             if (direction == "right"&&num) {
                 g.drawImage(PLAYER_DOWN[index], pl_x, pl_y, pl_width, pl_height, null);
                 k = false;
+                rg = true;
+                lf = false;
             }
             if (direction == "left"&&num) {
                 g.drawImage(PLAYER_DOWN[index], pl_x + 80, pl_y, -pl_width, pl_height, null);
                 k = false;
+                lf = true;
+                rg = false;
             }
             if (direction == "down"&&num) {
                 g.drawImage(PLAYER_DOWN[index], pl_x, pl_y, pl_width, pl_height, null);
                 k = false;
+                rg = true;
+                lf = false;
             }
             k = true;
 
@@ -215,9 +234,6 @@ public class Player implements KeyListener {
                 }
                 cooldown = 10;
             }
-
-//            animation_speed = 0;
-//        }
     }
     public void moveMent() {
         if (up) {
@@ -249,6 +265,7 @@ public class Player implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         char znak = e.getKeyChar();
+        p=true;
         if  (znak == 'w') {
             up = true;
             num=true;
