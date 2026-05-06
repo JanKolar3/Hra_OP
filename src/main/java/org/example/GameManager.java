@@ -226,7 +226,6 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 //                    pole_enemy.remove(enemy);
             }
 
-
         }
 
         for (int i = 0; i < pole_proj.size(); i++) {
