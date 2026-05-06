@@ -225,7 +225,6 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
                 System.out.println("Shield collision");
 //                    pole_enemy.remove(enemy);
             }
-
         }
 
         for (int i = 0; i < pole_proj.size(); i++) {
@@ -237,7 +236,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
                 }
 
-//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
+////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
             if (shield.getShieldMode() == 1){
                 if (shield.collision1 ((ProjectileSettings) projectyleS)) {
 
