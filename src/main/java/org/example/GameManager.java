@@ -233,7 +233,6 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
             ProjectileSettings projectyleS = (ProjectileSettings) pole_proj.get(i);
             projectyleS.draw(g);
 
-
                 if (enemyS.getE_id() != projectyleS.getId()){
                     pole_proj.remove(projectyleS);
 
