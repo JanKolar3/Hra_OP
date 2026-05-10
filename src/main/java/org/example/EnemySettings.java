@@ -32,6 +32,7 @@ public class EnemySettings {
 
 
 
+
     public EnemySettings(int x ,int y ,int e_width, int e_height,int speed, int id) {
 //        image = new ImageIcon(SOUBOR_ENEMy).getImage();
 
@@ -50,6 +51,7 @@ public class EnemySettings {
             if (shootcooldown<=0){
 
                     projectilS.add(new Projectile1(e_x, e_y, 32, 32,e_id,this,player));
+
 //                    projectilS.add(new Projectile2(e_x, e_y, 32, 32));
 //                System.out.println(projectilS);
 
@@ -136,6 +138,9 @@ public class EnemySettings {
             return player.hitBox().intersects(hitBox());
 
         }
+        public boolean collision2(EnemySettings enemyS){
+        return hitBox().intersects(this.hitBox());
+        }
 
 
         public void vykresleniObr(Graphics g) {
@@ -170,6 +175,14 @@ public class EnemySettings {
 
         public int getIndex() {
         return index;
+    }
+
+    public void setE_x(int e_x) {
+        this.e_x = e_x;
+    }
+
+    public void setE_y(int e_y) {
+        this.e_y = e_y;
     }
 }
 

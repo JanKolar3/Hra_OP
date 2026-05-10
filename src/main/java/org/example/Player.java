@@ -15,7 +15,7 @@ public class Player implements KeyListener {
 
 
     Image[] PLAYER_UP = SpriteLoader.getFrames("/Player/playerAnimUp.png",16,16,2);
-    Image[] PLAYER_DOWN = SpriteLoader.getFrames("/Player/playerAnimDown.png",16,16,2);
+    Image[] PLAYER_DOWN = SpriteLoader.getFrames("/Player/playerAnimDownts (1).png",16,16,3);
     Image[] HEALTHS = SpriteLoader.getFrames("/Player/healts.png",16,16,3);
 
 
@@ -25,6 +25,7 @@ public class Player implements KeyListener {
     Projectile1 projectyle;
     GameManager gameManager;
     Image image;
+    Shield shield;
     private int index = 0;
     private int index_count = 8;
     private int animation_speed = 0;
@@ -36,7 +37,7 @@ public class Player implements KeyListener {
     private int health=6;
     private int hp=2;
     private int healthMode=0,mode1,mode2,mode3;
-    private int cooldown=15;
+    private int cooldown=20;
     private boolean k = true;
     private boolean up,down,left,right,num,lf,rg,p;
     private int hX,hY,hW,HH;
@@ -61,6 +62,7 @@ public class Player implements KeyListener {
 //        img2 = new ImageIcon(SOUBOR_PLAYER2).getImage();
 //        img3 = new ImageIcon(SOUBOR_PLAYER3).getImage();
 //        img = new ImageIcon(PLAYER[index]).getImage();
+//        shield = new Shield(pl_x,pl_y,16*3,16*3);
 
 
         this.pl_x = x;
@@ -90,26 +92,26 @@ public class Player implements KeyListener {
             case 6:
                 mode3 = 0;
                 break;
-                case 5:
-                    mode3 = 1;
-                    break;
-                    case 4:
-                        mode3 = 2;
-                        mode2 = 0;
-                        break;
-                        case 3:
-                            mode2 = 1;
-                            break;
-                            case 2:
-                                mode2 = 2;
-                                mode1 = 0;
-                                break;
-                                case 1:
-                                    mode1 = 1;
-                                    break;
-                                    case 0:
-                                        mode1 = 2;
-                                        break;
+            case 5:
+                mode3 = 1;
+                break;
+            case 4:
+                mode3 = 2;
+                mode2 = 0;
+                break;
+            case 3:
+                mode2 = 1;
+                break;
+            case 2:
+                mode2 = 2;
+                mode1 = 0;
+                break;
+            case 1:
+                mode1 = 1;
+                break;
+            case 0:
+                mode1 = 2;
+                break;
         }
         System.out.println("health: " + health);
 //
@@ -152,89 +154,6 @@ public class Player implements KeyListener {
 
     }
 
-
-
-    public void vykresleniObr(Graphics g) {
-//        g.drawImage(img,pl_x,pl_y,pl_height,pl_width,null);
-//        g.drawRect(pl_x+(getPl_width()/4), pl_y, pl_width/2, pl_height);
-
-
-
-        if ((k&&!num&&rg)||!p) {
-
-                g.drawImage(PLAYER_DOWN[1], pl_x, pl_y, pl_width, pl_height, null);
-        }
-
-        if (k&&!num&&lf) {
-
-                g.drawImage(PLAYER_DOWN[1], pl_x + 80, pl_y, -pl_width, pl_height, null);
-
-
-        }
-
-            if (direction == "up"&&num) {
-                g.drawImage(PLAYER_UP[index], pl_x, pl_y, pl_width, pl_height, null);
-                k = false;
-                rg = true;
-                lf = false;
-            }
-            if (direction == "right"&&num) {
-                g.drawImage(PLAYER_DOWN[index], pl_x, pl_y, pl_width, pl_height, null);
-                k = false;
-                rg = true;
-                lf = false;
-            }
-            if (direction == "left"&&num) {
-                g.drawImage(PLAYER_DOWN[index], pl_x + 80, pl_y, -pl_width, pl_height, null);
-                k = false;
-                lf = true;
-                rg = false;
-            }
-            if (direction == "down"&&num) {
-                g.drawImage(PLAYER_DOWN[index], pl_x, pl_y, pl_width, pl_height, null);
-                k = false;
-                rg = true;
-                lf = false;
-            }
-            k = true;
-
-
-//                case "L":
-//                direction = "L";
-//                break;
-//                case "R":
-//                direction = "R";
-//
-//
-
-//
-//        g.drawImage(PLAYER[index],pl_x,pl_y,pl_width,pl_height, null);
-
-            g.drawImage(HEALTHS[mode3], hX * 5, hY, hW, HH, null);
-            g.drawImage(HEALTHS[mode2], hX * 3, hY, hW, HH, null);
-            g.drawImage(HEALTHS[mode1], hX, hY, hW, HH, null);
-
-
-
-//        g.drawImage(HEALTHS[mode2],hX*3,hY,hW,HH,null);
-//        g.drawImage(HEALTHS[mode3],hX*5,hY,hW,HH,null);
-
-    }
-
-
-
-    public void playerAnimation() {
-//        animation_speed++;
-//        if (animation_speed >= 3) {
-            cooldown --;
-            if (cooldown<=0) {
-                index++;
-                if (index >= 2) {
-                    index = 0;
-                }
-                cooldown = 10;
-            }
-    }
     public void moveMent() {
         if (up) {
             pl_y -= pl_speed;
@@ -252,6 +171,87 @@ public class Player implements KeyListener {
             pl_x += pl_speed;
             direction = "right";
         }
+    }
+
+    public void playerAnimation() {
+//        animation_speed++;
+//        if (animation_speed >= 3) {
+        if (num) {
+            cooldown--;
+            if (cooldown <= 0) {
+                index++;
+                if (index >= 2) {
+                    System.out.println("index: " + index);;
+                    index = 0;
+
+                }
+                cooldown = 20;
+            }
+        }
+    }
+
+    public void vykresleniObr(Graphics g) {
+//        g.drawImage(img,pl_x,pl_y,pl_height,pl_width,null);
+//        g.drawRect(pl_x+(getPl_width()/4), pl_y, pl_width/2, pl_height);
+
+
+
+        if ((k&&!num&&rg)||!p) {
+            g.drawImage(PLAYER_DOWN[0], pl_x, pl_y, pl_width, pl_height, null);
+        }
+
+        if (k&&!num&&lf) {
+            g.drawImage(PLAYER_DOWN[0], pl_x + 80, pl_y, -pl_width, pl_height, null);
+        }
+
+        if (direction == "up"&&num) {
+            g.drawImage(PLAYER_UP[index], pl_x, pl_y, pl_width, pl_height, null);
+            k = false;
+            rg = true;
+            lf = false;
+        }
+        if (direction == "right"&&num) {
+            g.drawImage(PLAYER_DOWN[index], pl_x, pl_y, pl_width, pl_height, null);
+            k = false;
+            rg = true;
+            lf = false;
+        }
+        if (direction == "left"&&num) {
+            g.drawImage(PLAYER_DOWN[index], pl_x + 80, pl_y, -pl_width, pl_height, null);
+            k = false;
+            lf = true;
+            rg = false;
+        }
+        if (direction == "down"&&num) {
+            g.drawImage(PLAYER_DOWN[index], pl_x, pl_y, pl_width, pl_height, null);
+            k = false;
+            rg = true;
+            lf = false;
+        }
+        k = true;
+
+
+
+//                case "L":
+//                direction = "L";
+//                break;
+//                case "R":
+//                direction = "R";
+//
+//
+
+//
+//        g.drawImage(PLAYER[index],pl_x,pl_y,pl_width,pl_height, null);
+
+        g.drawImage(HEALTHS[mode3], hX * 5, hY, hW, HH, null);
+        g.drawImage(HEALTHS[mode2], hX * 3, hY, hW, HH, null);
+        g.drawImage(HEALTHS[mode1], hX, hY, hW, HH, null);
+
+
+
+//        g.drawImage(HEALTHS[mode2],hX*3,hY,hW,HH,null);
+//        g.drawImage(HEALTHS[mode3],hX*5,hY,hW,HH,null);
+
     }
 
 
@@ -360,5 +360,17 @@ public class Player implements KeyListener {
 
     public void setHealth(int health) {
         this.health = health;
+    }
+
+    public void setMode3(int mode3) {
+        this.mode3 = mode3;
+    }
+
+    public void setMode2(int mode2) {
+        this.mode2 = mode2;
+    }
+
+    public void setMode1(int mode1) {
+        this.mode1 = mode1;
     }
 }

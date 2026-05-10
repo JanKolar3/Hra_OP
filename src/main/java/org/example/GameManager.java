@@ -13,6 +13,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
     ArrayList<EnemySettings> pole_enemy =new ArrayList<>();
     ArrayList<ProjectileSettings> pole_proj = new ArrayList<>();
+    Random rand = new Random();
 
     private EnemySettings enemyS;
     private Image image;
@@ -22,7 +23,8 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
     private Shield shield;
     private Menu menu;
     private int id;
-    private  int timer = 600;
+    private  int timer = 500;
+    private int pocet=1;
 
 
 
@@ -48,7 +50,8 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
         menu = new Menu(x,y,640,640);
 //        project = new Projectyle(50,40,50,40);
         player = new Player(40,40,16*5,16*5,20,20,48,48,health);
-        shield = new Shield(16*3,16*3);
+        shield = new Shield(player,16*3,16*3);
+
         jLabel = new JLabel("SCORE");
 
         if (menu.isMode()==false) {
@@ -81,35 +84,61 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
                 if (gameOver == false) {
 
-                    shieldRotate();
-                    shield.cooldown();
-
 
                     player.moveMent();
                     player.playerAnimation();
-                    player.setIndex(player.getIndex());
+//                    player.setIndex(player.getIndex());
+
+                    shield.shieldRotate();
+                    shield.Cooldown();
 //            addProj();
-                    addEnemy();
+
+                    pocet=pole_enemy.size();
+
+
+
+
+
+
+                    if (pocet<=0 || score==0) {
+//                        System.out.println("pocet "+pocet);
+                        addEnemy();
+                    }
+
                     repaint();
 
 
                     for (EnemySettings enemyS : pole_enemy) {
+
+
+
                         enemyS.enemyAnimation();
                         enemyS.enemyMove(player);
 
                         healthBar();
                         enemyS.cooldownProj(player, pole_proj);
 
+                        pocet ++;
+//                        if (enemyS.collision2(this.enemyS)) {
+//                            if (this.enemyS.collision2(enemyS)) {
+//                                enemyS.setE_x(enemyS.getE_x() + rand.nextInt(1,5));
+//                                enemyS.setE_y(enemyS.getE_y() + rand.nextInt(2));
+//                            }
+//                        }
+
+
+
                     }
                     for (ProjectileSettings projectyleS : pole_proj) {
                         projectyleS.direction(player);
                         timer--;
+//                        System.out.println("timer:"+timer);
 //                        projectyleS.direction1(player, enemyS);
 
 //                healthBar();
                         if (projectyleS.collision(player)) {
 //                            player.setHealth(health);
-                            player.setIndex(player.getIndex()+1);
+//                            player.setIndex(player.getIndex()+1);
                             health -= 1;
                             player.health(health);
 
@@ -127,6 +156,9 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
 
                         }
+//                        if ((enemyS.collision2(enemyS))){
+//                            System.out.println("ADADA");
+//                        }
 
                     }
 
@@ -135,30 +167,37 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
         }).start();
     }
     public void addEnemy(){
-        if (enemyS != null){
-            id++;
-        }
 
-        Random rand = new Random();
-        if (score >= 10){
-            max =2;
-        }
-        if (score >= 100){
-            max =4;
-        }
-        if (score >= 200){
-            max =5;
-        }
-        if (pole_enemy.size() <max){
+//        if (enemyS != null){
+//            id++;
+//        }
 
 
+            while (pole_enemy.size()!=max) {
 
-            enemyS = new Enemy1(rand.nextInt(1,400),rand.nextInt(1,400),24*3,24*3,1,id);
-            pole_enemy.add(enemyS);
+                if (score >= 10) {
+                    max = 2;
+                }
+                if (score >= 50) {
+                    max = 4;
+                }
+                if (score >= 200) {
+                    max = 5;
+                }
+                if (pole_enemy.size() < max) {
+
+
+                    enemyS = new Enemy1(rand.nextInt(1, 400), rand.nextInt(1, 400), 24 * 3, 24 * 3, 1, id);
+                    pole_enemy.add(enemyS);
+                    pocet++;
+
 //            System.out.println(enemyS);
 
 //            enemyS = new Enemy2(rand.nextInt(1,400),rand.nextInt(1,400),50,50,1);
 //            pole_enemy.add(enemyS);
+                }
+            }
+
         }
 
 
@@ -171,20 +210,20 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 //            project = new Projectyle(random.nextInt(1, 400), random.nextInt(1, 400), 50, 50);
 //        pole_proj.add(project);
 //    }
-    }
-    public void shieldRotate(){
-        double radius = 50;
 
-        double dx = sx - player.getPl_x();
-        double dy = sy - player.getPl_y();
-        double angle = Math.atan2(dy, dx);
-
-        double shieldX = player.getPl_x() + Math.cos(angle) * radius;
-        double shieldY = player.getPl_y() + Math.sin(angle) * radius;
-
-        shield.setS_x((int) shieldX);
-        shield.setS_y((int) shieldY);
-    }
+//    public void shieldRotate(){
+//        double radius = 50;
+//
+//        double dx = sx - player.getPl_x();
+//        double dy = sy - player.getPl_y();
+//        double angle = Math.atan2(dy, dx);
+//
+//        double shieldX = player.getPl_x() + Math.cos(angle) * radius;
+//        double shieldY = player.getPl_y() + Math.sin(angle) * radius;
+//
+//        shield.setS_x((int) shieldX);
+//        shield.setS_y((int) shieldY);
+//    }
     public void healthBar() {
 
 //        if (enemy.collision(player)) {
@@ -210,6 +249,10 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
         pole_enemy.clear();
         health = 6;
         score = 0;
+        player.setMode1(0);
+        player.setMode2(0);
+        player.setMode3(0);
+        max=1;
     }
 
 
@@ -224,10 +267,10 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
 
         for (int j = 0; j < pole_enemy.size();j++){
-            EnemySettings enemyS =(EnemySettings) pole_enemy.get(j);
+            EnemySettings enemyS =pole_enemy.get(j);
             enemyS.vykresleniObr(g);
             for (int i = 0; i < pole_proj.size(); i++) {
-                ProjectileSettings projectyleS = (ProjectileSettings) pole_proj.get(i);
+                ProjectileSettings projectyleS =pole_proj.get(i);
                 projectyleS.draw(g);
 
             if (shield.getShieldMode() == 1){
@@ -246,10 +289,12 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
                     if (projectyleS.collision1(enemyS)) {
                         pole_enemy.remove(enemyS);
                         pole_proj.remove(projectyleS);
+                        pocet--;
                         j--;
                         i--;
                         score += 10;
                         jLabel.setText(String.valueOf(score));
+//                        System.out.println(" pda"+pocet);
                         System.out.println("score: "+ score);
                     }
             }
@@ -299,6 +344,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
     @Override
     public void keyReleased(KeyEvent e) {
         player.keyReleased(e);
+        shield.keyReleased(e);
 
     }
 
@@ -310,9 +356,10 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
     @Override
     public void mouseMoved(MouseEvent e) {
 //        shield.mouseMoved(e);
-        sy=e.getY();
-        sx=e.getX();
+//        sy=e.getY();
+//        sx=e.getX();
         menu.mouseMoved(e);
+        shield.mouseMoved(e);
 
     }
 

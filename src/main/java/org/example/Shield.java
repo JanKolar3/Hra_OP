@@ -14,30 +14,75 @@ public class Shield implements MouseMotionListener, KeyListener {
 
 //    Projectile1 projectyle;
     ProjectileSettings projectileS;
-    private int cooldown=60;
-    private int x;
-    private int y;
+    private int cooldown=10,cooldown1=1;
+    private int sx;
+    private int sy;
     private int s_x ;
     private int s_y ;
     private int s_w ;
     private int s_h;
+    private int x,y;
+    private int radius = 50;
 
     private int shieldMode=1;
 
     private boolean je= false;
+    private boolean je1= false;
 
 
 
 
 
-    public Shield(int s_w, int s_h) {
+    public Shield(Player player, int s_w, int s_h) {
         image = new ImageIcon(SOUBOR_SHIELD).getImage();
         img = new ImageIcon(SOUBOR_SH).getImage();
+        this.player = player;
 
         this.s_w = s_w;
         this.s_h = s_h;
 
+        this.x = x;
+        this.y = y;
+
+
     }
+
+
+    public void shieldRotate(){
+        if (player != null) {
+            int dx = sx - player.getPl_x();
+            int dy = sy - player.getPl_y();
+            double angle = Math.atan2(dy, dx);
+
+            int shieldX = (int) (player.getPl_x() + Math.cos(angle) * radius);
+            int shieldY = (int) (player.getPl_y() + Math.sin(angle) * radius);
+
+            s_x=shieldX;
+            s_y=shieldY;
+
+        }
+    }
+    public void Cooldown(){
+        if(je) {
+            cooldown--;
+
+            if (cooldown <= 0) {
+                radius--;
+                System.out.println(radius);
+
+                shieldMode = 1;
+
+                if (radius <= 50) {
+                    radius = 50;
+//                    shieldMode = 1;
+                    cooldown = 20;
+                    cooldown1 = 30;
+                    je = false;
+                }
+            }
+        }
+    }
+
 
     public Rectangle hitBox() {
             return new Rectangle(s_x + (getS_w() / 4), s_y, s_w / 2, s_h);
@@ -60,29 +105,25 @@ public class Shield implements MouseMotionListener, KeyListener {
 
 
 
-
-    public void cooldown(){
-        if(je) {
-            cooldown--;
-        }
-    }
-
-
     public void vykresleniObr(Graphics g) {
 
-        g.drawImage(image,s_x,s_y,s_w,s_h,null);
+
+        g.drawImage(image,s_x+10,s_y,s_w,s_h,null);
 //        g.drawRect(s_x+(getS_w()/4),s_y,s_w/2,s_h);
 
         if (je == true){
-            g.drawImage(img,s_x,s_y,s_w,s_h,null);
-            shieldMode = 2;
-                    if (cooldown == 0) {
-                        cooldown =60;
-                        shieldMode = 1;
-                        je = false;
-                    }
+            g.drawImage(img,s_x+10,s_y,s_w,s_h,null);
+            if (je1) {
+                shieldMode = 2;
+                radius=65;
+
+                je1 = false;
+            }
+//            radius=60;
+
         }
     }
+
     @Override
     public void mouseDragged(MouseEvent e) {
 
@@ -90,12 +131,8 @@ public class Shield implements MouseMotionListener, KeyListener {
 
     @Override
     public void mouseMoved(MouseEvent e) {
-
-        y=e.getY();
-        x=e.getX();
-//        s_x = e.getX() - (s_w / 2);
-//        s_y = e.getY() - (s_w / 2);
-
+        sy=e.getY();
+        sx=e.getX();
     }
 
 
@@ -140,6 +177,7 @@ public class Shield implements MouseMotionListener, KeyListener {
         if (znk == 'r'){
 
             je = true;
+            je1= true;
 
 
 //            System.out.println("RRRRR");
@@ -153,7 +191,6 @@ public class Shield implements MouseMotionListener, KeyListener {
     public void keyReleased(KeyEvent e) {
         char znk = e.getKeyChar();
         if (znk == 'r') {
-            je = false;
         }
     }
 

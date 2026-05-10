@@ -49,7 +49,7 @@ public class ProjectileSettings {
             if (player.getPl_y() > y) y += speed;
             if (player.getPl_y() < y) y -= speed;
         } else if (mode == 2 && enemyS != null) {
-            speed = 5;
+            speed = 7;
             if (enemyS.getE_x() > x) x += speed;
             if (enemyS.getE_x() < x) x -= speed;
             if (enemyS.getE_y() > y) y += speed;
