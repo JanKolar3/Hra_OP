@@ -90,6 +90,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 //                    player.setIndex(player.getIndex());
 
                     shield.shieldRotate();
+                    shield.shieldAnimation();
                     shield.Cooldown();
 //            addProj();
 
@@ -105,7 +106,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
                         addEnemy();
                     }
 
-                    repaint();
+//                    repaint();
 
 
                     for (EnemySettings enemyS : pole_enemy) {
@@ -163,6 +164,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
                     }
 
                 }
+            repaint();
 //            }
         }).start();
     }

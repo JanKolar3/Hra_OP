@@ -5,8 +5,9 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Shield implements MouseMotionListener, KeyListener {
-    private String SOUBOR_SHIELD = "src/main/resources/shield.png";
+//    private String SOUBOR_SHIELD = "src/main/resources/shield.png";
     private String SOUBOR_SH = "src/main/resources/shieldPush.png";
+    Image[] SHIELD = SpriteLoader.getFrames("/shield - kopie.png",16,16,3);
 
     private Image image;
     private Image img;
@@ -22,7 +23,10 @@ public class Shield implements MouseMotionListener, KeyListener {
     private int s_w ;
     private int s_h;
     private int x,y;
+    private int otoceni,posun;
     private int radius = 50;
+
+    private int index;
 
     private int shieldMode=1;
 
@@ -34,7 +38,7 @@ public class Shield implements MouseMotionListener, KeyListener {
 
 
     public Shield(Player player, int s_w, int s_h) {
-        image = new ImageIcon(SOUBOR_SHIELD).getImage();
+//        image = new ImageIcon(SOUBOR_SHIELD).getImage();
         img = new ImageIcon(SOUBOR_SH).getImage();
         this.player = player;
 
@@ -59,6 +63,7 @@ public class Shield implements MouseMotionListener, KeyListener {
 
             s_x=shieldX;
             s_y=shieldY;
+            s_x+=10;
 
         }
     }
@@ -83,6 +88,29 @@ public class Shield implements MouseMotionListener, KeyListener {
         }
     }
 
+    public void shieldAnimation(){
+        System.out.println(s_y+" "+player.getPl_y());
+//        System.out.println("x"+s_x+" "+player.getPl_x());
+//        if (shieldMode == 1) {
+//        System.out.println(otoceni);
+//        System.out.println(posun);
+        //kdyztak: &&s_y>= player.getPl_y()-40
+            if (s_y>= player.getPl_y()&&s_y<= player.getPl_y()+40||s_y<= player.getPl_y()){
+                index=1;
+                if(s_x<=player.getPl_x()+20){
+                    otoceni=-1;
+                    posun=50;
+
+                }else{ otoceni=1;posun=0;}
+            }else if(s_y>=player.getPl_y()){index=0;}
+            if (s_y<= player.getPl_y()-40){
+                index=2;
+            }
+
+
+//        }
+    }
+
 
     public Rectangle hitBox() {
             return new Rectangle(s_x + (getS_w() / 4), s_y, s_w / 2, s_h);
@@ -101,18 +129,17 @@ public class Shield implements MouseMotionListener, KeyListener {
 
 
 
-
-
-
-
     public void vykresleniObr(Graphics g) {
 
 
-        g.drawImage(image,s_x+10,s_y,s_w,s_h,null);
+//        g.drawImage(image,s_x+10,s_y,s_w,s_h,null);
 //        g.drawRect(s_x+(getS_w()/4),s_y,s_w/2,s_h);
+        if (je==false) {
+            g.drawImage(SHIELD[index], s_x+posun, s_y, s_w*otoceni, s_h, null);
+        }
 
         if (je == true){
-            g.drawImage(img,s_x+10,s_y,s_w,s_h,null);
+            g.drawImage(img,s_x,s_y,s_w,s_h,null);
             if (je1) {
                 shieldMode = 2;
                 radius=65;

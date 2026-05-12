@@ -139,7 +139,7 @@ public class EnemySettings {
 
         }
         public boolean collision2(EnemySettings enemyS){
-        return hitBox().intersects(this.hitBox());
+        return hitBox().intersects(hitBox());
         }
 
 

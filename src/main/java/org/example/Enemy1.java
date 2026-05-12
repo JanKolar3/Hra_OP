@@ -15,7 +15,5 @@ public class Enemy1 extends EnemySettings{
 
 //        image1 = new Image{new ImageIcon(SOUBOR_ENEMY[getIndex()]).getImage()};
         image1 = SOUBOR_ENEMY;
-
     }
-
 }
