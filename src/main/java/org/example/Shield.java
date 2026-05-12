@@ -89,11 +89,6 @@ public class Shield implements MouseMotionListener, KeyListener {
     }
 
     public void shieldAnimation(){
-        System.out.println(s_y+" "+player.getPl_y());
-//        System.out.println("x"+s_x+" "+player.getPl_x());
-//        if (shieldMode == 1) {
-//        System.out.println(otoceni);
-//        System.out.println(posun);
         //kdyztak: &&s_y>= player.getPl_y()-40
             if (s_y>= player.getPl_y()&&s_y<= player.getPl_y()+40||s_y<= player.getPl_y()){
                 index=1;
