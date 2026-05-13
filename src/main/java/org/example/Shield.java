@@ -15,7 +15,7 @@ public class Shield implements MouseMotionListener, KeyListener {
 
 //    Projectile1 projectyle;
     ProjectileSettings projectileS;
-    private int cooldown=10,cooldown1=1;
+    private int cooldown=10,cooldown1=1,cooldownAktivace=360;
     private int sx;
     private int sy;
     private int s_x ;
@@ -32,23 +32,16 @@ public class Shield implements MouseMotionListener, KeyListener {
 
     private boolean je= false;
     private boolean je1= false;
+    private boolean aktivace= false;
 
 
 
 
 
     public Shield(Player player, int s_w, int s_h) {
-//        image = new ImageIcon(SOUBOR_SHIELD).getImage();
-//        img = new ImageIcon(SOUBOR_SH).getImage();
         this.player = player;
-
         this.s_w = s_w;
         this.s_h = s_h;
-
-        this.x = x;
-        this.y = y;
-
-
     }
 
 
@@ -70,6 +63,7 @@ public class Shield implements MouseMotionListener, KeyListener {
     public void Cooldown(){
         if(je) {
             cooldown--;
+            cooldownAktivace--;
 
             if (cooldown <= 0) {
                 radius--;
@@ -77,12 +71,17 @@ public class Shield implements MouseMotionListener, KeyListener {
 
                 shieldMode = 1;
 
+
                 if (radius <= 50) {
                     radius = 50;
 //                    shieldMode = 1;
                     cooldown = 20;
                     cooldown1 = 30;
                     je = false;
+                }
+                if (cooldownAktivace <= 0) {
+                   aktivace = true;
+                   cooldownAktivace = 30;
                 }
             }
         }
@@ -118,27 +117,11 @@ public class Shield implements MouseMotionListener, KeyListener {
 
     public Rectangle hitBox() {
             return new Rectangle(s_x+posunh, s_y, s_w/zmenseni, s_h);
-
-    }
-    public Rectangle hitBoxodr(){
-            return new Rectangle(s_x + (getS_w() / 4), s_y, s_w / 2, s_h);
-    }
-
-    public boolean collision(EnemySettings enemyS) {
-        return enemyS.hitBox().intersects(hitBox());
     }
     public boolean collision1(ProjectileSettings projectileS){
         return projectileS.hitBox().intersects(hitBox());
     }
-
-
-
     public void vykresleniObr(Graphics g) {
-
-
-//        g.drawImage(image,s_x+10,s_y,s_w,s_h,null);
-//        g.drawRect(s_x+(getS_w()/4),s_y,s_w/2,s_h);
-//        g.drawRect(s_x+posunh , s_y, s_w/zmenseni , s_h);
         if (je==false) {
             g.drawImage(SHIELD[index], s_x+posun, s_y, s_w*otoceni, s_h, null);
         }
