@@ -120,6 +120,20 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
                         enemyS.cooldownProj(player, pole_proj);
 
                         pocet ++;
+                        for (int i = 0; i < pole_enemy.size(); i++) {
+                            for (int j = i+1; j < pole_proj.size(); j++) {
+
+                                EnemySettings ememy1 = pole_enemy.get(i);
+                                EnemySettings enemy2 = pole_enemy.get(j);
+
+                                if (ememy1.collision2(enemy2)) {
+                                    ememy1.setE_x(ememy1.getE_x()+1);
+                                    ememy1.setE_y(ememy1.getE_y()-1);
+//                                    System.out.println("coolll");
+                                }
+                            }
+
+                        }
 //                        if (enemyS.collision2(this.enemyS)) {
 //                            if (this.enemyS.collision2(enemyS)) {
 //                                enemyS.setE_x(enemyS.getE_x() + rand.nextInt(1,5));
