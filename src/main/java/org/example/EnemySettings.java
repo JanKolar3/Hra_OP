@@ -6,37 +6,32 @@ import java.util.Random;
 
 public class EnemySettings {
 
-        private int OHRANICENI1 = 650;
-        private int OHRANICENI2 = -60;
+
+    private int OHRANICENI1 = 650;
+    private int OHRANICENI2 = -60;
+
+    Random random = new Random();
+
+    Image[] image1;
+    Image image2;
 
 
-//        private String SOUBOR_ENEMy = "";
-//        Image image = new ImageIcon(SOUBOR_ENEMy).getImage();
-        Image[] image1;
-        Image image2;
-
-//        Projectile1 projectyle;
-        Shield shield;
-        Player player;
-        Random random = new Random();
-        //    ArrayList<Projectyle> pole_proj = new ArrayList<>();
-        private int cooldown = 240;
-        private int shootcooldown = 60;
-        //    private int x,y,pspeed = 1;
-        private int e_id;
-        private int max;
-        private int e_x;
-        private int e_y;
-        private int e_width;
-        private int e_height;
-        private int speed;
-        private EnemySettings enemyS;
-        private int index;
-        private int animationCooldown=30;
-        private boolean mode;
-        private int OKOLIK=1,RADIUS=150;
-        private int bud;
-        private int cooldownMove;
+    private int cooldown = 240;
+    private int shootcooldown = 60;
+    private int e_id;
+    private int max;
+    private int e_x;
+    private int e_y;
+    private int e_width;
+    private int e_height;
+    private int speed;
+    private EnemySettings enemyS;
+    private int index;
+    private int animationCooldown=30;
+    private boolean mode;
+    private int OKOLIK=1,RADIUS=150;
+    private int bud;
+    private int cooldownMove;
 
 
 

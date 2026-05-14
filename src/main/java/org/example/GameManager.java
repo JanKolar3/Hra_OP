@@ -131,7 +131,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 //                                if (ememy1.collision2(enemy2)) {
 //                                    ememy1.setE_x(ememy1.getE_x()+1);
 //                                    ememy1.setE_y(ememy1.getE_y()-1);
-////                                    System.out.println("coolll");
+//                                    System.out.println("coolll");
 //                                }
 //                            }
 
@@ -166,10 +166,10 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
                             if (shield.getShieldMode() == 2) {
                                 projectyleS.setMode(2);
                             }
-                            if (shield.getShieldMode() == 1) {
-                                projectyleS.setMode(1);
-
-                            }
+//                            if (shield.getShieldMode() == 1) {
+//                                projectyleS.setMode(1);
+//
+//                            }
 
 
                         }
@@ -315,6 +315,11 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 //                        System.out.println(" pda"+pocet);
                         System.out.println("score: "+ score);
                     }
+                if (timer <=0){
+                    pole_proj.remove(projectyleS);
+                    i--;
+                    timer =600;
+                }
             }
             if (timer <=0){
                 pole_proj.remove(projectyleS);
