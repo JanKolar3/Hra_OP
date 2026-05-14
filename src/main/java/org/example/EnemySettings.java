@@ -31,6 +31,8 @@ public class EnemySettings {
         private int animationCooldown=30;
         private boolean mode;
         private int OKOLIK=1,RADIUS=150;
+        private int bud;
+        private int cooldownMove;
 
 
 
@@ -69,86 +71,45 @@ public class EnemySettings {
 
 
         public void enemyMove(Player player) {
-//            if (e_x <= player.getPl_x() && e_x >= player.getPl_x() - RADIUS) {
-//                e_x-=OKOLIK;
-//                mode = true;
-//                if (e_y <= player.getPl_y() && e_y >= player.getPl_y() - RADIUS) {
-//                    e_y-=OKOLIK;
-//                }
-//                if (e_y <= player.getPl_y() + RADIUS && e_y >= player.getPl_y()) {
-//                    e_y+=OKOLIK;
-//
-//                }
-//            }else mode = false;
-//            if (e_x <= player.getPl_x() + RADIUS && e_x >= player.getPl_x()) {
-//                e_x+=OKOLIK;
-//                mode = true;
-//                if (e_y <= player.getPl_y() && e_y >= player.getPl_y() - RADIUS) {
-//                    e_y-=OKOLIK;
-//
-//                }
-//                if (e_y <= player.getPl_y() + RADIUS && e_y >= player.getPl_y()) {
-//                    e_y+=OKOLIK;
-//                }
-//
-//
-//            }else mode = false;
-//            if (e_y <= player.getPl_y() && e_y >= player.getPl_y() - RADIUS) {
-//                e_y-=OKOLIK;
-//                mode = true;
-//
-//                if (e_x <= player.getPl_x() && e_x >= player.getPl_x() - RADIUS) {
-//                    e_x-=OKOLIK;
-//                }
-//                if (e_x <= player.getPl_x() + RADIUS && e_x >= player.getPl_x()) {
-//                    e_x+=OKOLIK;
-//                }
-//            }else mode = false;
-//
-//            if (e_y <= player.getPl_y() + RADIUS && e_y >= player.getPl_y()) {
-//                e_y++;
-//                mode = true;
-//                if (e_x <= player.getPl_x() && e_x >= player.getPl_x() - RADIUS) {
-//                    e_x-=OKOLIK;
-//                }
-//                if (e_x <= player.getPl_x() + RADIUS && e_x >= player.getPl_x()) {
-//                    e_x+=OKOLIK;
-//
-//                }
-//            } else mode = false;
             mode =false;
-            if (e_x <= player.getPl_x() && e_x >= player.getPl_x() - RADIUS && (e_y >= player.getPl_y() - RADIUS && e_y <= player.getPl_y() + RADIUS)) {
+            if (e_x <= player.getPl_x() && e_x >= player.getPl_x() - RADIUS && e_y >= player.getPl_y() - RADIUS && e_y <= player.getPl_y() + RADIUS) {
                 e_x -= OKOLIK;
                 mode = true;
             }
-            if (e_x <= player.getPl_x() + RADIUS && e_x >= player.getPl_x() && (e_y >= player.getPl_y() - RADIUS && e_y <= player.getPl_y() + RADIUS)) {
+            if (e_x <= player.getPl_x() + RADIUS && e_x >= player.getPl_x() && e_y >= player.getPl_y() - RADIUS && e_y <= player.getPl_y() + RADIUS) {
                 e_x += OKOLIK;
                 mode = true;
             }
-            if (e_y <= player.getPl_y() && e_y >= player.getPl_y() - RADIUS && (e_x >= player.getPl_x() - RADIUS && e_x <= player.getPl_x() + RADIUS)) {
+            if (e_y <= player.getPl_y() && e_y >= player.getPl_y() - RADIUS && e_x >= player.getPl_x() - RADIUS && e_x <= player.getPl_x() + RADIUS) {
                 e_y -= OKOLIK;
                 mode = true;
             }
-            if (e_y <= player.getPl_y() + RADIUS && e_y >= player.getPl_y() && (e_x >= player.getPl_x() - RADIUS && e_x <= player.getPl_x() + RADIUS)) {
+            if (e_y <= player.getPl_y() + RADIUS && e_y >= player.getPl_y() && e_x >= player.getPl_x() - RADIUS && e_x <= player.getPl_x() + RADIUS) {
                 e_y += OKOLIK;
                 mode = true;
             }
 
 
             if (mode == false) {
-                e_x += random.nextInt(-1, 1);
-                e_y += random.nextInt(-1, 1);
+                cooldownMove--;
+                if (cooldownMove <= 0) {
+                    bud=random.nextInt(1,5);
+                    cooldownMove = 30;
+                }
+                switch (bud){
+                    case 1:
+                        e_x++;
+                        break;
+                        case 2:
+                            e_x--;
+                            break;
+                            case 3:
+                                e_y++;
+                                break;
+                                case 4:
+                                    e_y--;
+                                    }
             }
-
-
-
-
-
-
-
-
-
-
 
 
 //            double dx = player.getPl_x() - this.e_x;
@@ -174,36 +135,6 @@ public class EnemySettings {
 //                this.e_y += dy * speed;
 //            }
 
-//        rozmezi = player.getPl_x()+player.getPl_y();
-//        rozmezix = player.getPl_x()+e_x/2;
-//        rozmeziy = player.getPl_y()+e_y/2;
-//        System.out.println(player.getPl_x()+" "+player.getPl_y()+" "+ e_x+" "+e_y+" "+rozmezix+" "+rozmeziy);
-//        if (player.getPl_x() > e_x){
-//            e_x += speed;
-//
-//            if (rozmeziy < e_x){
-//                e_x -= 1;
-//            }
-//        }
-//
-//        if (player.getPl_x() < e_x){
-//            e_x -= speed;
-//            if (rozmeziy > e_x){
-//                e_x += 1;
-//            }
-//        }
-//        if (player.getPl_y() > e_y){
-//            e_y += speed;
-//            if (rozmezix < e_y){
-//                e_y -= 1;
-//            }
-//        }
-//        if (player.getPl_y() < e_y){
-//            e_y -= speed;
-//            if (rozmezix > e_y){
-//                e_y += 1;
-//            }
-//        }
         }
     public void ohraniceni() {
 

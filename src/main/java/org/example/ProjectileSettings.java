@@ -50,10 +50,10 @@ public class ProjectileSettings {
             if (player.getPl_y() < y) y -= speed;
         } else if (mode == 2 && enemyS != null) {
             speed = 7;
-            if (enemyS.getE_x() > x) x += speed;
-            if (enemyS.getE_x() < x) x -= speed;
-            if (enemyS.getE_y() > y) y += speed;
-            if (enemyS.getE_y() < y) y -= speed;
+            if (enemyS.getE_x()+(enemyS.getE_width()/4) > x) x += speed;
+            if (enemyS.getE_x()+(enemyS.getE_width()/4) < x) x -= speed;
+            if (enemyS.getE_y()+(enemyS.getE_width()/4) > y) y += speed;
+            if (enemyS.getE_y()+(enemyS.getE_width()/4) < y) y -= speed;
 
         }
     }
