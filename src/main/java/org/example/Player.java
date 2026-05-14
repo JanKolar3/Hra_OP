@@ -33,7 +33,7 @@ public class Player implements KeyListener {
     private int pl_y;
     private int pl_width;
     private int pl_height;
-    private int pl_speed = 3;
+    private int pl_speed = 2;
     private int health=6;
     private int hp=2;
     private int healthMode=0,mode1,mode2,mode3;
@@ -170,6 +170,22 @@ public class Player implements KeyListener {
         if (right) {
             pl_x += pl_speed;
             direction = "right";
+        }
+    }
+
+    public void ohraniceni(){
+
+        if (pl_x<-100){
+            pl_x=700;
+        }
+        if (pl_x>700){
+            pl_x=-100;
+        }
+        if (pl_y<-100){
+            pl_y=700;
+        }
+        if (pl_y>700){
+            pl_y=-100;
         }
     }
 

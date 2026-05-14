@@ -67,7 +67,7 @@ public class Shield implements MouseMotionListener, KeyListener {
 
             if (cooldown <= 0) {
                 radius--;
-                System.out.println(radius);
+//                System.out.println(radius);
 
                 shieldMode = 1;
 
@@ -128,6 +128,7 @@ public class Shield implements MouseMotionListener, KeyListener {
 
         if (je == true){
 //            g.drawImage(img,s_x,s_y,s_w,s_h,null);
+            System.out.println(s_x+"y:"+s_y);
             g.drawImage(SHIELDPUSH[indexPush],s_x+posun, s_y, s_w*otoceni, s_h, null);
             if (je1) {
                 shieldMode = 2;

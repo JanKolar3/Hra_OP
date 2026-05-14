@@ -87,6 +87,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
                     player.moveMent();
                     player.playerAnimation();
+                    player.ohraniceni();
 //                    player.setIndex(player.getIndex());
 
                     shield.shieldRotate();
@@ -115,25 +116,26 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
                         enemyS.enemyAnimation();
                         enemyS.enemyMove(player);
+                        enemyS.ohraniceni();
 
                         healthBar();
                         enemyS.cooldownProj(player, pole_proj);
 
                         pocet ++;
-                        for (int i = 0; i < pole_enemy.size(); i++) {
-                            for (int j = i+1; j < pole_proj.size(); j++) {
+//                        for (int i = 0; i < pole_enemy.size(); i++) {
+//                            for (int j = i+1; j < pole_proj.size(); j++) {
+//
+//                                EnemySettings ememy1 = pole_enemy.get(i);
+//                                EnemySettings enemy2 = pole_enemy.get(j);
+//
+//                                if (ememy1.collision2(enemy2)) {
+//                                    ememy1.setE_x(ememy1.getE_x()+1);
+//                                    ememy1.setE_y(ememy1.getE_y()-1);
+////                                    System.out.println("coolll");
+//                                }
+//                            }
 
-                                EnemySettings ememy1 = pole_enemy.get(i);
-                                EnemySettings enemy2 = pole_enemy.get(j);
-
-                                if (ememy1.collision2(enemy2)) {
-                                    ememy1.setE_x(ememy1.getE_x()+1);
-                                    ememy1.setE_y(ememy1.getE_y()-1);
-//                                    System.out.println("coolll");
-                                }
-                            }
-
-                        }
+//                        }
 //                        if (enemyS.collision2(this.enemyS)) {
 //                            if (this.enemyS.collision2(enemyS)) {
 //                                enemyS.setE_x(enemyS.getE_x() + rand.nextInt(1,5));
@@ -203,7 +205,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
                 if (pole_enemy.size() < max) {
 
 
-                    enemyS = new Enemy1(rand.nextInt(1, 400), rand.nextInt(1, 400), 24 * 3, 24 * 3, 1, id);
+                    enemyS = new Enemy1(rand.nextInt(1, 600), rand.nextInt(1, 600), 24 * 3, 24 * 3, 1, id);
                     pole_enemy.add(enemyS);
                     pocet++;
 

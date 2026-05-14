@@ -2,6 +2,7 @@ package org.example;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class EnemySettings {
 
@@ -13,6 +14,7 @@ public class EnemySettings {
 //        Projectile1 projectyle;
         Shield shield;
         Player player;
+        Random random = new Random();
         //    ArrayList<Projectyle> pole_proj = new ArrayList<>();
         private int cooldown = 240;
         private int shootcooldown = 60;
@@ -27,6 +29,8 @@ public class EnemySettings {
         private EnemySettings enemyS;
         private int index;
         private int animationCooldown=30;
+        private boolean mode;
+        private int OKOLIK=1,RADIUS=150;
 
 
 
@@ -65,28 +69,110 @@ public class EnemySettings {
 
 
         public void enemyMove(Player player) {
-            double dx = player.getPl_x() - this.e_x;
-            double dy = player.getPl_y() - this.e_y;
-
-            double distanceSquared = dx * dx + dy * dy;
-            double radius = 200;
-            double radiusSquared = radius * radius;
-
-            if (distanceSquared < radiusSquared) {
-                this.e_x += (Math.random() - 0.5) * 2;
-                this.e_y += (Math.random() - 0.5) * 2;
-            } else {
-
-                double length = Math.sqrt(distanceSquared);
-
-                dx /= length;
-                dy /= length;
-
-                double speed = 2;
-
-                this.e_x += dx * speed;
-                this.e_y += dy * speed;
+//            if (e_x <= player.getPl_x() && e_x >= player.getPl_x() - RADIUS) {
+//                e_x-=OKOLIK;
+//                mode = true;
+//                if (e_y <= player.getPl_y() && e_y >= player.getPl_y() - RADIUS) {
+//                    e_y-=OKOLIK;
+//                }
+//                if (e_y <= player.getPl_y() + RADIUS && e_y >= player.getPl_y()) {
+//                    e_y+=OKOLIK;
+//
+//                }
+//            }else mode = false;
+//            if (e_x <= player.getPl_x() + RADIUS && e_x >= player.getPl_x()) {
+//                e_x+=OKOLIK;
+//                mode = true;
+//                if (e_y <= player.getPl_y() && e_y >= player.getPl_y() - RADIUS) {
+//                    e_y-=OKOLIK;
+//
+//                }
+//                if (e_y <= player.getPl_y() + RADIUS && e_y >= player.getPl_y()) {
+//                    e_y+=OKOLIK;
+//                }
+//
+//
+//            }else mode = false;
+//            if (e_y <= player.getPl_y() && e_y >= player.getPl_y() - RADIUS) {
+//                e_y-=OKOLIK;
+//                mode = true;
+//
+//                if (e_x <= player.getPl_x() && e_x >= player.getPl_x() - RADIUS) {
+//                    e_x-=OKOLIK;
+//                }
+//                if (e_x <= player.getPl_x() + RADIUS && e_x >= player.getPl_x()) {
+//                    e_x+=OKOLIK;
+//                }
+//            }else mode = false;
+//
+//            if (e_y <= player.getPl_y() + RADIUS && e_y >= player.getPl_y()) {
+//                e_y++;
+//                mode = true;
+//                if (e_x <= player.getPl_x() && e_x >= player.getPl_x() - RADIUS) {
+//                    e_x-=OKOLIK;
+//                }
+//                if (e_x <= player.getPl_x() + RADIUS && e_x >= player.getPl_x()) {
+//                    e_x+=OKOLIK;
+//
+//                }
+//            } else mode = false;
+            mode =false;
+            if (e_x <= player.getPl_x() && e_x >= player.getPl_x() - RADIUS && (e_y >= player.getPl_y() - RADIUS && e_y <= player.getPl_y() + RADIUS)) {
+                e_x -= OKOLIK;
+                mode = true;
             }
+            if (e_x <= player.getPl_x() + RADIUS && e_x >= player.getPl_x() && (e_y >= player.getPl_y() - RADIUS && e_y <= player.getPl_y() + RADIUS)) {
+                e_x += OKOLIK;
+                mode = true;
+            }
+            if (e_y <= player.getPl_y() && e_y >= player.getPl_y() - RADIUS && (e_x >= player.getPl_x() - RADIUS && e_x <= player.getPl_x() + RADIUS)) {
+                e_y -= OKOLIK;
+                mode = true;
+            }
+            if (e_y <= player.getPl_y() + RADIUS && e_y >= player.getPl_y() && (e_x >= player.getPl_x() - RADIUS && e_x <= player.getPl_x() + RADIUS)) {
+                e_y += OKOLIK;
+                mode = true;
+            }
+
+
+            if (mode == false) {
+                e_x += random.nextInt(-1, 1);
+                e_y += random.nextInt(-1, 1);
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+//            double dx = player.getPl_x() - this.e_x;
+//            double dy = player.getPl_y() - this.e_y;
+//
+//            double distanceSquared = dx * dx + dy * dy;
+//            double radius = 200;
+//            double radiusSquared = radius * radius;
+//
+//            if (distanceSquared < radiusSquared) {
+//                this.e_x += (Math.random() - 0.5) * 2;
+//                this.e_y += (Math.random() - 0.5) * 2;
+//            } else {
+//
+//                double length = Math.sqrt(distanceSquared);
+//
+//                dx /= length;
+//                dy /= length;
+//
+//                double speed = 2;
+//
+//                this.e_x += dx * speed;
+//                this.e_y += dy * speed;
+//            }
 
 //        rozmezi = player.getPl_x()+player.getPl_y();
 //        rozmezix = player.getPl_x()+e_x/2;
@@ -119,6 +205,21 @@ public class EnemySettings {
 //            }
 //        }
         }
+    public void ohraniceni() {
+
+        if (e_x < -61) {
+            e_x = 650;
+        }
+        if (e_x > 651) {
+            e_x = -60;
+        }
+        if (e_y < -61) {
+            e_y = 650;
+        }
+        if (e_y > 651) {
+            e_y = -60;
+        }
+    }
     public void enemyAnimation() {
         animationCooldown--;
         if (animationCooldown <= 0) {
