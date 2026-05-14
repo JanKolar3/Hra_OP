@@ -6,6 +6,10 @@ import java.util.Random;
 
 public class EnemySettings {
 
+        private int OHRANICENI1 = 650;
+        private int OHRANICENI2 = -60;
+
+
 //        private String SOUBOR_ENEMy = "";
 //        Image image = new ImageIcon(SOUBOR_ENEMy).getImage();
         Image[] image1;
@@ -33,6 +37,7 @@ public class EnemySettings {
         private int OKOLIK=1,RADIUS=150;
         private int bud;
         private int cooldownMove;
+
 
 
 
@@ -93,22 +98,26 @@ public class EnemySettings {
             if (mode == false) {
                 cooldownMove--;
                 if (cooldownMove <= 0) {
-                    bud=random.nextInt(1,5);
+                    bud=random.nextInt(1,6);
                     cooldownMove = 30;
                 }
                 switch (bud){
                     case 1:
                         e_x++;
                         break;
-                        case 2:
-                            e_x--;
-                            break;
-                            case 3:
-                                e_y++;
-                                break;
-                                case 4:
-                                    e_y--;
-                                    }
+                    case 2:
+                        e_x--;
+                        break;
+                    case 3:
+                        e_y++;
+                        break;
+                    case 4:
+                        e_y--;
+                        break;
+                    case 5:
+                        break;
+                    }
+
             }
 
 
@@ -138,17 +147,17 @@ public class EnemySettings {
         }
     public void ohraniceni() {
 
-        if (e_x < -61) {
-            e_x = 650;
+        if (e_x < OHRANICENI2-1) {
+            e_x = OHRANICENI1;
         }
-        if (e_x > 651) {
-            e_x = -60;
+        if (e_x > OHRANICENI1+1) {
+            e_x = OHRANICENI2;
         }
-        if (e_y < -61) {
-            e_y = 650;
+        if (e_y < OHRANICENI2-1) {
+            e_y = OHRANICENI1;
         }
-        if (e_y > 651) {
-            e_y = -60;
+        if (e_y > OHRANICENI1+1) {
+            e_y = OHRANICENI2;
         }
     }
     public void enemyAnimation() {
