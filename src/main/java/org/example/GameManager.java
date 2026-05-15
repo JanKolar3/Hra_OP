@@ -16,15 +16,19 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
     Random rand = new Random();
 
     private EnemySettings enemyS;
+    private LevelSettings levelS;
+
     private Image image;
     private Image image2;
-    private JLabel jLabel;
+    private JLabel jLabel,txtlevel,txtwave;
     private Player player;
     private Shield shield;
     private Menu menu;
     private int id;
     private  int timer = 500;
     private int pocet=1;
+
+    private boolean konecWave=false;
 
 
 
@@ -46,13 +50,21 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
     public GameManager() {
         image = new ImageIcon(SOUBOR_POZADI).getImage();
+        levelS = new LevelSettings();
 //        image2 = new ImageIcon(SOUBOR_HELTH).getImage();
         menu = new Menu(x,y,640,640);
+//        levelS = new LevelSettings(pocet,konecWave);
 //        project = new Projectyle(50,40,50,40);
         player = new Player(40,40,16*5,16*5,20,20,48,48,health);
         shield = new Shield(player,16*3,16*3);
 
         jLabel = new JLabel("SCORE");
+        txtlevel = new JLabel("Level: "+levelS.getLevel());
+        txtwave = new JLabel("Wave: "+levelS.getWave());
+
+        add(txtlevel);
+        add(txtwave);
+
 
         if (menu.isMode()==false) {
 
@@ -85,6 +97,9 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
                 if (gameOver == false) {
 
 
+
+
+
                     player.moveMent();
                     player.playerAnimation();
                     player.ohraniceni();
@@ -96,16 +111,19 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 //            addProj();
 
                     pocet=pole_enemy.size();
-
-
-
-
-
-
-                    if (pocet<=0 || score==0) {
-//                        System.out.println("pocet "+pocet);
-                        addEnemy();
+                    if (pocet<=0) {
+                        levelS.waveSettings();
                     }
+
+
+
+                    addEnemy();
+
+
+//                    if (pocet<=0 || score==0) {
+//                        System.out.println("pocet "+pocet);
+//                        addEnemy();
+//                    }
 
 //                    repaint();
 
@@ -121,7 +139,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
                         healthBar();
                         enemyS.cooldownProj(player, pole_proj);
 
-                        pocet ++;
+//                        pocet ++;
 //                        for (int i = 0; i < pole_enemy.size(); i++) {
 //                            for (int j = i+1; j < pole_proj.size(); j++) {
 //
@@ -153,14 +171,15 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 //                        projectyleS.direction1(player, enemyS);
 
 //                healthBar();
-                        if (projectyleS.collision(player)) {
+
 //                            player.setHealth(health);
 //                            player.setIndex(player.getIndex()+1);
-                            health -= 1;
-                            player.health(health);
-
-
-                            System.out.println("HP: "+health);
+                            if (projectyleS.isDamage()) {
+                                if (projectyleS.collision(player)) {
+                                health -= 1;
+                                player.health(health);
+                                System.out.println("HP: " + health);
+                            }
                         }
                         if (projectyleS.collision2(shield)) {
                             if (shield.getShieldMode() == 2) {
@@ -186,23 +205,29 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
     }
     public void addEnemy(){
 
+
 //        if (enemyS != null){
 //            id++;
 //        }
+        if (pocet<=0) {
+            levelS.enemyMax();
+            System.out.println(levelS.getMax());
+            max = levelS.getMax();
 
 
-            while (pole_enemy.size()!=max) {
+            while (pole_enemy.size() != levelS.getMax()) {
 
-                if (score >= 10) {
-                    max = 2;
-                }
-                if (score >= 50) {
-                    max = 4;
-                }
-                if (score >= 200) {
-                    max = 5;
-                }
-                if (pole_enemy.size() < max) {
+
+//                if (score >= 10) {
+//                    max = 2;
+//                }
+//                if (score >= 50) {
+//                    max = 4;
+//                }
+//                if (score >= 200) {
+//                    max = 5;
+//                }
+                if (pole_enemy.size() < levelS.getMax()) {
 
 
                     enemyS = new Enemy1(rand.nextInt(1, 600), rand.nextInt(1, 600), 24 * 3, 24 * 3, 1, id);
@@ -215,6 +240,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 //            pole_enemy.add(enemyS);
                 }
             }
+        }
 
         }
 
@@ -298,10 +324,11 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
                     i--;
                 }
             }
-
-            if (projectyleS.collision(player)) {
-                pole_proj.remove(projectyleS);
-                i--;
+            if (projectyleS.isDamage()) {
+                if (projectyleS.collision(player)) {
+                    pole_proj.remove(projectyleS);
+                    i--;
+                }
             }
             if (projectyleS.getMode() == 2) {
                     if (projectyleS.collision1(enemyS)) {
@@ -331,6 +358,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
         player.vykresleniObr(g);
         shield.vykresleniObr(g);
+
 
 
         if (gameOver==true){
@@ -425,4 +453,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
     }
 
+    public int getPocet() {
+        return pocet;
+    }
 }

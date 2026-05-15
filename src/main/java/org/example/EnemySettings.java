@@ -26,6 +26,7 @@ public class EnemySettings {
     private int e_height;
     private int speed;
     private EnemySettings enemyS;
+    private ProjectileSettings projectileSettings;
     private int index;
     private int animationCooldown=30;
     private boolean mode;
@@ -56,7 +57,9 @@ public class EnemySettings {
             shootcooldown --;
             if (shootcooldown<=0){
 
-                    projectilS.add(new Projectile1(e_x, e_y, 32, 32,e_id,this,player));
+
+                        projectilS.add(new Projectile1(e_x, e_y, 32, 32, e_id, this, player));
+
 
 //                    projectilS.add(new Projectile2(e_x, e_y, 32, 32));
 //                System.out.println(projectilS);
@@ -94,7 +97,7 @@ public class EnemySettings {
                 cooldownMove--;
                 if (cooldownMove <= 0) {
                     bud=random.nextInt(1,6);
-                    cooldownMove = 30;
+                    cooldownMove = 40;
                 }
                 switch (bud){
                     case 1:

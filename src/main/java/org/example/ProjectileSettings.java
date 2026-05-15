@@ -23,6 +23,7 @@ public class ProjectileSettings {
     private int mode=1;
     private double dx, dy;
     private int id;
+    private boolean damage=true;
 
 
     public ProjectileSettings(int x, int y,int width, int height,int id,EnemySettings enemyS,Player player){
@@ -49,6 +50,7 @@ public class ProjectileSettings {
             if (player.getPl_y() > y) y += speed;
             if (player.getPl_y() < y) y -= speed;
         } else if (mode == 2 && enemyS != null) {
+            damage = false;
             speed = 7;
             if (enemyS.getE_x()+(enemyS.getE_width()/4) > x) x += speed;
             if (enemyS.getE_x()+(enemyS.getE_width()/4) < x) x -= speed;
@@ -73,8 +75,12 @@ public class ProjectileSettings {
 
 
     public void draw(Graphics g){
-        g.drawImage(image1,x,y,width,height,null);
-        g.drawImage(image2,x,y,width,height,null);
+        if (damage==true) {
+            g.drawImage(image1, x, y, width, height, null);
+//            g.drawImage(image2, x, y, width, height, null);
+        }
+        else if (damage==false){
+            g.drawImage(image2, x, y, width, height, null);}
 //        g.drawRect(x+(getWidth()/4),y+(getWidth()/4),width/2,height/2);
     }
 
@@ -120,5 +126,11 @@ public class ProjectileSettings {
         this.mode = mode;
     }
 
+    public boolean isDamage() {
+        return damage;
+    }
 
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
 }
