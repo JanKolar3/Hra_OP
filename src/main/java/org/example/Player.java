@@ -308,9 +308,6 @@ public class Player implements KeyListener {
 //            direction = "right";
             }
 
-
-
-
     }
 
     @Override
