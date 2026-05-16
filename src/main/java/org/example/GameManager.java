@@ -25,7 +25,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
     private Shield shield;
     private Menu menu;
     private int id;
-    private  int timer = 500;
+    private  int timer = 600,timer1=100;
     private int pocet=1;
 
     private boolean konecWave=false;
@@ -166,7 +166,11 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
                     }
                     for (ProjectileSettings projectyleS : pole_proj) {
                         projectyleS.direction(player);
-                        timer--;
+                        if (pole_proj.contains(projectyleS)) {
+                            timer--;
+                            System.out.println("timer: "+timer);
+                        }
+
 //                        System.out.println("timer:"+timer);
 //                        projectyleS.direction1(player, enemyS);
 
@@ -322,15 +326,22 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
                     pole_proj.remove(projectyleS);
                     score += 5;
                     i--;
+                    timer = 600;
+
+
                 }
             }
             if (projectyleS.isDamage()) {
                 if (projectyleS.collision(player)) {
                     pole_proj.remove(projectyleS);
                     i--;
+                    timer =600;
+
                 }
             }
             if (projectyleS.getMode() == 2) {
+                timer =600;
+                timer1--;
                     if (projectyleS.collision1(enemyS)) {
                         pole_enemy.remove(enemyS);
                         pole_proj.remove(projectyleS);
@@ -341,17 +352,25 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
                         jLabel.setText(String.valueOf(score));
 //                        System.out.println(" pda"+pocet);
                         System.out.println("score: "+ score);
+                        timer1=100;
+
+
+                    }else if (timer1 <=0){
+                        pole_proj.remove(projectyleS);
+                        i--;
+                        timer1=100;
                     }
-                if (timer <=0){
-                    pole_proj.remove(projectyleS);
-                    i--;
-                    timer =600;
-                }
+
+//                if (timer <=0){
+//                    pole_proj.remove(projectyleS);
+//                    i--;
+//                    timer =600;
+//                }
             }
             if (timer <=0){
+                timer =600;
                 pole_proj.remove(projectyleS);
                 i--;
-                timer =600;
             }
         }
         }

@@ -33,6 +33,7 @@ public class EnemySettings {
     private int OKOLIK=1,RADIUS=150;
     private int bud;
     private int cooldownMove;
+    private int cooldownProjectile=600;
 
 
 
@@ -59,6 +60,7 @@ public class EnemySettings {
 
 
                         projectilS.add(new Projectile1(e_x, e_y, 32, 32, e_id, this, player));
+
 
 
 //                    projectilS.add(new Projectile2(e_x, e_y, 32, 32));
