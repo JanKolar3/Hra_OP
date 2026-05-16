@@ -15,7 +15,7 @@ public class Shield implements MouseMotionListener, KeyListener {
 
 //    Projectile1 projectyle;
     ProjectileSettings projectileS;
-    private int cooldown=10,cooldown1=1,cooldownAktivace=360;
+    private int cooldown=10,cooldownAktivace=100;
     private int sx;
     private int sy;
     private int s_x ;
@@ -33,6 +33,7 @@ public class Shield implements MouseMotionListener, KeyListener {
     private boolean je= false;
     private boolean je1= false;
     private boolean aktivace= false;
+    private boolean akt=false;
 
 
 
@@ -63,11 +64,11 @@ public class Shield implements MouseMotionListener, KeyListener {
     public void Cooldown(){
         if(je) {
             cooldown--;
-            cooldownAktivace--;
 
             if (cooldown <= 0) {
                 radius--;
 //                System.out.println(radius);
+
 
                 shieldMode = 1;
 
@@ -76,13 +77,19 @@ public class Shield implements MouseMotionListener, KeyListener {
                     radius = 50;
 //                    shieldMode = 1;
                     cooldown = 20;
-                    cooldown1 = 30;
+//                    cooldown1 = 30;
                     je = false;
                 }
-                if (cooldownAktivace <= 0) {
-                   aktivace = true;
-                   cooldownAktivace = 30;
-                }
+
+            }
+        }
+        if (akt==true) {
+            cooldownAktivace--;
+            if (cooldownAktivace <= 0) {
+                aktivace = false;
+                akt = false;
+                cooldownAktivace = 100;
+
             }
         }
     }
@@ -132,8 +139,10 @@ public class Shield implements MouseMotionListener, KeyListener {
             if (je1) {
                 shieldMode = 2;
                 radius=65;
-
+                aktivace = true;
                 je1 = false;
+
+
             }
 //            radius=60;
 
@@ -190,10 +199,11 @@ public class Shield implements MouseMotionListener, KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         char znk = e.getKeyChar();
-        if (znk == 'r'){
+        if (znk == 'r'&&aktivace==false){
 
             je = true;
             je1= true;
+            akt = true;
 
 
 //            System.out.println("RRRRR");

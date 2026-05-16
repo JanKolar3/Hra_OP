@@ -168,7 +168,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
                         projectyleS.direction(player);
                         if (pole_proj.contains(projectyleS)) {
                             timer--;
-                            System.out.println("timer: "+timer);
+//                            System.out.println("timer: "+timer);
                         }
 
 //                        System.out.println("timer:"+timer);
@@ -215,7 +215,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 //        }
         if (pocet<=0) {
             levelS.enemyMax();
-            System.out.println(levelS.getMax());
+//            System.out.println(levelS.getMax());
             max = levelS.getMax();
 
 

@@ -197,7 +197,7 @@ public class Player implements KeyListener {
             if (cooldown <= 0) {
                 index++;
                 if (index >= 2) {
-                    System.out.println("index: " + index);;
+//                    System.out.println("index: " + index);;
                     index = 0;
 
                 }
@@ -281,25 +281,29 @@ public class Player implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         char znak = e.getKeyChar();
-        p=true;
+
         if  (znak == 'w') {
             up = true;
             num=true;
+            p=true;
 //            pl_y-= pl_speed;
 //            direction = "up";
         }if  (znak == 's') {
             down = true;
             num=true;
+            p=true;
 //            pl_y+= pl_speed;
 //            direction = "down";
         }if  (znak == 'a') {
             left = true;
             num=true;
+            p=true;
 //            pl_x-= pl_speed;
 //            direction = "left";
         }if  (znak == 'd') {
             right=true;
             num=true;
+            p=true;
 //            pl_x+= pl_speed;
 //            direction = "right";
             }
