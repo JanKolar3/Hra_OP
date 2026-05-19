@@ -16,7 +16,7 @@ public class Player implements KeyListener {
 
     Image[] PLAYER_UP = SpriteLoader.getFrames("/Player/playerAnimUp.png",16,16,2);
     Image[] PLAYER_DOWN = SpriteLoader.getFrames("/Player/playerAnimDownts (1).png",16,16,3);
-    Image[] HEALTHS = SpriteLoader.getFrames("/Player/healts.png",16,16,3);
+//    Image[] HEALTHS = SpriteLoader.getFrames("/Player/healts.png",16,16,3);
 
 
     private Image img;
@@ -36,7 +36,7 @@ public class Player implements KeyListener {
     private int pl_speed = 2;
     private int health=6;
     private int hp=2;
-    private int healthMode=0,mode1,mode2,mode3;
+//    private int healthMode=0,mode1,mode2,mode3;
     private int cooldown=20;
     private boolean k = true;
     private boolean up,down,left,right,num,lf,rg,p;
@@ -47,7 +47,7 @@ public class Player implements KeyListener {
 
 
 
-    public Player(int x, int y, int width, int height,int hX,int hY,int hW, int hH,int health) {
+    public Player(int x, int y, int width, int height) {
 
 
 //        img = new ImageIcon(SOUBOR_PLAYER).getImage();
@@ -70,12 +70,12 @@ public class Player implements KeyListener {
         this.pl_width = width;
         this.pl_height = height;
 
-        this.health = health;
-
-        this.hX = hX;
-        this.hY = hY;
-        this.hW = hW;
-        this.HH = hH;
+//        this.health = health;
+//
+//        this.hX = hX;
+//        this.hY = hY;
+//        this.hW = hW;
+//        this.HH = hH;
 
     }
 
@@ -86,34 +86,34 @@ public class Player implements KeyListener {
         return projectyle.hitBox().intersects(hitBox());
     }
 
-    public void health(int health) {
+//    public void health(int health) {
 //        System.out.println("health changed to " + health);
-        switch (health) {
-            case 6:
-                mode3 = 0;
-                break;
-            case 5:
-                mode3 = 1;
-                break;
-            case 4:
-                mode3 = 2;
-                mode2 = 0;
-                break;
-            case 3:
-                mode2 = 1;
-                break;
-            case 2:
-                mode2 = 2;
-                mode1 = 0;
-                break;
-            case 1:
-                mode1 = 1;
-                break;
-            case 0:
-                mode1 = 2;
-                break;
-        }
-        System.out.println("health: " + health);
+//        switch (health) {
+//            case 6:
+//                mode3 = 0;
+//                break;
+//            case 5:
+//                mode3 = 1;
+//                break;
+//            case 4:
+//                mode3 = 2;
+//                mode2 = 0;
+//                break;
+//            case 3:
+//                mode2 = 1;
+//                break;
+//            case 2:
+//                mode2 = 2;
+//                mode1 = 0;
+//                break;
+//            case 1:
+//                mode1 = 1;
+//                break;
+//            case 0:
+//                mode1 = 2;
+//                break;
+//        }
+//        System.out.println("health: " + health);
 //
 //
 //        if (health<=6&&health>=4) {
@@ -152,7 +152,7 @@ public class Player implements KeyListener {
 //        if (health<=0) {mode1 = 3;}
 
 
-    }
+//    }
 
     public void moveMent() {
         if (up) {
@@ -259,9 +259,9 @@ public class Player implements KeyListener {
 //
 //        g.drawImage(PLAYER[index],pl_x,pl_y,pl_width,pl_height, null);
 
-        g.drawImage(HEALTHS[mode3], hX * 5, hY, hW, HH, null);
-        g.drawImage(HEALTHS[mode2], hX * 3, hY, hW, HH, null);
-        g.drawImage(HEALTHS[mode1], hX, hY, hW, HH, null);
+//        g.drawImage(HEALTHS[mode3], hX * 5, hY, hW, HH, null);
+//        g.drawImage(HEALTHS[mode2], hX * 3, hY, hW, HH, null);
+//        g.drawImage(HEALTHS[mode1], hX, hY, hW, HH, null);
 
 
 
@@ -382,15 +382,15 @@ public class Player implements KeyListener {
         this.health = health;
     }
 
-    public void setMode3(int mode3) {
-        this.mode3 = mode3;
-    }
-
-    public void setMode2(int mode2) {
-        this.mode2 = mode2;
-    }
-
-    public void setMode1(int mode1) {
-        this.mode1 = mode1;
-    }
+//    public void setMode3(int mode3) {
+//        this.mode3 = mode3;
+//    }
+//
+//    public void setMode2(int mode2) {
+//        this.mode2 = mode2;
+//    }
+//
+//    public void setMode1(int mode1) {
+//        this.mode1 = mode1;
+//    }
 }

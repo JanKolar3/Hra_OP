@@ -17,6 +17,7 @@ public class Frame extends JFrame {
 //        Panel panel = new Panel();
 //
 //        add(panel);
+
         GameManager gameManager = new GameManager();
         add(gameManager);
 
