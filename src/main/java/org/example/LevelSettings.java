@@ -42,13 +42,13 @@ public class LevelSettings {
 
             if (wave>0) {
                 wave--;
-                waveName=String.valueOf(wave);
+//                waveName=String.valueOf(wave);
                 System.out.println("wave was "+wave);
             }
             if (wave<=0) {
                 level++;
                 wave=5;
-                levelName= String.valueOf(level);
+//                levelName= String.valueOf(level);
                 System.out.println("level was "+level);
             }
 //        levelName= String.valueOf(level);

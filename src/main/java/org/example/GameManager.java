@@ -8,7 +8,8 @@ import java.util.Random;
 
 public class GameManager extends JPanel implements KeyListener, MouseMotionListener, MouseListener {
 
-    private String SOUBOR_POZADI = "src/main/resources/floorTest (1).png";
+    private String SOUBOR_POZADI = "src/main/resources/les.png";
+    private String SOUBRO_OHRANI = "src/main/resources/lesUP.png";
 //    private String SOUBOR_HELTH = "src/main/resources/healthtest1.png";
 
     ArrayList<EnemySettings> pole_enemy =new ArrayList<>();
@@ -33,6 +34,12 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
 
 
+    public void vykresleni(Graphics g){
+
+    }
+
+
+
     private int score = 0;
 //    Projectile1 project;
     int health = 6;
@@ -50,6 +57,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
     public GameManager() {
         image = new ImageIcon(SOUBOR_POZADI).getImage();
+        image2 = new ImageIcon(SOUBRO_OHRANI).getImage();
         levelS = new LevelSettings();
 //        image2 = new ImageIcon(SOUBOR_HELTH).getImage();
         menu = new Menu(x,y,640,640);
@@ -310,6 +318,9 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
     @Override
     protected void paintComponent(Graphics g) {
+
+
+
         super.paintComponents(g);
         g.drawImage(image,x,y,getWidth(),getHeight(),this);
 
@@ -377,6 +388,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
         player.vykresleniObr(g);
         shield.vykresleniObr(g);
+        g.drawImage(image2,x,y,getWidth(),getHeight(),null);
 
 
 

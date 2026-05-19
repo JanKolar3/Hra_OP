@@ -7,8 +7,8 @@ import java.util.Random;
 public class EnemySettings {
 
 
-    private int OHRANICENI1 = 650;
-    private int OHRANICENI2 = -60;
+    private int OHRANICENI1 = 600;
+    private int OHRANICENI2 = -42;
 
     Random random = new Random();
 
@@ -156,7 +156,7 @@ public class EnemySettings {
         if (e_y < OHRANICENI2-1) {
             e_y = OHRANICENI1;
         }
-        if (e_y > OHRANICENI1+1) {
+        if (e_y > OHRANICENI1+30) {
             e_y = OHRANICENI2;
         }
     }
