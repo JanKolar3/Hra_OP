@@ -167,9 +167,6 @@ public class Player implements KeyListener {
             p=true;
 
             }
-
-
-
     }
 
     @Override
