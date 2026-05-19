@@ -140,7 +140,6 @@ public class Player implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-
     }
 
     @Override
