@@ -10,10 +10,10 @@ import java.awt.event.MouseMotionListener;
 public class Menu extends JPanel implements MouseListener, MouseMotionListener {
 
     public String SOUBOR_MENU = "src/main/resources/Menu/menuBackground.png";
-    private String BUTTON_START = "src/main/resources/Menu/button_play.png";
-    private String BUTTON_STARTPUSH = "src/main/resources/Menu/button_playPush.png";
-    private String BUTTON_EXIT = "src/main/resources/Menu/button_exit.png";
-    private String BUTTON_EXITPUSH = "src/main/resources/Menu/button_exitPush.png";
+    private final String BUTTON_START = "src/main/resources/Menu/button_play.png";
+    private final String BUTTON_STARTPUSH = "src/main/resources/Menu/button_playPush.png";
+    private final String BUTTON_EXIT = "src/main/resources/Menu/button_exit.png";
+    private final String BUTTON_EXITPUSH = "src/main/resources/Menu/button_exitPush.png";
 
     private int loccation;
 
@@ -23,13 +23,23 @@ public class Menu extends JPanel implements MouseListener, MouseMotionListener {
     private Image i_button_stop;
     private Image i_button_stopPush;
 
-    private int sx=190,sy=210,sw=26*10,sh=14*10,ex=210,ey=360,ew=22*10,eh=13*10;
-    private int x,y,w,h;
+    private final int sx=190;
+    private final int sy=210;
+    private final int sw=26*10;
+    private final int sh=14*10;
+    private final int ex=210;
+    private final int ey=360;
+    private final int ew=22*10;
+    private final int eh=13*10;
+    private final int x;
+    private final int y;
+    private final int w;
+    private final int h;
 
     private boolean mode=true;
 
-    private Rectangle rectangle;
-    private Rectangle rectangle1;
+    private final Rectangle rectangle;
+    private final Rectangle rectangle1;
 
 
     public Menu(int x,int y,int w,int h) {
@@ -102,7 +112,7 @@ public class Menu extends JPanel implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (mode == true) {
+        if (mode) {
             if (rectangle().contains(e.getPoint())) {
                 mode = false;
             }

@@ -8,8 +8,8 @@ import java.util.Random;
 
 public class GameManager extends JPanel implements KeyListener, MouseMotionListener, MouseListener {
 
-    private String SOUBOR_POZADI = "src/main/resources/les.png";
-    private String SOUBRO_OHRANI = "src/main/resources/lesUP.png";
+    private final String SOUBOR_POZADI = "src/main/resources/les.png";
+    private final String SOUBRO_OHRANI = "src/main/resources/lesUP.png";
     Image[] HEALTHS = SpriteLoader.getFrames("/Player/healts.png",16,16,3);
 //    private String SOUBOR_HELTH = "src/main/resources/healthtest1.png";
 
@@ -18,14 +18,16 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
     Random rand = new Random();
 
     private EnemySettings enemyS;
-    private LevelSettings levelS;
+    private final LevelSettings levelS;
 
-    private Image image;
-    private Image image2;
-    private JLabel jLabel,txtlevel,txtwave;
-    private Player player;
-    private Shield shield;
-    private Menu menu;
+    private final Image image;
+    private final Image image2;
+    private final JLabel jLabel;
+    private final JLabel txtlevel;
+    private final JLabel txtwave;
+    private final Player player;
+    private final Shield shield;
+    private final Menu menu;
     private int id;
     private  int timer = 600,timer1=100;
     private int pocet=1;
@@ -66,7 +68,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
         add(txtwave);
 
 
-        if (menu.isMode()==false) {
+        if (!menu.isMode()) {
 
 
             add(jLabel);
@@ -80,8 +82,8 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
 
         new Timer(16, e -> {
-            if(menu.isMode()==false) {
-                if (gameOver == false) {
+            if(!menu.isMode()) {
+                if (!gameOver) {
 
                     player.moveMent();
                     player.playerAnimation();
@@ -194,7 +196,6 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
                     mode1 = 2;
                     break;
             }
-            System.out.println("health: " + health);
 
         if (health <= 0) {
             health =6;
@@ -281,7 +282,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
 
 
-        if (gameOver==true){
+        if (gameOver){
             g.setFont(new Font("Arial", Font.BOLD,64));
             g.setColor(Color.RED);
             g.drawString("Game Over", 150, 320);
@@ -289,7 +290,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
         }
 
 
-        if (menu.isMode() == true){
+        if (menu.isMode()){
             menu.vykresleniMenu(g);
         }
 
@@ -341,7 +342,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
     @Override
     public void mouseClicked(MouseEvent e) {
         menu.mouseClicked(e);
-        if (gameOver==true) {
+        if (gameOver) {
             reset();
         }
     }

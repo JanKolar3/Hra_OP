@@ -4,8 +4,8 @@ public class LevelSettings {
     private int wave=5;
     private int level;
     private int max;
-    private String levelName="";
-    private String waveName="";
+    private final String levelName="";
+    private final String waveName="";
     ProjectileSettings projectileS;
 //    private int pocet;
 

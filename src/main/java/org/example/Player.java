@@ -18,7 +18,7 @@ public class Player implements KeyListener {
     private int pl_y;
     private int pl_width;
     private int pl_height;
-    private int pl_speed = 2;
+    private final int pl_speed = 2;
 
     private int cooldown=20;
     private boolean k = true;

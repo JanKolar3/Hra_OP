@@ -74,7 +74,7 @@ public class Shield implements MouseMotionListener, KeyListener {
 
             }
         }
-        if (akt==true) {
+        if (akt) {
             cooldownAktivace--;
             if (cooldownAktivace <= 0) {
                 aktivace = false;
@@ -120,11 +120,11 @@ public class Shield implements MouseMotionListener, KeyListener {
         return projectileS.hitBox().intersects(hitBox());
     }
     public void vykresleniObr(Graphics g) {
-        if (je==false) {
+        if (!je) {
             g.drawImage(SHIELD[index], s_x+posun, s_y, s_w*otoceni, s_h, null);
         }
 
-        if (je == true){
+        if (je){
             g.drawImage(SHIELDPUSH[indexPush],s_x+posun, s_y, s_w*otoceni, s_h, null);
             if (je1) {
                 shieldMode = 2;
@@ -188,7 +188,7 @@ public class Shield implements MouseMotionListener, KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         char znk = e.getKeyChar();
-        if (znk == 'r'&&aktivace==false){
+        if (znk == 'r'&& !aktivace){
 
             je = true;
             je1= true;

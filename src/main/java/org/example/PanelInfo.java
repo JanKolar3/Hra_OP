@@ -9,11 +9,11 @@ import java.awt.event.MouseMotionListener;
 
 public class PanelInfo extends JPanel implements MouseListener, MouseMotionListener {
 
-    private String SOUBOR_POZADI = "src/main/resources/les.png";
-    private String SOUBRO_OHRANI = "src/main/resources/lesUP.png";
+    private final String SOUBOR_POZADI = "src/main/resources/les.png";
+    private final String SOUBRO_OHRANI = "src/main/resources/lesUP.png";
 
-    private Image image1;
-    private Image image2;
+    private final Image image1;
+    private final Image image2;
     GameManager gameManager;
     Menu menu;
     JLabel jLabel;

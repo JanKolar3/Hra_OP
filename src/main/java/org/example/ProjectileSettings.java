@@ -11,8 +11,8 @@ public class ProjectileSettings {
     Image image2;
     private int x;
     private int y;
-    private int width;
-    private int height;
+    private final int width;
+    private final int height;
     private int speed=2;
     private int mode=1;
     private boolean damage=true;
@@ -64,10 +64,10 @@ public class ProjectileSettings {
 
 
     public void draw(Graphics g){
-        if (damage==true) {
+        if (damage) {
             g.drawImage(image1, x, y, width, height, null);
         }
-        else if (damage==false){
+        else if (!damage){
             g.drawImage(image2, x, y, width, height, null);}
     }
 

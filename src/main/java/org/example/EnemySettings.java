@@ -7,8 +7,8 @@ import java.util.Random;
 public class EnemySettings {
 
 
-    private int OHRANICENI1 = 600;
-    private int OHRANICENI2 = -42;
+    private final int OHRANICENI1 = 600;
+    private final int OHRANICENI2 = -42;
 
     Random random = new Random();
 
@@ -16,22 +16,23 @@ public class EnemySettings {
     Image image2;
 
 
-    private int cooldown = 240;
+    private final int cooldown = 240;
     private int shootcooldown = 60;
     private int e_id;
     private int max;
     private int e_x;
     private int e_y;
-    private int e_width;
-    private int e_height;
-    private int speed;
+    private final int e_width;
+    private final int e_height;
+    private final int speed;
     private int index;
     private int animationCooldown=30;
     private boolean mode;
-    private int OKOLIK=1,RADIUS=150;
+    private final int OKOLIK=1;
+    private final int RADIUS=150;
     private int bud;
     private int cooldownMove;
-    private int cooldownProjectile=600;
+    private final int cooldownProjectile=600;
 
 
 
@@ -87,7 +88,7 @@ public class EnemySettings {
             }
 
 
-            if (mode == false) {
+            if (!mode) {
                 cooldownMove--;
                 if (cooldownMove <= 0) {
                     bud=random.nextInt(1,6);
