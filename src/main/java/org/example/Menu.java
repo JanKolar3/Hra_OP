@@ -9,8 +9,6 @@ import java.awt.event.MouseMotionListener;
 
 public class Menu extends JPanel implements MouseListener, MouseMotionListener {
 
-//    private static Image[] BUTTON_START = SpriteLoader.getFrames("src/main/resources/button_play - kopie.png",53,14,2);
-
     public String SOUBOR_MENU = "src/main/resources/Menu/menuBackground.png";
     private String BUTTON_START = "src/main/resources/Menu/button_play.png";
     private String BUTTON_STARTPUSH = "src/main/resources/Menu/button_playPush.png";
@@ -24,12 +22,10 @@ public class Menu extends JPanel implements MouseListener, MouseMotionListener {
     private Image i_button_playPush;
     private Image i_button_stop;
     private Image i_button_stopPush;
-//    private JButton button;
-//    private JButton button1;
+
     private int sx=190,sy=210,sw=26*10,sh=14*10,ex=210,ey=360,ew=22*10,eh=13*10;
     private int x,y,w,h;
-    private Rectangle rect;
-    private Rectangle rect1;
+
     private boolean mode=true;
 
     private Rectangle rectangle;
@@ -59,55 +55,9 @@ public class Menu extends JPanel implements MouseListener, MouseMotionListener {
     }
 
 
-
-
-
-//    public void buttons() {
-//        button = new JButton("PLAY");
-//
-//
-//        button.setBounds(x, y, w, h);
-//        button1 = new JButton("END");
-//        button1.setBounds(x, y, w, h);
-//        setLayout(new FlowLayout(FlowLayout.CENTER));
-//        add(button);
-//        add(button1);
-//
-//
-//
-//        }
-//
-//        button.addActionListener(new AbstractAction() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//
-//                i_menu = null;
-//                button.setVisible(false);
-//                button1.setVisible(false);
-//
-//
-//            }
-//
-//        });
-//
-//        button1.addActionListener(new AbstractAction() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                System.exit(0);
-//            }
-//        });
-//
-//    }
-
-
-
-
-
-
     public void vykresleniMenu(Graphics g) {
 
         g.drawImage(i_menu,x,y,w,h,null);
-//        g.drawImage(BUTTON_START[index],100,250,53,14,null );
         g.drawImage(i_button_play,sx,sy,sw,sh,null);
         g.drawImage(i_button_stop,ex,ey,ew,eh,null);
 
@@ -137,10 +87,8 @@ public class Menu extends JPanel implements MouseListener, MouseMotionListener {
 
             if (rectangle().contains(e.getPoint())) {
                 loccation = 1;
-//            System.out.println("ADAADA");
             } else {
                 loccation = 0;
-//                System.out.println("kkkkk");
             }
             if (rectangle1().contains(e.getPoint())) {
                 loccation = 2;
@@ -157,9 +105,6 @@ public class Menu extends JPanel implements MouseListener, MouseMotionListener {
         if (mode == true) {
             if (rectangle().contains(e.getPoint())) {
                 mode = false;
-//                rectangle1 = null;
-//                rectangle = null;
-
             }
             if (rectangle1().contains(e.getPoint())) {
                 System.exit(0);

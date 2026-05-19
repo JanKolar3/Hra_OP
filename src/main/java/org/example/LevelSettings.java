@@ -51,9 +51,6 @@ public class LevelSettings {
 //                levelName= String.valueOf(level);
                 System.out.println("level was "+level);
             }
-//        levelName= String.valueOf(level);
-//        waveName= String.valueOf(wave);
-
     }
 
     public int enemyMax(){
@@ -61,7 +58,6 @@ public class LevelSettings {
         switch (wave) {
             case 4:
                 max=1;
-
                 break;
             case 3:
                 max=2;

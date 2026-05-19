@@ -5,14 +5,8 @@ import java.awt.*;
 
 public class ProjectileSettings {
 
-//    private String SOUBOR_PROJECTYLE = "src/main/resources/testst.png";
-
-
-
     Player player;
     EnemySettings enemyS;
-    private Image image;
-    Shield shield;
     Image image1;
     Image image2;
     private int x;
@@ -21,24 +15,19 @@ public class ProjectileSettings {
     private int height;
     private int speed=2;
     private int mode=1;
-    private double dx, dy;
-    private int id;
     private boolean damage=true;
 
 
-    public ProjectileSettings(int x, int y,int width, int height,int id,EnemySettings enemyS,Player player){
-//        image = new ImageIcon(SOUBOR_PROJECTYLE).getImage();
-
+    public ProjectileSettings(int x, int y,int width, int height,EnemySettings enemyS,Player player){
 
         this.y = y;
         this.x = x;
         this.width = width;
         this.height = height;
-        this.id = id;
 
         this.enemyS = enemyS;
         this.player = player;
-//        direction();
+
 
 
     }
@@ -77,11 +66,9 @@ public class ProjectileSettings {
     public void draw(Graphics g){
         if (damage==true) {
             g.drawImage(image1, x, y, width, height, null);
-//            g.drawImage(image2, x, y, width, height, null);
         }
         else if (damage==false){
             g.drawImage(image2, x, y, width, height, null);}
-//        g.drawRect(x+(getWidth()/4),y+(getWidth()/4),width/2,height/2);
     }
 
 
@@ -113,10 +100,6 @@ public class ProjectileSettings {
     public int getSpeed() {
         return speed;
     }
-
-//    public void setLp(boolean lp) {
-//        this.lp = lp;
-//    }
 
     public int getMode() {
         return mode;

@@ -25,8 +25,6 @@ public class EnemySettings {
     private int e_width;
     private int e_height;
     private int speed;
-    private EnemySettings enemyS;
-    private ProjectileSettings projectileSettings;
     private int index;
     private int animationCooldown=30;
     private boolean mode;
@@ -41,15 +39,13 @@ public class EnemySettings {
 
 
 
-    public EnemySettings(int x ,int y ,int e_width, int e_height,int speed, int id) {
-//        image = new ImageIcon(SOUBOR_ENEMy).getImage();
-
+    public EnemySettings(int x ,int y ,int e_width, int e_height,int speed) {
         this.e_x = x;
         this.e_y = y;
         this.e_width = e_width;
         this.e_height = e_height;
         this.speed = speed;
-        this.e_id = id;
+
 
     }
 
@@ -59,12 +55,8 @@ public class EnemySettings {
             if (shootcooldown<=0){
 
 
-                        projectilS.add(new Projectile1(e_x, e_y, 32, 32, e_id, this, player));
+                        projectilS.add(new Projectile1(e_x, e_y, 32, 32,this, player));
 
-
-
-//                    projectilS.add(new Projectile2(e_x, e_y, 32, 32));
-//                System.out.println(projectilS);
 
                 shootcooldown = cooldown;
             }
@@ -120,30 +112,6 @@ public class EnemySettings {
 
             }
 
-
-//            double dx = player.getPl_x() - this.e_x;
-//            double dy = player.getPl_y() - this.e_y;
-//
-//            double distanceSquared = dx * dx + dy * dy;
-//            double radius = 200;
-//            double radiusSquared = radius * radius;
-//
-//            if (distanceSquared < radiusSquared) {
-//                this.e_x += (Math.random() - 0.5) * 2;
-//                this.e_y += (Math.random() - 0.5) * 2;
-//            } else {
-//
-//                double length = Math.sqrt(distanceSquared);
-//
-//                dx /= length;
-//                dy /= length;
-//
-//                double speed = 2;
-//
-//                this.e_x += dx * speed;
-//                this.e_y += dy * speed;
-//            }
-
         }
     public void ohraniceni() {
 
@@ -175,21 +143,17 @@ public class EnemySettings {
             return new Rectangle(e_x+(getE_width()/4),e_y+(getE_width()/4),e_width/2,e_height/2);
 
         }
-        public boolean collision(Player player){
-            return player.hitBox().intersects(hitBox());
-
-        }
-        public boolean collision2(EnemySettings enemyS){
-        return enemyS.hitBox().intersects(hitBox());
-        }
+//        public boolean collision(Player player){
+//            return player.hitBox().intersects(hitBox());
+//
+//        }
+//        public boolean collision2(EnemySettings enemyS){
+//        return enemyS.hitBox().intersects(hitBox());
+//        }
 
 
         public void vykresleniObr(Graphics g) {
-//            g.drawImage(image1,e_x,e_y,e_width,e_height,null);
-//            g.drawImage(image2,e_x,e_y,e_width,e_height,null);
             g.drawImage(image1[index],e_x,e_y,e_width,e_height,null);
-
-
         }
 
         public int getMax() {
@@ -200,7 +164,6 @@ public class EnemySettings {
             return e_width;
         }
 
-        public int getE_id() {return e_id;}
 
         public int getE_height() {
             return e_height;

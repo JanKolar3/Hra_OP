@@ -5,16 +5,13 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Shield implements MouseMotionListener, KeyListener {
-//    private String SOUBOR_SHIELD = "src/main/resources/shield.png";
+
     Image[] SHIELDPUSH = SpriteLoader.getFrames("/shieldAnimationPush.png",16,16,4);
     Image[] SHIELD = SpriteLoader.getFrames("/shieldAnimation.png",16,16,4);
 
-    private Image image;
-    private Image img;
+
     Player player;
 
-//    Projectile1 projectyle;
-    ProjectileSettings projectileS;
     private int cooldown=10,cooldownAktivace=100;
     private int sx;
     private int sy;
@@ -22,7 +19,6 @@ public class Shield implements MouseMotionListener, KeyListener {
     private int s_y ;
     private int s_w ;
     private int s_h;
-    private int x,y;
     private int otoceni,posun,zmenseni=1,posunh;
     private int radius = 50;
 
@@ -67,17 +63,12 @@ public class Shield implements MouseMotionListener, KeyListener {
 
             if (cooldown <= 0) {
                 radius--;
-//                System.out.println(radius);
-
 
                 shieldMode = 1;
 
-
                 if (radius <= 50) {
                     radius = 50;
-//                    shieldMode = 1;
                     cooldown = 20;
-//                    cooldown1 = 30;
                     je = false;
                 }
 
@@ -134,7 +125,6 @@ public class Shield implements MouseMotionListener, KeyListener {
         }
 
         if (je == true){
-//            g.drawImage(img,s_x,s_y,s_w,s_h,null);
             g.drawImage(SHIELDPUSH[indexPush],s_x+posun, s_y, s_w*otoceni, s_h, null);
             if (je1) {
                 shieldMode = 2;
@@ -144,7 +134,6 @@ public class Shield implements MouseMotionListener, KeyListener {
 
 
             }
-//            radius=60;
 
         }
     }
