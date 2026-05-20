@@ -102,6 +102,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
                     addEnemy();
                     healthBar();
+                    info.shieldTimer(shield.getCooldownAktivace(),shield.isJe1());
 
                     for (EnemySettings enemyS : pole_enemy) {
 

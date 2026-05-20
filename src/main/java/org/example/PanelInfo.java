@@ -17,8 +17,10 @@ public class PanelInfo extends JPanel{
 //    private final Image image1;
 //    private final Image image2;
     Menu menu;
+    Shield shield;
     private int mode1,mode2,mode3;
     private int x,y,w,h;
+    private int akt=100,akti=100-1;
 
 
 
@@ -42,6 +44,8 @@ public class PanelInfo extends JPanel{
     public void health(int health) {
         switch (health) {
             case 6:
+                mode1 = 0;
+                mode2  =0;
                 mode3 = 0;
                 break;
             case 5:
@@ -66,7 +70,27 @@ public class PanelInfo extends JPanel{
                 break;
         }
     }
+    public void shieldTimer(int aktivation,boolean aktivace){
+        if (akt<=akti){
+            akt++;
+        }
+        if (aktivace==true){
+            akt=0;
+        }
+//            if (aktivace==false) {
+//                if (akt <= aktivation) {
+//                    akti = aktivation;
 
+
+//                    akt += 4;
+//                if (aktivation <= 1) {
+//                    akt = 0;
+//                }
+//                }
+
+
+//    }
+}
 
     public void vykreliseni(Graphics g) {
 
@@ -76,6 +100,14 @@ public class PanelInfo extends JPanel{
         g.drawImage(HEALTHS[mode2], 20 * 3, 20, 48, 48, null);
         g.drawImage(HEALTHS[mode1], 20, 20, 48, 48, null);
 //        g.drawImage(image2, getX(), getY(), getWidth(), getHeight(), null);
+
+
+        g.setColor(Color.yellow);
+        g.fillRect(500,20,akt,30);
+        g.setColor(Color.black);
+        g.drawRect(500,20,akti+1,30);
+
+
 
     }
 
