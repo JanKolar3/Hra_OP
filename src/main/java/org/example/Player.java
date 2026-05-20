@@ -110,6 +110,8 @@ public class Player implements KeyListener {
 
         if (direction == "up"&&num) {
             g.drawImage(PLAYER_UP[index], pl_x, pl_y, pl_width, pl_height, null);
+//            g.setColor(Color.black);
+//            g.fillOval(pl_x-20, pl_y+50, pl_width, pl_height-20);
             k = false;
             rg = true;
             lf = false;

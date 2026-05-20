@@ -77,35 +77,22 @@ public class PanelInfo extends JPanel{
         if (aktivace==true){
             akt=0;
         }
-//            if (aktivace==false) {
-//                if (akt <= aktivation) {
-//                    akti = aktivation;
-
-
-//                    akt += 4;
-//                if (aktivation <= 1) {
-//                    akt = 0;
-//                }
-//                }
-
-
-//    }
 }
 
     public void vykreliseni(Graphics g) {
 
 //        g.drawImage(image2, getX(), getY(), getWidth(), getHeight(), null);
 
-        g.drawImage(HEALTHS[mode3], 20 * 5, 20, 48, 48, null);
-        g.drawImage(HEALTHS[mode2], 20 * 3, 20, 48, 48, null);
+        g.drawImage(HEALTHS[mode3], 100, 20, 48, 48, null);
+        g.drawImage(HEALTHS[mode2], 60, 20, 48, 48, null);
         g.drawImage(HEALTHS[mode1], 20, 20, 48, 48, null);
 //        g.drawImage(image2, getX(), getY(), getWidth(), getHeight(), null);
 
-
-        g.setColor(Color.yellow);
-        g.fillRect(500,20,akt,30);
         g.setColor(Color.black);
-        g.drawRect(500,20,akti+1,30);
+        g.fillRect(500,30,akti+1,20);
+        g.setColor(Color.yellow);
+        g.fillRect(500,30,akt,20);
+
 
 
 
