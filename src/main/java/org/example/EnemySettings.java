@@ -92,7 +92,7 @@ public class EnemySettings {
                 cooldownMove--;
                 if (cooldownMove <= 0) {
                     bud=random.nextInt(1,6);
-                    cooldownMove = 40;
+                    cooldownMove = 200;
                 }
                 switch (bud){
                     case 1:
@@ -116,17 +116,17 @@ public class EnemySettings {
         }
     public void ohraniceni() {
 
-        if (e_x < OHRANICENI2-1) {
-            e_x = OHRANICENI1;
+        if (e_x < -70) {
+            e_x = 650;
         }
-        if (e_x > OHRANICENI1+1) {
-            e_x = OHRANICENI2;
+        if (e_x > 650) {
+            e_x = -70;
         }
-        if (e_y < OHRANICENI2-1) {
-            e_y = OHRANICENI1;
+        if (e_y < 0) {
+            e_y = 700;
         }
-        if (e_y > OHRANICENI1+30) {
-            e_y = OHRANICENI2;
+        if (e_y > 700) {
+            e_y = 0;
         }
     }
     public void enemyAnimation() {

@@ -28,6 +28,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
     private final Player player;
     private final Shield shield;
     private final Menu menu;
+    private PanelInfo info;
     private int id;
     private  int timer = 600,timer1=100;
     private int pocet=1;
@@ -52,6 +53,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
     public GameManager() {
         image = new ImageIcon(SOUBOR_POZADI).getImage();
+        info = new PanelInfo(x,y,getWidth(),getHeight());
         image2 = new ImageIcon(SOUBRO_OHRANI).getImage();
         levelS = new LevelSettings();
 
@@ -100,6 +102,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
                     addEnemy();
                     healthBar();
+                    info.shieldTimer(shield.getCooldownAktivace(),shield.isJe1());
 
                     for (EnemySettings enemyS : pole_enemy) {
 
@@ -171,31 +174,34 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
     public void healthBar() {
 
-            switch (health) {
-                case 6:
-                    mode3 = 0;
-                    break;
-                case 5:
-                    mode3 = 1;
-                    break;
-                case 4:
-                    mode3 = 2;
-                    mode2 = 0;
-                    break;
-                case 3:
-                    mode2 = 1;
-                    break;
-                case 2:
-                    mode2 = 2;
-                    mode1 = 0;
-                    break;
-                case 1:
-                    mode1 = 1;
-                    break;
-                case 0:
-                    mode1 = 2;
-                    break;
-            }
+        info.health(health);
+
+
+//            switch (health) {
+//                case 6:
+//                    mode3 = 0;
+//                    break;
+//                case 5:
+//                    mode3 = 1;
+//                    break;
+//                case 4:
+//                    mode3 = 2;
+//                    mode2 = 0;
+//                    break;
+//                case 3:
+//                    mode2 = 1;
+//                    break;
+//                case 2:
+//                    mode2 = 2;
+//                    mode1 = 0;
+//                    break;
+//                case 1:
+//                    mode1 = 1;
+//                    break;
+//                case 0:
+//                    mode1 = 2;
+//                    break;
+//            }
 
         if (health <= 0) {
             health =6;
@@ -276,9 +282,11 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
         player.vykresleniObr(g);
         shield.vykresleniObr(g);
         g.drawImage(image2,x,y,getWidth(),getHeight(),null);
-        g.drawImage(HEALTHS[mode3],20*5,20,48,48, null);
-        g.drawImage(HEALTHS[mode2], 20 * 3,20, 48, 48, null);
-        g.drawImage(HEALTHS[mode1], 20, 20, 48, 48, null);
+//        g.drawImage(HEALTHS[mode3],20*5,20,48,48, null);
+//        g.drawImage(HEALTHS[mode2], 20 * 3,20, 48, 48, null);
+//        g.drawImage(HEALTHS[mode1], 20, 20, 48, 48, null);
+        info.vykreliseni(g);
+
 
 
 
@@ -293,6 +301,8 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
         if (menu.isMode()){
             menu.vykresleniMenu(g);
         }
+
+
 
     }
 

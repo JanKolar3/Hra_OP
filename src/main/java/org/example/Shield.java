@@ -77,10 +77,9 @@ public class Shield implements MouseMotionListener, KeyListener {
         if (akt) {
             cooldownAktivace--;
             if (cooldownAktivace <= 0) {
+                cooldownAktivace = 100;
                 aktivace = false;
                 akt = false;
-                cooldownAktivace = 100;
-
             }
         }
     }
@@ -149,7 +148,9 @@ public class Shield implements MouseMotionListener, KeyListener {
         sx=e.getX();
     }
 
-
+    public int getCooldownAktivace() {
+        return cooldownAktivace;
+    }
 
     public int getS_x() {
         return s_x;
@@ -212,4 +213,13 @@ public class Shield implements MouseMotionListener, KeyListener {
     public int getShieldMode() {
         return shieldMode;
     }
+
+    public boolean isAktivace() {
+        return aktivace;
+    }
+
+    public boolean isJe1() {
+        return je1;
+    }
 }
+

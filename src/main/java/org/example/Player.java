@@ -67,17 +67,17 @@ public class Player implements KeyListener {
 
     public void ohraniceni(){
 
-        if (pl_x<-100){
-            pl_x=700;
+        if (pl_x<-70){
+            pl_x=650;
         }
-        if (pl_x>700){
-            pl_x=-100;
+        if (pl_x>650){
+            pl_x=-70;
         }
-        if (pl_y<-100){
+        if (pl_y<0){
             pl_y=700;
         }
         if (pl_y>700){
-            pl_y=-100;
+            pl_y=0;
         }
     }
 
@@ -110,6 +110,8 @@ public class Player implements KeyListener {
 
         if (direction == "up"&&num) {
             g.drawImage(PLAYER_UP[index], pl_x, pl_y, pl_width, pl_height, null);
+//            g.setColor(Color.black);
+//            g.fillOval(pl_x-20, pl_y+50, pl_width, pl_height-20);
             k = false;
             rg = true;
             lf = false;
