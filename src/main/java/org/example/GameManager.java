@@ -29,11 +29,8 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
     private final Shield shield;
     private final Menu menu;
     private PanelInfo info;
-    private int id;
     private  int timer = 600,timer1=100;
     private int pocet=1;
-
-    private int mode1,mode2,mode3;
 
 
 
@@ -42,6 +39,11 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
     int health = 6;
     int max =1;
     private boolean gameOver = false;
+
+    private boolean damaged = false;
+    private int damage=0;
+    private int damage2=0;
+
 
 
 
@@ -85,65 +87,35 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
         new Timer(16, e -> {
             if(!menu.isMode()) {
-                if (!gameOver) {
+                if (!gameOver&&!levelS.isVictory()) {
 
                     player.moveMent();
                     player.playerAnimation();
                     player.ohraniceni();
+                    healthBar();
 
                     shield.shieldRotate();
                     shield.shieldAnimation();
                     shield.Cooldown();
 
                     pocet = pole_enemy.size();
-                    if (pocet <= 0) {
-                        levelS.waveSettings();
-                    }
 
                     addEnemy();
-                    healthBar();
+                    collision();
+
                     info.shieldTimer(shield.getCooldownAktivace(),shield.isJe1());
 
                     for (EnemySettings enemyS : pole_enemy) {
-
-
                         enemyS.enemyAnimation();
                         enemyS.enemyMove(player);
                         enemyS.ohraniceni();
-
-
                         enemyS.cooldownProj(player, pole_proj);
-
-//                        for (int i = 0; i < pole_enemy.size(); i++) {
-//                            for (int j = i+1; j < pole_proj.size(); j++) {
-//
-//                                EnemySettings ememy1 = pole_enemy.get(i);
-//                                EnemySettings enemy2 = pole_enemy.get(j);
-//
-//                                if (ememy1.collision2(enemy2)) {
-//                                    ememy1.setE_x(ememy1.getE_x()+1);
-//                                    ememy1.setE_y(ememy1.getE_y()-1);
-//                                    System.out.println("coolll");
-//                                }
-//                            }
-//                        }
+//                        enemyS.damage(damaged, levelS.getDamage());
                     }
-                    for (ProjectileSettings projectyleS : pole_proj) {
-                        projectyleS.direction(player);
-                        if (pole_proj.contains(projectyleS)) {
-                            timer--;
-                        }
-                        if (projectyleS.isDamage()) {
-                            if (projectyleS.collision(player)) {
-                                health -= 1;
-                            }
-                        }
-                        if (projectyleS.collision2(shield)) {
-                            if (shield.getShieldMode() == 2) {
-                                projectyleS.setMode(2);
-                            }
+                    if (pocet <= 0) {
+                        levelS.waveSettings();
+//                        damage= levelS.getDamage();
 
-                        }
                     }
 
                 }
@@ -151,6 +123,76 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
                 repaint();
 
         }).start();
+    }
+    public void collision() {
+            for (int i = 0; i < pole_proj.size(); i++) {
+                ProjectileSettings projectyleS = pole_proj.get(i);
+                projectyleS.direction(player);
+
+                if (shield.getShieldMode() == 1) {
+                    if (shield.collision1(projectyleS)) {
+                        pole_proj.remove(projectyleS);
+                        score += 5;
+                        timer = 600;
+                        i--;
+                    }
+                }
+
+                if (projectyleS.isDamage()) {
+                    if (projectyleS.collision(player)) {
+                        health -= 1;
+                        pole_proj.remove(projectyleS);
+                        timer = 600;
+                        i--;
+                    }
+                }
+
+                if (projectyleS.collision2(shield)) {
+                    if (shield.getShieldMode() == 2) {
+                        projectyleS.setMode(2);
+                    }
+                }
+
+                if (projectyleS.getMode() == 2) {
+                    timer = 600;
+                    timer1--;
+
+                    for (int j = 0; j < pole_enemy.size(); j++) {
+                        EnemySettings enemyS = pole_enemy.get(j);
+
+                        if (projectyleS.collision1(enemyS)) {
+
+
+                            enemyS.damage(true,levelS.getDamage());
+                            pole_proj.remove(projectyleS);
+                            i--;
+
+                            if (enemyS.getK1() <=0){
+                                pole_enemy.remove(enemyS);
+                                pocet--;
+                                score += 10;
+//                                jLabel.setText(String.valueOf(score));
+
+                                timer1 = 100;
+                                j--;
+                        }
+                        }
+                    }
+
+                    if (timer1 <= 0) {
+                        pole_proj.remove(projectyleS);
+                        timer1 = 100;
+                        i--;
+                    }
+                }
+                if (timer <= 0) {
+                    timer = 600;
+                    pole_proj.remove(projectyleS);
+                    i--;
+                }
+                timer--;
+        }
+
     }
     public void addEnemy(){
         if (pocet<=0) {
@@ -160,7 +202,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
             while (pole_enemy.size() != levelS.getMax()) {
                 if (pole_enemy.size() < levelS.getMax()) {
 
-                    enemyS = new Enemy1(rand.nextInt(1, 600), rand.nextInt(1, 600), 24 * 3, 24 * 3, 1);
+                    enemyS = new Enemy1(rand.nextInt(1, 600), rand.nextInt(1, 600), 72, 72, 1);
                     pole_enemy.add(enemyS);
                     pocet++;
 
@@ -172,36 +214,9 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
         }
 
+
     public void healthBar() {
-
         info.health(health);
-
-
-//            switch (health) {
-//                case 6:
-//                    mode3 = 0;
-//                    break;
-//                case 5:
-//                    mode3 = 1;
-//                    break;
-//                case 4:
-//                    mode3 = 2;
-//                    mode2 = 0;
-//                    break;
-//                case 3:
-//                    mode2 = 1;
-//                    break;
-//                case 2:
-//                    mode2 = 2;
-//                    mode1 = 0;
-//                    break;
-//                case 1:
-//                    mode1 = 1;
-//                    break;
-//                case 0:
-//                    mode1 = 2;
-//                    break;
-//            }
 
         if (health <= 0) {
             health =6;
@@ -216,9 +231,6 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
         pole_enemy.clear();
         health = 6;
         score = 0;
-        mode1=0;
-        mode2=0;
-        mode3=0;
         max=1;
     }
 
@@ -227,73 +239,31 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
         super.paintComponents(g);
         g.drawImage(image,x,y,getWidth(),getHeight(),this);
 
-        for (int j = 0; j < pole_enemy.size();j++){
-            EnemySettings enemyS =pole_enemy.get(j);
+        for (int j = 0; j < pole_enemy.size();j++) {
+            EnemySettings enemyS = pole_enemy.get(j);
             enemyS.vykresleniObr(g);
             for (int i = 0; i < pole_proj.size(); i++) {
-                ProjectileSettings projectyleS =pole_proj.get(i);
+                ProjectileSettings projectyleS = pole_proj.get(i);
                 projectyleS.draw(g);
-
-            if (shield.getShieldMode() == 1){
-                if (shield.collision1 (projectyleS)) {
-                    pole_proj.remove(projectyleS);
-                    score += 5;
-                    i--;
-                    timer = 600;
-
-
-                }
             }
-            if (projectyleS.isDamage()) {
-                if (projectyleS.collision(player)) {
-                    pole_proj.remove(projectyleS);
-                    i--;
-                    timer =600;
-
-                }
-            }
-            if (projectyleS.getMode() == 2) {
-                timer =600;
-                timer1--;
-                    if (projectyleS.collision1(enemyS)) {
-                        pole_enemy.remove(enemyS);
-                        pole_proj.remove(projectyleS);
-                        pocet--;
-                        j--;
-                        i--;
-                        score += 10;
-                        jLabel.setText(String.valueOf(score));
-                        timer1=100;
-                    }else if (timer1 <=0){
-                        pole_proj.remove(projectyleS);
-                        i--;
-                        timer1=100;
-                    }
-
-            }
-            if (timer <=0){
-                timer =600;
-                pole_proj.remove(projectyleS);
-                i--;
-            }
-        }
         }
 
         player.vykresleniObr(g);
         shield.vykresleniObr(g);
         g.drawImage(image2,x,y,getWidth(),getHeight(),null);
-//        g.drawImage(HEALTHS[mode3],20*5,20,48,48, null);
-//        g.drawImage(HEALTHS[mode2], 20 * 3,20, 48, 48, null);
-//        g.drawImage(HEALTHS[mode1], 20, 20, 48, 48, null);
         info.vykreliseni(g);
-
-
 
 
         if (gameOver){
             g.setFont(new Font("Arial", Font.BOLD,64));
             g.setColor(Color.RED);
             g.drawString("Game Over", 150, 320);
+            g.drawString("Score: "+score, 150, 400);
+        }
+        if (levelS.isVictory()) {
+            g.setFont(new Font("Arial", Font.BOLD,64));
+            g.setColor(Color.GREEN);
+            g.drawString("Victory", 150, 320);
             g.drawString("Score: "+score, 150, 400);
         }
 
@@ -352,7 +322,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
     @Override
     public void mouseClicked(MouseEvent e) {
         menu.mouseClicked(e);
-        if (gameOver) {
+        if (gameOver||levelS.isVictory()) {
             reset();
         }
     }
@@ -377,7 +347,4 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
     }
 
-    public int getPocet() {
-        return pocet;
-    }
 }

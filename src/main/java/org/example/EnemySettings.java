@@ -15,6 +15,8 @@ public class EnemySettings {
     Image[] image1;
     Image image2;
 
+    LevelSettings levelS;
+    GameManager  game;
 
     private final int cooldown = 240;
     private int shootcooldown = 60;
@@ -22,6 +24,10 @@ public class EnemySettings {
     private int max;
     private int e_x;
     private int e_y;
+
+    private int barheight;
+    private int barwidth;
+
     private final int e_width;
     private final int e_height;
     private final int speed;
@@ -33,6 +39,15 @@ public class EnemySettings {
     private int bud;
     private int cooldownMove;
     private final int cooldownProjectile=600;
+    private boolean damage;
+    private int health=2;
+    private int health1;
+    private int k=0;
+    private int k1;
+    private boolean test = true;
+    private int maxhealth=2;
+
+
 
 
 
@@ -46,8 +61,6 @@ public class EnemySettings {
         this.e_width = e_width;
         this.e_height = e_height;
         this.speed = speed;
-
-
     }
 
         public void cooldownProj(Player player, ArrayList<ProjectileSettings> projectilS){
@@ -151,13 +164,46 @@ public class EnemySettings {
 //        public boolean collision2(EnemySettings enemyS){
 //        return enemyS.hitBox().intersects(hitBox());
 //        }
+        public void damage(boolean damaged,int damagecounter){
+        if (test){
+            damage =damaged;
+            k1=damagecounter;
+            test=false;
+        }
+        k1--;
+        health = damagecounter;
+
+
+        }
 
 
         public void vykresleniObr(Graphics g) {
-            g.drawImage(image1[index],e_x,e_y,e_width,e_height,null);
+            g.drawImage(image1[index], e_x, e_y, e_width, e_height, null);
+
+
+            if (damage&&k1==1) {
+
+                barwidth = e_width-2;
+                barheight= e_height-60;
+
+
+                g.setColor(Color.gray);
+                g.fillRect(e_x, e_y - 20, barwidth, barheight);
+
+                g.setColor(Color.red);
+                g.fillRect(e_x, e_y - 20, barwidth/2, barheight);
+
+                g.setColor(Color.black);
+                g.drawRect(e_x - 1, e_y - 21, barwidth + 1, barheight+1);
+            }
         }
 
-        public int getMax() {
+
+    public int getK1() {
+        return k1;
+    }
+
+    public int getMax() {
             return max;
         }
 

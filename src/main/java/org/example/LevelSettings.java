@@ -1,63 +1,45 @@
 package org.example;
 
 public class LevelSettings {
-    private int wave=5;
+    private int wave=2;
     private int level;
     private int max;
     private final String levelName="";
     private final String waveName="";
-    ProjectileSettings projectileS;
-//    private int pocet;
-
-//    private boolean konecWave;
-//    private int max=1;
-
-
-
-
-//    public LevelSettings() {
-//        this.pocet=pocet;
-
-
-
-//    }
-
-
-//    public void nextLevelSettings() {
-//        if (level==0){
-//            if(konecWave){
-//                if(pocet<=0) {
-//                    level++;
-//                    wave=5;
-//                    konecWave=false;
-//                }
-//
-//            }
-//        }
-//
-//    }
+    private int damage=2;
+    private boolean victory=false;
 
     public void waveSettings() {
-
-
-            if (wave>0) {
+        if (level<=1) {
+            if (wave > 0) {
                 wave--;
 //                waveName=String.valueOf(wave);
-                System.out.println("wave was "+wave);
+                System.out.println("wave was " + wave);
             }
-            if (wave<=0) {
+            if (wave <= 0) {
                 level++;
-                wave=5;
+                damage++;
+                wave = 2;
+                damage++;
 //                levelName= String.valueOf(level);
-                System.out.println("level was "+level);
+                System.out.println("level was " + level);
             }
+
+        }else if (level>=2) {
+            victory=true;
+            level=0;
+            wave=5;
+
+        }
+
+
     }
 
     public int enemyMax(){
 
         switch (wave) {
             case 4:
-                max=1;
+                max = 1;
                 break;
             case 3:
                 max=2;
@@ -76,6 +58,13 @@ public class LevelSettings {
     return max;
     }
 
+    public boolean isVictory() {
+        return victory;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
 
     public int getMax() {
         return max;
