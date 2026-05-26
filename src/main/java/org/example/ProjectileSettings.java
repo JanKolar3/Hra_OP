@@ -13,7 +13,7 @@ public class ProjectileSettings {
     private int y;
     private final int width;
     private final int height;
-    private int speed=2;
+    private int speed=3;
     private int mode=1;
     private boolean damage=true;
 

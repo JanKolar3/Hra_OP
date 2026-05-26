@@ -1,34 +1,37 @@
 package org.example;
 
 public class LevelSettings {
-    private int wave=2;
-    private int level;
+    private int wave=5;
+    private int level=0;
     private int max;
-    private final String levelName="";
-    private final String waveName="";
-    private int damage=2;
+    private String levelName;
+    private String waveName;
+    private int damage=1;
     private boolean victory=false;
 
     public void waveSettings() {
         if (level<=1) {
             if (wave > 0) {
                 wave--;
-//                waveName=String.valueOf(wave);
+                waveName=String.valueOf("wave: "+wave);
                 System.out.println("wave was " + wave);
             }
             if (wave <= 0) {
                 level++;
-                damage++;
-                wave = 2;
-                damage++;
-//                levelName= String.valueOf(level);
+                wave = 4;
+                if (level==1) {
+                    damage = 2;
+                }
+                levelName= String.valueOf(level);
                 System.out.println("level was " + level);
             }
 
-        }else if (level>=2) {
+        }
+        if (level>=2) {
             victory=true;
             level=0;
             wave=5;
+            max=1;
 
         }
 
@@ -53,13 +56,17 @@ public class LevelSettings {
             case 0:
                 max=5;
                 break;
-            }
+        }
 
     return max;
     }
 
     public boolean isVictory() {
         return victory;
+    }
+
+    public void setVictory(boolean victory) {
+        this.victory = victory;
     }
 
     public int getDamage() {

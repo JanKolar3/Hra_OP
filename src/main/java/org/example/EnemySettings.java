@@ -46,6 +46,8 @@ public class EnemySettings {
     private int k1;
     private boolean test = true;
     private int maxhealth=2;
+    private int borderx=0;
+    private int bordery=0;
 
 
 
@@ -100,47 +102,139 @@ public class EnemySettings {
                 mode = true;
             }
 
-
             if (!mode) {
                 cooldownMove--;
                 if (cooldownMove <= 0) {
-                    bud=random.nextInt(1,6);
+                    bud = random.nextInt(1, 6);
                     cooldownMove = 200;
                 }
-                switch (bud){
-                    case 1:
-                        e_x++;
-                        break;
-                    case 2:
-                        e_x--;
-                        break;
-                    case 3:
-                        e_y++;
-                        break;
-                    case 4:
-                        e_y--;
-                        break;
-                    case 5:
-                        break;
+                if (cooldownMove<=100) {
+
+                    switch (bud) {
+                        case 1:
+                            e_x++;
+                            break;
+                        case 2:
+                            e_x--;
+                            break;
+                        case 3:
+                            e_y++;
+                            break;
+                        case 4:
+                            e_y--;
+                            break;
+                        case 5:
+                            break;
                     }
 
+                }
             }
 
         }
     public void ohraniceni() {
+//        System.out.println(e_x);
+        System.out.println(e_y);
+        if (borderx==0) {
+            if (e_x <= -20) {
+                e_x--;
+                mode = true;
+                if (e_x <= -50) {
+                    e_x = 650;
+                    borderx = 1;
+                }
+            }
+            if (e_x >= 550) {
+                e_x++;
+                mode = true;
+                if (e_x >= 650) {
+                    e_x = -50;
+                    borderx = 2;
+                }
+            }
+        }
+        if (borderx == 1) {
 
-        if (e_x < -70) {
-            e_x = 650;
+                e_x--;
+
+            if (e_x <= 520) {
+                mode = false;
+                borderx = 0;
+            }
         }
-        if (e_x > 650) {
-            e_x = -70;
+
+        if (borderx == 2) {
+
+                e_x++;
+
+            if (e_x >= 20) {
+                mode = false;
+                borderx = 0;
+            }
         }
-        if (e_y < 0) {
-            e_y = 700;
+
+
+
+        //
+
+
+        if (bordery==0) {
+            if (e_y <= 30) {
+                e_y--;
+                mode = true;
+                if (e_y <= 15) {
+                    e_y = 600;
+                    bordery = 1;
+                }
+            }
+            if (e_y >= 500) {
+                e_y++;
+                mode = true;
+                if (e_y >= 600) {
+                    e_y = 20;
+                    bordery = 2;
+                }
+            }
         }
-        if (e_y > 700) {
-            e_y = 0;
+        if (bordery == 1) {
+            if (e_y > 400) {
+                e_y--;
+            }
+            if (e_y <= 495) {
+                mode = false;
+                bordery = 0;
+            }
         }
+
+        if (bordery == 2) {
+            if (e_y < 130) {
+                e_y++;
+            }
+            if (e_y >= 125) {
+                mode = false;
+                bordery = 0;
+            }
+        }
+
+
+
+
+
+
+//            if (e_y < 0) {
+//                e_y = 700;
+//            }
+//            if (e_y > 700) {
+//                e_y = 0;
+//            }
+//
+//
+//            if (e_y < 0) {
+//                e_y  --;
+//            }
+//            if (e_y > 600) {
+//                e_y  --;
+//            }
+
     }
     public void enemyAnimation() {
         animationCooldown--;

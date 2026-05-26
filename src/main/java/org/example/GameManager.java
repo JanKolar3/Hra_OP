@@ -226,6 +226,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
     }
     public void reset(){
         gameOver = false;
+        levelS.setVictory(false);
         menu.setMode(true);
         pole_proj.clear();
         pole_enemy.clear();
