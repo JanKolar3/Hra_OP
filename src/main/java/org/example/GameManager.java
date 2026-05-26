@@ -10,8 +10,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
     private final String SOUBOR_POZADI = "src/main/resources/pozadi.png";
     private final String SOUBRO_OHRANI = "src/main/resources/lesUP.png";
-    Image[] HEALTHS = SpriteLoader.getFrames("/Player/healts.png",16,16,3);
-//    private String SOUBOR_HELTH = "src/main/resources/healthtest1.png";
+    private String OVER= "src/main/resources/GameOver.png";
 
     ArrayList<EnemySettings> pole_enemy =new ArrayList<>();
     ArrayList<ProjectileSettings> pole_proj = new ArrayList<>();
@@ -19,6 +18,8 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
     private EnemySettings enemyS;
     private final LevelSettings levelS;
+
+    private final Image over;
 
     private final Image image;
     private final Image image2;
@@ -54,6 +55,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
 
     public GameManager() {
+        over =new ImageIcon(OVER).getImage();
         image = new ImageIcon(SOUBOR_POZADI).getImage();
         info = new PanelInfo(x,y,getWidth(),getHeight());
         image2 = new ImageIcon(SOUBRO_OHRANI).getImage();
@@ -61,7 +63,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
         menu = new Menu(x,y,640,640);
 
-        player = new Player(40,40,16*5,16*5);
+        player = new Player(200,200,16*5,16*5);
         shield = new Shield(player,16*3,16*3);
 
         jLabel = new JLabel("SCORE");
@@ -256,10 +258,11 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
 
         if (gameOver){
-            g.setFont(new Font("Arial", Font.BOLD,64));
+            g.drawImage(over,x,y,getWidth(),getHeight(),null);
+            g.setFont(new Font("Arial", Font.BOLD,50));
             g.setColor(Color.RED);
-            g.drawString("Game Over", 150, 320);
-            g.drawString("Score: "+score, 150, 400);
+            g.drawString("Game Over", 200, 320);
+            g.drawString("Score: "+score, 200, 400);
         }
         if (levelS.isVictory()) {
             g.setFont(new Font("Arial", Font.BOLD,64));

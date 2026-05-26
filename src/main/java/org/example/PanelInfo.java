@@ -14,13 +14,19 @@ public class PanelInfo extends JPanel{
     Image[] HEALTHS = SpriteLoader.getFrames("/Player/healts.png",16,16,3);
 
 
+
+
 //    private final Image image1;
 //    private final Image image2;
     Menu menu;
+    Image image;
     Shield shield;
     private int mode1,mode2,mode3;
     private int x,y,w,h;
     private int akt=100,akti=100-1;
+    boolean gameover=false;
+    boolean victory=false;
+    int score=0;
 
 
 
@@ -32,10 +38,13 @@ public class PanelInfo extends JPanel{
 //        image1 = new ImageIcon(SOUBOR_POZADI).getImage();
 //        image2 = new ImageIcon(SOUBRO_OHRANI).getImage();
 
+
         this.x=x;
         this.y=y;
         this.w=w;
         this.h=h;
+
+        this.score=score;
 
 
 
@@ -83,6 +92,7 @@ public class PanelInfo extends JPanel{
 
 //        g.drawImage(image2, getX(), getY(), getWidth(), getHeight(), null);
 
+
         g.drawImage(HEALTHS[mode3], 100, 20, 48, 48, null);
         g.drawImage(HEALTHS[mode2], 60, 20, 48, 48, null);
         g.drawImage(HEALTHS[mode1], 20, 20, 48, 48, null);
@@ -92,7 +102,6 @@ public class PanelInfo extends JPanel{
         g.fillRect(500,30,akti+1,20);
         g.setColor(Color.yellow);
         g.fillRect(500,30,akt,20);
-
 
 
 

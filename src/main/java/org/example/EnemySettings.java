@@ -17,7 +17,7 @@ public class EnemySettings {
 
 
     private final int cooldown = 240;
-    private int shootcooldown = 60;
+    private int shootcooldown = random.nextInt(cooldown);
     private int e_id;
     private int max;
     private int e_x;
@@ -179,7 +179,7 @@ public class EnemySettings {
         }
         if (bordery == 1) {
                 e_y--;
-            if (e_y <= 600) {
+            if (e_y <= 550) {
                 bordery = 0;
                 border=false;
             }
