@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class GameManager extends JPanel implements KeyListener, MouseMotionListener, MouseListener {
 
-    private final String SOUBOR_POZADI = "src/main/resources/les.png";
+    private final String SOUBOR_POZADI = "src/main/resources/pozadi.png";
     private final String SOUBRO_OHRANI = "src/main/resources/lesUP.png";
     Image[] HEALTHS = SpriteLoader.getFrames("/Player/healts.png",16,16,3);
 //    private String SOUBOR_HELTH = "src/main/resources/healthtest1.png";
@@ -108,7 +108,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
                     for (EnemySettings enemyS : pole_enemy) {
                         enemyS.enemyAnimation();
                         enemyS.enemyMove(player);
-                        enemyS.ohraniceni();
+//                        enemyS.ohraniceni();
                         enemyS.cooldownProj(player, pole_proj);
 //                        enemyS.damage(damaged, levelS.getDamage());
                     }
@@ -185,7 +185,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
                         i--;
                     }
                 }
-                if (timer <= 0) {
+                 if (timer <= 0) {
                     timer = 600;
                     pole_proj.remove(projectyleS);
                     i--;

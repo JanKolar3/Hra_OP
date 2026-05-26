@@ -15,8 +15,6 @@ public class EnemySettings {
     Image[] image1;
     Image image2;
 
-    LevelSettings levelS;
-    GameManager  game;
 
     private final int cooldown = 240;
     private int shootcooldown = 60;
@@ -48,7 +46,7 @@ public class EnemySettings {
     private int maxhealth=2;
     private int borderx=0;
     private int bordery=0;
-
+    private boolean border=false;
 
 
 
@@ -69,22 +67,14 @@ public class EnemySettings {
 
             shootcooldown --;
             if (shootcooldown<=0){
-
-
                         projectilS.add(new Projectile1(e_x, e_y, 32, 32,this, player));
-
-
                 shootcooldown = cooldown;
             }
-
         }
 
-
-
-
-
         public void enemyMove(Player player) {
-            mode =false;
+        if (border==false) {
+            mode = false;
             if (e_x <= player.getPl_x() && e_x >= player.getPl_x() - RADIUS && e_y >= player.getPl_y() - RADIUS && e_y <= player.getPl_y() + RADIUS) {
                 e_x -= OKOLIK;
                 mode = true;
@@ -108,7 +98,7 @@ public class EnemySettings {
                     bud = random.nextInt(1, 6);
                     cooldownMove = 200;
                 }
-                if (cooldownMove<=100) {
+                if (cooldownMove <= 100) {
 
                     switch (bud) {
                         case 1:
@@ -129,112 +119,79 @@ public class EnemySettings {
 
                 }
             }
+        }
+            ohraniceni();
 
         }
     public void ohraniceni() {
-//        System.out.println(e_x);
-        System.out.println(e_y);
+
         if (borderx==0) {
-            if (e_x <= -20) {
+            if (e_x <= 0&&border==false) {
                 e_x--;
-                mode = true;
-                if (e_x <= -50) {
-                    e_x = 650;
+                if (e_x <= -40) {
+                    e_x = 630;
                     borderx = 1;
+                    border=true;
                 }
             }
-            if (e_x >= 550) {
+            if (e_x >= 550&&border==false) {
                 e_x++;
-                mode = true;
-                if (e_x >= 650) {
-                    e_x = -50;
+                if (e_x >= 630) {
+                    e_x = -40;
                     borderx = 2;
+                    border=true;
                 }
             }
         }
         if (borderx == 1) {
-
                 e_x--;
-
-            if (e_x <= 520) {
-                mode = false;
+            if (e_x <= 500) {
                 borderx = 0;
+                border=false;
             }
         }
 
         if (borderx == 2) {
-
                 e_x++;
-
-            if (e_x >= 20) {
-                mode = false;
+            if (e_x >= 50) {
                 borderx = 0;
+                border=false;
             }
         }
 
-
-
-        //
-
-
         if (bordery==0) {
-            if (e_y <= 30) {
+            if (e_y <= 50&&border==false) {
                 e_y--;
-                mode = true;
-                if (e_y <= 15) {
-                    e_y = 600;
+                if (e_y <= 0) {
+                    e_y = 650;
                     bordery = 1;
+                    border=true;
                 }
             }
-            if (e_y >= 500) {
+            if (e_y >= 550&&border==false) {
                 e_y++;
-                mode = true;
-                if (e_y >= 600) {
-                    e_y = 20;
+                if (e_y >= 650) {
+                    e_y = 0;
                     bordery = 2;
+                    border=true;
                 }
             }
         }
         if (bordery == 1) {
-            if (e_y > 400) {
                 e_y--;
-            }
-            if (e_y <= 495) {
-                mode = false;
+            if (e_y <= 600) {
                 bordery = 0;
+                border=false;
             }
         }
 
         if (bordery == 2) {
-            if (e_y < 130) {
                 e_y++;
-            }
-            if (e_y >= 125) {
-                mode = false;
+            if (e_y >= 100) {
                 bordery = 0;
+                border=false;
             }
         }
-
-
-
-
-
-
-//            if (e_y < 0) {
-//                e_y = 700;
-//            }
-//            if (e_y > 700) {
-//                e_y = 0;
-//            }
-//
-//
-//            if (e_y < 0) {
-//                e_y  --;
-//            }
-//            if (e_y > 600) {
-//                e_y  --;
-//            }
-
     }
     public void enemyAnimation() {
         animationCooldown--;
