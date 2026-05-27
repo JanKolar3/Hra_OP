@@ -7,6 +7,9 @@ import java.util.Random;
 public class EnemySettings {
 
 
+    private final int OKOLIK=1;
+    private final int RADIUS=150;
+
     private final int OHRANICENI1 = 600;
     private final int OHRANICENI2 = -42;
 
@@ -15,59 +18,39 @@ public class EnemySettings {
     Image[] image1;
     Image image2;
 
+    private int x,y,width,height;
+
+    private int barheight,barwidth;
 
     private final int cooldown = 240;
     private int shootcooldown = random.nextInt(cooldown);
-    private int e_id;
-    private int max;
-    private int e_x;
-    private int e_y;
 
-    private int barheight;
-    private int barwidth;
-
-    private final int e_width;
-    private final int e_height;
     private final int speed;
-    private int index;
     private int animationCooldown=30;
-    private boolean mode;
-    private final int OKOLIK=1;
-    private final int RADIUS=150;
+    private int index;
     private int bud;
     private int cooldownMove;
-    private final int cooldownProjectile=600;
-    private boolean damage;
-    private int health=2;
-    private int health1;
-    private int k=0;
     private int k1;
-    private boolean test = true;
-    private int maxhealth=2;
     private int borderx=0;
     private int bordery=0;
+
+    private boolean mode;
+    private boolean damage;
+    private boolean test = true;
     private boolean border=false;
 
-
-
-
-
-
-
-
     public EnemySettings(int x ,int y ,int e_width, int e_height,int speed) {
-        this.e_x = x;
-        this.e_y = y;
-        this.e_width = e_width;
-        this.e_height = e_height;
+        this.x = x;
+        this.y = y;
+        this.width = e_width;
+        this.height = e_height;
         this.speed = speed;
     }
 
         public void cooldownProj(Player player, ArrayList<ProjectileSettings> projectilS){
-
             shootcooldown --;
             if (shootcooldown<=0){
-                        projectilS.add(new Projectile1(e_x, e_y, 32, 32,this, player));
+                        projectilS.add(new Projectile1(x, y, 32, 32,this, player));
                 shootcooldown = cooldown;
             }
         }
@@ -75,20 +58,20 @@ public class EnemySettings {
         public void enemyMove(Player player) {
         if (border==false) {
             mode = false;
-            if (e_x <= player.getPl_x() && e_x >= player.getPl_x() - RADIUS && e_y >= player.getPl_y() - RADIUS && e_y <= player.getPl_y() + RADIUS) {
-                e_x -= OKOLIK;
+            if (x <= player.getX() && x >= player.getX() - RADIUS && y >= player.getY() - RADIUS && y <= player.getY() + RADIUS) {
+                x -= OKOLIK;
                 mode = true;
             }
-            if (e_x <= player.getPl_x() + RADIUS && e_x >= player.getPl_x() && e_y >= player.getPl_y() - RADIUS && e_y <= player.getPl_y() + RADIUS) {
-                e_x += OKOLIK;
+            if (x <= player.getX() + RADIUS && x >= player.getX() && y >= player.getY() - RADIUS && y <= player.getY() + RADIUS) {
+                x += OKOLIK;
                 mode = true;
             }
-            if (e_y <= player.getPl_y() && e_y >= player.getPl_y() - RADIUS && e_x >= player.getPl_x() - RADIUS && e_x <= player.getPl_x() + RADIUS) {
-                e_y -= OKOLIK;
+            if (y <= player.getY() && y >= player.getY() - RADIUS && x >= player.getX() - RADIUS && x <= player.getX() + RADIUS) {
+                y -= OKOLIK;
                 mode = true;
             }
-            if (e_y <= player.getPl_y() + RADIUS && e_y >= player.getPl_y() && e_x >= player.getPl_x() - RADIUS && e_x <= player.getPl_x() + RADIUS) {
-                e_y += OKOLIK;
+            if (y <= player.getY() + RADIUS && y >= player.getY() && x >= player.getX() - RADIUS && x <= player.getX() + RADIUS) {
+                y += OKOLIK;
                 mode = true;
             }
 
@@ -102,21 +85,20 @@ public class EnemySettings {
 
                     switch (bud) {
                         case 1:
-                            e_x++;
+                            x +=speed;
                             break;
                         case 2:
-                            e_x--;
+                            x -=speed;
                             break;
                         case 3:
-                            e_y++;
+                            y +=speed;
                             break;
                         case 4:
-                            e_y--;
+                            y -=speed;
                             break;
                         case 5:
                             break;
                     }
-
                 }
             }
         }
@@ -126,68 +108,67 @@ public class EnemySettings {
     public void ohraniceni() {
 
         if (borderx==0) {
-            if (e_x <= 0&&border==false) {
-                e_x--;
-                if (e_x <= -40) {
-                    e_x = 630;
+            if (x <= 0&&border==false) {
+                x--;
+                if (x <= -40) {
+                    x = 630;
                     borderx = 1;
                     border=true;
                 }
             }
-            if (e_x >= 550&&border==false) {
-                e_x++;
-                if (e_x >= 630) {
-                    e_x = -40;
+            if (x >= 550&&border==false) {
+                x++;
+                if (x >= 630) {
+                    x = -40;
                     borderx = 2;
                     border=true;
                 }
             }
         }
         if (borderx == 1) {
-                e_x--;
-            if (e_x <= 500) {
+                x--;
+            if (x <= 500) {
                 borderx = 0;
                 border=false;
             }
         }
 
         if (borderx == 2) {
-                e_x++;
-            if (e_x >= 50) {
+                x++;
+            if (x >= 50) {
                 borderx = 0;
                 border=false;
             }
         }
-
         if (bordery==0) {
-            if (e_y <= 50&&border==false) {
-                e_y--;
-                if (e_y <= 0) {
-                    e_y = 650;
+            if (y <= 50&&border==false) {
+                y--;
+                if (y <= 0) {
+                    y = 650;
                     bordery = 1;
                     border=true;
                 }
             }
-            if (e_y >= 550&&border==false) {
-                e_y++;
-                if (e_y >= 650) {
-                    e_y = 0;
+            if (y >= 550&&border==false) {
+                y++;
+                if (y >= 650) {
+                    y = 0;
                     bordery = 2;
                     border=true;
                 }
             }
         }
         if (bordery == 1) {
-                e_y--;
-            if (e_y <= 550) {
+                y--;
+            if (y <= 550) {
                 bordery = 0;
                 border=false;
             }
         }
 
         if (bordery == 2) {
-                e_y++;
-            if (e_y >= 100) {
+                y++;
+            if (y >= 100) {
                 bordery = 0;
                 border=false;
             }
@@ -205,16 +186,8 @@ public class EnemySettings {
     }
 
         public Rectangle hitBox(){
-            return new Rectangle(e_x+(getE_width()/4),e_y+(getE_width()/4),e_width/2,e_height/2);
-
+            return new Rectangle(x +(getWidth()/4), y +(getWidth()/4), width /2, height /2);
         }
-//        public boolean collision(Player player){
-//            return player.hitBox().intersects(hitBox());
-//
-//        }
-//        public boolean collision2(EnemySettings enemyS){
-//        return enemyS.hitBox().intersects(hitBox());
-//        }
         public void damage(boolean damaged,int damagecounter){
         if (test){
             damage =damaged;
@@ -222,30 +195,25 @@ public class EnemySettings {
             test=false;
         }
         k1--;
-        health = damagecounter;
-
-
         }
 
 
         public void vykresleniObr(Graphics g) {
-            g.drawImage(image1[index], e_x, e_y, e_width, e_height, null);
-
+            g.drawImage(image1[index], x, y, width, height, null);
 
             if (damage&&k1==1) {
 
-                barwidth = e_width-2;
-                barheight= e_height-60;
-
+                barwidth = width -2;
+                barheight= height -60;
 
                 g.setColor(Color.gray);
-                g.fillRect(e_x, e_y - 20, barwidth, barheight);
+                g.fillRect(x, y - 20, barwidth, barheight);
 
                 g.setColor(Color.red);
-                g.fillRect(e_x, e_y - 20, barwidth/2, barheight);
+                g.fillRect(x, y - 20, barwidth/2, barheight);
 
                 g.setColor(Color.black);
-                g.drawRect(e_x - 1, e_y - 21, barwidth + 1, barheight+1);
+                g.drawRect(x - 1, y - 21, barwidth + 1, barheight+1);
             }
         }
 
@@ -254,37 +222,34 @@ public class EnemySettings {
         return k1;
     }
 
-    public int getMax() {
-            return max;
-        }
 
-        public int getE_width() {
-            return e_width;
+        public int getWidth() {
+            return width;
         }
 
 
-        public int getE_height() {
-            return e_height;
+        public int getHeight() {
+            return height;
         }
 
-        public int getE_x() {
-            return e_x;
+        public int getX() {
+            return x;
         }
 
-        public int getE_y() {
-            return e_y;
+        public int getY() {
+            return y;
         }
 
         public int getIndex() {
         return index;
     }
 
-    public void setE_x(int e_x) {
-        this.e_x = e_x;
+    public void setX(int x) {
+        this.x = x;
     }
 
-    public void setE_y(int e_y) {
-        this.e_y = e_y;
+    public void setY(int y) {
+        this.y = y;
     }
 }
 

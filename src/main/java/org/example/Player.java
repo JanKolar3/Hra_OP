@@ -1,10 +1,8 @@
 package org.example;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Arrays;
 
 public class Player implements KeyListener {
 
@@ -12,14 +10,9 @@ public class Player implements KeyListener {
     Image[] PLAYER_DOWN = SpriteLoader.getFrames("/Player/playerAnimDownts (1).png",16,16,3);
 
     private int index = 0;
-//    private int index_count = 8;
-//    private int animation_speed = 0;
-    private int pl_x;
-    private int pl_y;
-    private int pl_width;
-    private int pl_height;
-    private final int pl_speed = 2;
 
+    private int x,y,width,height;
+    private final int pl_speed = 2;
     private int cooldown=20;
     private boolean k = true;
     private boolean up,down,left,right,num,lf,rg,p;
@@ -31,16 +24,14 @@ public class Player implements KeyListener {
 
 
     public Player(int x, int y, int width, int height) {
-
-        this.pl_x = x;
-        this.pl_y = y;
-        this.pl_width = width;
-        this.pl_height = height;
-
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
     }
 
     public Rectangle hitBox() {
-        return new Rectangle(pl_x+(getPl_width()/4), pl_y, pl_width/2, pl_height);
+        return new Rectangle(x +(getWidth()/4), y, width /2, height);
     }
 //    public boolean collision(Projectile1 projectyle) {
 //        return projectyle.hitBox().intersects(hitBox());
@@ -48,36 +39,36 @@ public class Player implements KeyListener {
 
     public void moveMent() {
         if (up) {
-            pl_y -= pl_speed;
+            y -= pl_speed;
             direction = "up";
         }
         if (down) {
-            pl_y += pl_speed;
+            y += pl_speed;
             direction = "down";
         }
         if (left) {
-            pl_x -= pl_speed;
+            x -= pl_speed;
             direction = "left";
         }
         if (right) {
-            pl_x += pl_speed;
+            x += pl_speed;
             direction = "right";
         }
     }
 
     public void ohraniceni(){
 
-        if (pl_x<-70){
-            pl_x=650;
+        if (x <-70){
+            x =650;
         }
-        if (pl_x>650){
-            pl_x=-70;
+        if (x >650){
+            x =-70;
         }
-        if (pl_y<0){
-            pl_y=700;
+        if (y <0){
+            y =700;
         }
-        if (pl_y>700){
-            pl_y=0;
+        if (y >700){
+            y =0;
         }
     }
 
@@ -97,19 +88,19 @@ public class Player implements KeyListener {
         }
     }
 
-    public void vykresleniObr(Graphics g) {
+    public void paint(Graphics g) {
 
 
         if ((k&&!num&&rg)||!p) {
-            g.drawImage(PLAYER_DOWN[0], pl_x, pl_y, pl_width, pl_height, null);
+            g.drawImage(PLAYER_DOWN[0], x, y, width, height, null);
         }
 
         if (k&&!num&&lf) {
-            g.drawImage(PLAYER_DOWN[0], pl_x + 80, pl_y, -pl_width, pl_height, null);
+            g.drawImage(PLAYER_DOWN[0], x + 80, y, -width, height, null);
         }
 
         if (direction == "up"&&num) {
-            g.drawImage(PLAYER_UP[index], pl_x, pl_y, pl_width, pl_height, null);
+            g.drawImage(PLAYER_UP[index], x, y, width, height, null);
 //            g.setColor(Color.black);
 //            g.fillOval(pl_x-20, pl_y+50, pl_width, pl_height-20);
             k = false;
@@ -117,19 +108,19 @@ public class Player implements KeyListener {
             lf = false;
         }
         if (direction == "right"&&num) {
-            g.drawImage(PLAYER_DOWN[index], pl_x, pl_y, pl_width, pl_height, null);
+            g.drawImage(PLAYER_DOWN[index], x, y, width, height, null);
             k = false;
             rg = true;
             lf = false;
         }
         if (direction == "left"&&num) {
-            g.drawImage(PLAYER_DOWN[index], pl_x + 80, pl_y, -pl_width, pl_height, null);
+            g.drawImage(PLAYER_DOWN[index], x + 80, y, -width, height, null);
             k = false;
             lf = true;
             rg = false;
         }
         if (direction == "down"&&num) {
-            g.drawImage(PLAYER_DOWN[index], pl_x, pl_y, pl_width, pl_height, null);
+            g.drawImage(PLAYER_DOWN[index], x, y, width, height, null);
             k = false;
             rg = true;
             lf = false;
@@ -193,36 +184,36 @@ public class Player implements KeyListener {
 
 
 
-    public int getPl_x() {
-        return pl_x;
+    public int getX() {
+        return x;
     }
 
-    public void setPl_x(int pl_x) {
-        this.pl_x = pl_x;
+    public void setX(int x) {
+        this.x = x;
     }
 
-    public int getPl_y() {
-        return pl_y;
+    public int getY() {
+        return y;
     }
 
     public void setPl_y() {
-        this.pl_y = pl_y;
+        this.y = y;
     }
 
-    public int getPl_width() {
-        return pl_width;
+    public int getWidth() {
+        return width;
     }
 
-    public void setPl_width(int pl_width) {
-        this.pl_width = pl_width;
+    public void setWidth(int width) {
+        this.width = width;
     }
 
-    public int getPl_height() {
-        return pl_height;
+    public int getHeight() {
+        return height;
     }
 
-    public void setPl_height(int pl_height) {
-        this.pl_height = pl_height;
+    public void setHeight(int height) {
+        this.height = height;
     }
 
     public int getIndex() {

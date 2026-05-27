@@ -34,8 +34,6 @@ public class LevelSettings {
             max=1;
 
         }
-
-
     }
 
     public int enemyMax(){
@@ -59,6 +57,12 @@ public class LevelSettings {
         }
 
     return max;
+    }
+    public void reset() {
+        victory=false;
+        wave=0;
+        level=0;
+        damage=1;
     }
 
     public boolean isVictory() {

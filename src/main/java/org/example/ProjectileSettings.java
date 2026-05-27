@@ -1,6 +1,5 @@
 package org.example;
 
-import javax.swing.*;
 import java.awt.*;
 
 public class ProjectileSettings {
@@ -9,6 +8,7 @@ public class ProjectileSettings {
     EnemySettings enemyS;
     Image image1;
     Image image2;
+
     private int x;
     private int y;
     private final int width;
@@ -19,7 +19,6 @@ public class ProjectileSettings {
 
 
     public ProjectileSettings(int x, int y,int width, int height,EnemySettings enemyS,Player player){
-
         this.y = y;
         this.x = x;
         this.width = width;
@@ -27,43 +26,35 @@ public class ProjectileSettings {
 
         this.enemyS = enemyS;
         this.player = player;
-
-
-
     }
     public void direction(Player player) {
-
         if (mode == 1) {
-            if (player.getPl_x() > x) x += speed;
-            if (player.getPl_x() < x) x -= speed;
-            if (player.getPl_y() > y) y += speed;
-            if (player.getPl_y() < y) y -= speed;
+            if (player.getX() > x) x += speed;
+            if (player.getX() < x) x -= speed;
+            if (player.getY() > y) y += speed;
+            if (player.getY() < y) y -= speed;
         } else if (mode == 2 && enemyS != null) {
             damage = false;
             speed = 7;
-            if (enemyS.getE_x()+(enemyS.getE_width()/4) > x) x += speed;
-            if (enemyS.getE_x()+(enemyS.getE_width()/4) < x) x -= speed;
-            if (enemyS.getE_y()+(enemyS.getE_width()/4) > y) y += speed;
-            if (enemyS.getE_y()+(enemyS.getE_width()/4) < y) y -= speed;
-
+            if (enemyS.getX()+(enemyS.getWidth()/4) > x) x += speed;
+            if (enemyS.getX()+(enemyS.getWidth()/4) < x) x -= speed;
+            if (enemyS.getY()+(enemyS.getWidth()/4) > y) y += speed;
+            if (enemyS.getY()+(enemyS.getWidth()/4) < y) y -= speed;
         }
     }
     public Rectangle hitBox(){
         return new Rectangle(x+(getWidth()/4),y+(getWidth()/4),width/2,height/2);
     }
-    public boolean collision(Player player){
-        return player.hitBox().intersects(hitBox());
-    }
-    public boolean collision1(EnemySettings enemyS){
-        return enemyS.hitBox().intersects(this.hitBox());
-    }
-    public boolean collision2(Shield shield){
-        return shield.hitBox().intersects(hitBox());
-    }
+
+    public boolean collision(Player player){return player.hitBox().intersects(hitBox());}
+
+    public boolean collision1(EnemySettings enemyS){return enemyS.hitBox().intersects(this.hitBox());}
+
+    public boolean collision2(Shield shield){return shield.hitBox().intersects(hitBox());}
 
 
 
-    public void draw(Graphics g){
+    public void paintComponents(Graphics g){
         if (damage) {
             g.drawImage(image1, x, y, width, height, null);
         }
