@@ -13,10 +13,11 @@ public class ProjectileSettings {
     private int y;
     private final int width;
     private final int height;
-    private int speed=3;
+    private int speed=4;
     private int mode=1;
     private boolean damage=true;
-
+    private int cooldown=320;
+    private boolean destroy=false;
 
     public ProjectileSettings(int x, int y,int width, int height,EnemySettings enemyS,Player player){
         this.y = y;
@@ -29,17 +30,25 @@ public class ProjectileSettings {
     }
     public void direction(Player player) {
         if (mode == 1) {
+            cooldown --;
             if (player.getX() > x) x += speed;
             if (player.getX() < x) x -= speed;
             if (player.getY() > y) y += speed;
             if (player.getY() < y) y -= speed;
         } else if (mode == 2 && enemyS != null) {
+            if (damage) {
+                cooldown =100;
+            }
             damage = false;
+            cooldown --;
             speed = 7;
             if (enemyS.getX()+(enemyS.getWidth()/4) > x) x += speed;
             if (enemyS.getX()+(enemyS.getWidth()/4) < x) x -= speed;
             if (enemyS.getY()+(enemyS.getWidth()/4) > y) y += speed;
             if (enemyS.getY()+(enemyS.getWidth()/4) < y) y -= speed;
+        }
+        if (cooldown <= 0) {
+            destroy = true;
         }
     }
     public Rectangle hitBox(){
@@ -63,6 +72,9 @@ public class ProjectileSettings {
     }
 
 
+    public boolean isDestroy() {
+        return destroy;
+    }
 
     public int getX() {
         return x;

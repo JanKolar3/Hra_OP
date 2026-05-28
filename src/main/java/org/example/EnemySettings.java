@@ -4,7 +4,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class EnemySettings {
+public abstract class EnemySettings {
 
 
     private final int OKOLIK=1;
@@ -15,8 +15,8 @@ public class EnemySettings {
 
     Random random = new Random();
 
-    Image[] image1;
-    Image image2;
+    Image image1[];
+    Image image2[];
 
     private int x,y,width,height;
 
@@ -26,8 +26,8 @@ public class EnemySettings {
     private int shootcooldown = random.nextInt(cooldown);
 
     private final int speed;
-    private int animationCooldown=30;
-    private int index;
+    private int animationCooldown=random.nextInt(30);
+    private int index1;
     private int bud;
     private int cooldownMove;
     private int k1;
@@ -38,6 +38,9 @@ public class EnemySettings {
     private boolean damage;
     private boolean test = true;
     private boolean border=false;
+
+    private boolean right =false;
+    private boolean left=false;
 
     public EnemySettings(int x ,int y ,int e_width, int e_height,int speed) {
         this.x = x;
@@ -50,21 +53,28 @@ public class EnemySettings {
         public void cooldownProj(Player player, ArrayList<ProjectileSettings> projectilS){
             shootcooldown --;
             if (shootcooldown<=0){
-                        projectilS.add(new Projectile1(x, y, 32, 32,this, player));
+//                        projectilS.add(new Projectile1(x, y, 32, 32,this, player));
+                update(player,projectilS);
                 shootcooldown = cooldown;
             }
         }
+        public void update(Player player, ArrayList<ProjectileSettings> projectilS){}
 
         public void enemyMove(Player player) {
         if (border==false) {
             mode = false;
             if (x <= player.getX() && x >= player.getX() - RADIUS && y >= player.getY() - RADIUS && y <= player.getY() + RADIUS) {
                 x -= OKOLIK;
+                right=false;
+                left=true;
                 mode = true;
             }
             if (x <= player.getX() + RADIUS && x >= player.getX() && y >= player.getY() - RADIUS && y <= player.getY() + RADIUS) {
                 x += OKOLIK;
+                right=true;
+                left=false;
                 mode = true;
+
             }
             if (y <= player.getY() && y >= player.getY() - RADIUS && x >= player.getX() - RADIUS && x <= player.getX() + RADIUS) {
                 y -= OKOLIK;
@@ -82,13 +92,16 @@ public class EnemySettings {
                     cooldownMove = 200;
                 }
                 if (cooldownMove <= 100) {
-
                     switch (bud) {
                         case 1:
                             x +=speed;
+                            right=true;
+                            left=false;
                             break;
                         case 2:
                             x -=speed;
+                            right=false;
+                            left=true;
                             break;
                         case 3:
                             y +=speed;
@@ -102,87 +115,90 @@ public class EnemySettings {
                 }
             }
         }
-            ohraniceni();
-
+        ohraniceni();
         }
     public void ohraniceni() {
+        switch (borderx){
+            case 0:
+                if (x <= 0&&border==false) {
+                    x--;
+                    left=true;
+                    right=false;
+                    if (x <= -40) {
+                        right=true;
+                        left=false;
+                        x = 630;
+                        borderx = 1;
+                        border = true;
+                    }
+                }
+                if (x >= 550 && border == false) {
+                    x++;
+                    right=true;
+                    left=false;
+                    if (x >= 630) {
+                        right=false;
+                        left=true;
+                        x = -40;
+                        borderx = 2;
+                        border = true;
 
-        if (borderx==0) {
-            if (x <= 0&&border==false) {
+                    }
+                }
+            break;
+            case 1:
                 x--;
-                if (x <= -40) {
-                    x = 630;
-                    borderx = 1;
-                    border=true;
+                if (x <= 500) {
+                    borderx = 0;
+                    border=false;
                 }
-            }
-            if (x >= 550&&border==false) {
+            break;
+            case 2:
                 x++;
-                if (x >= 630) {
-                    x = -40;
-                    borderx = 2;
-                    border=true;
+                if (x >= 50) {
+                    borderx = 0;
+                    border=false;
                 }
-            }
+            break;
         }
-        if (borderx == 1) {
-                x--;
-            if (x <= 500) {
-                borderx = 0;
-                border=false;
-            }
-        }
-
-        if (borderx == 2) {
-                x++;
-            if (x >= 50) {
-                borderx = 0;
-                border=false;
-            }
-        }
-        if (bordery==0) {
-            if (y <= 50&&border==false) {
+        switch (bordery){
+            case 0:
+                if (y <= 50&&border==false) {
+                    y--;
+                    if (y <= 0) {
+                        y = 650;
+                        bordery = 1;
+                        border=true;
+                    }
+                }
+                if (y >= 550&&border==false) {
+                    y++;
+                    if (y >= 650) {
+                        y = 0;
+                        bordery = 2;
+                        border=true;
+                    }
+                }
+            break;
+            case 1:
                 y--;
-                if (y <= 0) {
-                    y = 650;
-                    bordery = 1;
-                    border=true;
+                if (y <= 550) {
+                    bordery = 0;
+                    border=false;
                 }
-            }
-            if (y >= 550&&border==false) {
+            break;
+            case 2:
                 y++;
-                if (y >= 650) {
-                    y = 0;
-                    bordery = 2;
-                    border=true;
+                if (y >= 100) {
+                    bordery = 0;
+                    border=false;
                 }
-            }
-        }
-        if (bordery == 1) {
-                y--;
-            if (y <= 550) {
-                bordery = 0;
-                border=false;
-            }
-        }
-
-        if (bordery == 2) {
-                y++;
-            if (y >= 100) {
-                bordery = 0;
-                border=false;
-            }
+            break;
         }
     }
-    public void enemyAnimation() {
-        animationCooldown--;
-        if (animationCooldown <= 0) {
-            index++;
-            if (index >= 2) {
-                index = 0;
-            }
-            animationCooldown = 30;
-        }
+
+    public int enemyAnimation() {
+        return 0;
     }
 
         public Rectangle hitBox(){
@@ -199,7 +215,12 @@ public class EnemySettings {
 
 
         public void vykresleniObr(Graphics g) {
-            g.drawImage(image1[index], x, y, width, height, null);
+        if (image1!=null) {
+            g.drawImage(image1[enemyAnimation()], x, y, width, height, null);
+        }
+        if (image2!=null) {
+            g.drawImage(image2[enemyAnimation()], x, y, width, height, null);
+        }
 
             if (damage&&k1==1) {
 
@@ -241,7 +262,7 @@ public class EnemySettings {
         }
 
         public int getIndex() {
-        return index;
+        return index1;
     }
 
     public void setX(int x) {
@@ -250,6 +271,14 @@ public class EnemySettings {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public boolean isLeft() {
+        return left;
+    }
+
+    public boolean isRight() {
+        return right;
     }
 }
 
