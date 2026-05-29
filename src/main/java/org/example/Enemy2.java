@@ -5,10 +5,10 @@ import java.util.ArrayList;
 
 public class Enemy2 extends EnemySettings{
 
-    Image[] SOUBOR_ENEMY1 = SpriteLoader.getFrames("/EnemyStop.png",16,16,6);
+    Image[] SOUBOR_ENEMY1 = SpriteLoader.getFrames("/Enemy.png",16,16,4);
 //    private final String SOUBOR_ENEMY2 = "src/main/resources/shieldPush.png";
     EnemySettings enemySettings;
-    private int animationCooldown;
+    private int animationCooldown=20;
     private int index;
 
 
@@ -27,26 +27,29 @@ public class Enemy2 extends EnemySettings{
 
     @Override
     public int enemyAnimation() {
-        if(isLeft()){
-            animationCooldown--;
-            if (animationCooldown <= 0) {
-                index++;
-                if (index >= 6) {
-                    index = 3;
-                }
-                animationCooldown = 50;
-            }
-        }
-        if(isRight()) {
+        if(isMoving()==true){
             animationCooldown--;
             if (animationCooldown <= 0) {
                 index++;
                 if (index >= 3) {
-                    index = 0;
+                    index = 2;
                 }
-                animationCooldown = 50;
+                animationCooldown = 25;
             }
         }
+        if (isMoving()==false){
+            index=0;
+        }
+//        if(isRight()) {
+//            animationCooldown--;
+//            if (animationCooldown <= 0) {
+//                index++;
+//                if (index >= 2) {
+//                    index = 1;
+//                }
+//                animationCooldown = 50;
+//            }
+//        }
         return index;
     }
 }
