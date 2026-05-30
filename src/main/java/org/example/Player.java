@@ -20,10 +20,6 @@ public class Player implements KeyListener {
     private boolean up=false,down=false,left=false,right=false;
     private int move;
 
-    private String direction;
-
-
-
     public Player(int x, int y, int width, int height) {
         this.x = x;
         this.y = y;
@@ -38,19 +34,15 @@ public class Player implements KeyListener {
 
         if (up) {
             y -= speed;
-//            direction = "up";
         }
         if (down) {
             y += speed;
-//            direction = "down";
         }
         if (left) {
             x -= speed;
-//            direction = "left";
         }
         if (right) {
             x += speed;
-//            direction = "right";
         }
     playerAnimation();
     border();
@@ -213,8 +205,5 @@ public class Player implements KeyListener {
         this.index = index;
     }
 
-    public String getDirection() {
-        return direction;
-    }
 
 }
