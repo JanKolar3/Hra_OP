@@ -19,7 +19,7 @@ public class Shield implements MouseMotionListener, KeyListener {
     private int width;
     private int height;
     private int anglex, angley;
-    private int rotate, movex, hitboxSize =1, hitboxMove;
+    private int rotate=1, movex=0, hitboxSize =1, hitboxMove;
     private int radius = 50;
 
     private int index, indexPush;

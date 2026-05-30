@@ -8,7 +8,7 @@ public class Player implements KeyListener {
 
     Image[] PLAYER = SpriteLoader.getFrames("/Player/Player.png",16,16,4);
 
-    private int rotate = 0;
+    private int rotate = 1;
     private int movex = 0;
 
     private int index = 0;

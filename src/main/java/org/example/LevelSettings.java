@@ -1,11 +1,9 @@
 package org.example;
 
 public class LevelSettings {
-    private int wave=5;
-    private int level=0;
+    private int wave=6;
+    private int level=1;
     private int max;
-    private String levelName;
-    private String waveName;
     private int damage=1;
     private boolean victory=false;
 
@@ -13,21 +11,17 @@ public class LevelSettings {
         if (level<=1) {
             if (wave > 0) {
                 wave--;
-                waveName=String.valueOf("wave: "+wave);
-                System.out.println("wave was " + wave);
             }
             if (wave <= 0) {
                 level++;
-                wave = 4;
+                wave = 5;
                 if (level==1) {
                     damage = 2;
                 }
-                levelName= String.valueOf(level);
-                System.out.println("level was " + level);
             }
 
         }
-        if (level>=2) {
+        if (level>=3) {
             victory=true;
             level=0;
             wave=5;
@@ -39,6 +33,8 @@ public class LevelSettings {
     public int enemyMax(){
 
         switch (wave) {
+            case 5:
+
             case 4:
                 max = 1;
                 break;

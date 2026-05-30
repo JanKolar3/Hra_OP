@@ -20,8 +20,8 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
     private final LevelSettings levelS;
 
     private final JLabel jLabel;
-    private final JLabel txtlevel;
-    private final JLabel txtwave;
+//    private final JLabel txtlevel;
+//    private final JLabel txtwave;
     private final Player player;
     private final Shield shield;
     private final Menu menu;
@@ -48,20 +48,22 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
         image = new ImageIcon(SOUBOR_POZADI).getImage();
         image2 = new ImageIcon(SOUBRO_OHRANI).getImage();
         over = new ImageIcon(OVER).getImage();
-        info = new PanelInfo(x,y,getWidth(),getHeight());
-        menu = new Menu(x,y,640,640);
 
+        menu = new Menu(x,y,640,640);
         player = new Player(200,200,16*5,16*5);
         shield = new Shield(player,16*3,16*3);
 
+
         levelS = new LevelSettings();
+        info = new PanelInfo();
+
 
         jLabel = new JLabel("SCORE");
-        txtlevel = new JLabel("Level: "+levelS.getLevel());
-        txtwave = new JLabel("Wave: "+levelS.getWave());
+//        txtlevel = new JLabel("Level: "+levelS.getLevel());
+//        txtwave = new JLabel("Wave: "+levelS.getWave());
 
-        add(txtlevel);
-        add(txtwave);
+//        add(txtlevel);
+//        add(txtwave);
 
 
 
@@ -82,6 +84,8 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
             if(!menu.isMode()) {
                 if (!gameOver&&!levelS.isVictory()) {
                     addEnemy();
+                    pocet=pole_enemy.size();
+
                     collision();
                     healthBar();
 
@@ -89,17 +93,18 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
                     shield.shieldRotate();
 
-                    pocet = pole_enemy.size();
-
-                    info.shieldTimer(shield.getCooldownAktivace(),shield.isShiueldBounce());
+                    info.info(health,shield.isShiueldBounce(),levelS.getLevel(),levelS.getWave(),score);
+//                    info.shieldTimer(shield.isShiueldBounce());
                     for (EnemySettings enemyS : pole_enemy) {
                         enemyS.enemyAnimation();
                         enemyS.enemyMove(player);
                         enemyS.cooldownProj(player, pole_proj);
+//                        pocet = pole_enemy.size();
                     }
-                    if (pocet <= 0) {
-                        levelS.waveSettings();
-                    }
+//                    if (pocet <= 0) {
+//                        levelS.waveSettings();
+//                    }
+
 
                 }
             }
@@ -164,11 +169,11 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
                     }
                 }
         }
-
     }
     public void addEnemy(){
         pocet = pole_enemy.size();
         if (pocet<=0) {
+            levelS.waveSettings();
             levelS.enemyMax();
 
             while (pole_enemy.size() != levelS.getMax()) {
@@ -181,10 +186,6 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
                         enemyS = new Enemy1(rand.nextInt(100, 500), rand.nextInt(100, 500), 72, 72, 1);
                         pole_enemy.add(enemyS);
                     }
-
-
-//            enemyS = new Enemy2(rand.nextInt(1,400),rand.nextInt(1,400),50,50,1);
-//            pole_enemy.add(enemyS);
                 }
             }
         }
@@ -193,7 +194,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
 
     public void healthBar() {
-        info.health(health);
+//        info.health(health);
 
         if (health <= 0) {
             health =6;

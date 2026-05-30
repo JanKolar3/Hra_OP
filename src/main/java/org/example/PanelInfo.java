@@ -11,32 +11,19 @@ public class PanelInfo extends JPanel{
 
     Image[] HEALTHS = SpriteLoader.getFrames("/Info/healts.png",16,16,3);
 
-
     private int mode1,mode2,mode3;
-    private int x,y,w,h;
     private int akt=100,akti=100-1;
     int score=0;
+    private String level1,wave1,score1;
 
 
+    public PanelInfo(){
+    }
 
-
-
-    public PanelInfo(int x,int y,int w,int h) {
-//        menu = new Menu(getX(),getY(),640,640);
-
-//        image1 = new ImageIcon(SOUBOR_POZADI).getImage();
-//        image2 = new ImageIcon(SOUBRO_OHRANI).getImage();
-
-
-        this.x=x;
-        this.y=y;
-        this.w=w;
-        this.h=h;
-
-        this.score=score;
-
-
-
+    public void info(int health,boolean aktivation,int level,int wave, int score){
+        health(health);
+        shieldTimer(aktivation);
+        levelInfo(level,wave,score);
     }
 
     public void health(int health) {
@@ -68,14 +55,19 @@ public class PanelInfo extends JPanel{
                 break;
         }
     }
-    public void shieldTimer(int aktivation,boolean aktivace){
+    public void shieldTimer(boolean aktivace){
         if (akt<=akti){
             akt++;
         }
         if (aktivace==true){
             akt=0;
         }
-}
+    }
+    public void levelInfo(int level,int wave,int score) {
+        level1 = String.valueOf(level);
+        wave1 = String.valueOf(wave);
+        score1 = String.valueOf(score);
+    }
 
     public void vykreliseni(Graphics g) {
 
@@ -91,6 +83,18 @@ public class PanelInfo extends JPanel{
         g.fillRect(500,30,akti+1,20);
         g.setColor(Color.yellow);
         g.fillRect(500,30,akt,20);
+
+        g.setFont(new Font("Arial", Font.BOLD,15));
+        g.setColor(Color.BLACK);
+
+
+
+        g.drawString("Score: "+score1, 230, 35);
+//        g.drawString("Level: "+level1+" / 2", 230, 35);
+        g.drawString("Wave: "+wave1+" / 5", 330, 35);
+
+
+
 
 
 
