@@ -10,7 +10,7 @@ public class  Main {
             @Override
             public void run() {
 
-                Frame frame = new Frame();
+                GameFrame frame = new GameFrame();
                 frame.setVisible(true);
                 frame.setResizable(false);
             }

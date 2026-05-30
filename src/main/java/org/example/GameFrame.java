@@ -1,11 +1,10 @@
 package org.example;
 
 import javax.swing.*;
-import java.awt.*;
 
-public class Frame extends JFrame {
+public class GameFrame extends JFrame {
 
-    public Frame() {
+    public GameFrame() {
 
 
         setTitle("Game");

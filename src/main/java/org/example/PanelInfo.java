@@ -9,23 +9,12 @@ import java.awt.event.MouseMotionListener;
 
 public class PanelInfo extends JPanel{
 
-//    private final String SOUBOR_POZADI = "src/main/resources/les.png";
-//    private final String SOUBRO_OHRANI = "src/main/resources/lesUP.png";
-    Image[] HEALTHS = SpriteLoader.getFrames("/Player/healts.png",16,16,3);
+    Image[] HEALTHS = SpriteLoader.getFrames("/Info/healts.png",16,16,3);
 
 
-
-
-//    private final Image image1;
-//    private final Image image2;
-    Menu menu;
-    Image image;
-    Shield shield;
     private int mode1,mode2,mode3;
     private int x,y,w,h;
     private int akt=100,akti=100-1;
-    boolean gameover=false;
-    boolean victory=false;
     int score=0;
 
 

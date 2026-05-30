@@ -60,7 +60,8 @@ public class LevelSettings {
     }
     public void reset() {
         victory=false;
-        wave=0;
+        wave=5;
+        max=1;
         level=0;
         damage=1;
     }

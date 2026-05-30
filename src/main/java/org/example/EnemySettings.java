@@ -8,7 +8,7 @@ public abstract class EnemySettings {
 
 
     private final int OKOLIK=1;
-    private final int RADIUS=150;
+    private final int RADIUS=120;
 
     private final int OHRANICENI1 = 600;
     private final int OHRANICENI2 = -42;
@@ -28,19 +28,24 @@ public abstract class EnemySettings {
     private final int speed;
     private int animationCooldown=random.nextInt(30);
     private int index1;
-    private int bud;
+    private int randomMove;
     private int cooldownMove;
-    private int k1;
+    private int dmg;
     private int borderx=0;
     private int bordery=0;
 
-    private boolean mode;
+    private boolean closeMode;
     private boolean damage;
     private boolean test = true;
     private boolean border=false;
 
     private boolean right =false;
     private boolean left=false;
+    private boolean moving=false;
+    private int otoc=-1;
+    private int posun=80;
+    private int timer = 50;
+    private boolean running=false;
 
     public EnemySettings(int x ,int y ,int e_width, int e_height,int speed) {
         this.x = x;
@@ -53,7 +58,6 @@ public abstract class EnemySettings {
         public void cooldownProj(Player player, ArrayList<ProjectileSettings> projectilS){
             shootcooldown --;
             if (shootcooldown<=0){
-//                        projectilS.add(new Projectile1(x, y, 32, 32,this, player));
                 update(player,projectilS);
                 shootcooldown = cooldown;
             }
@@ -61,92 +65,86 @@ public abstract class EnemySettings {
         public void update(Player player, ArrayList<ProjectileSettings> projectilS){}
 
         public void enemyMove(Player player) {
-        if (border==false) {
-            mode = false;
-            if (x <= player.getX() && x >= player.getX() - RADIUS && y >= player.getY() - RADIUS && y <= player.getY() + RADIUS) {
-                x -= OKOLIK;
-                right=false;
-                left=true;
-                mode = true;
-            }
-            if (x <= player.getX() + RADIUS && x >= player.getX() && y >= player.getY() - RADIUS && y <= player.getY() + RADIUS) {
-                x += OKOLIK;
-                right=true;
-                left=false;
-                mode = true;
+            if (border == false) {
+                closeMode = false;
+                moving = false;
+                if (x <= player.getX() && x >= player.getX() - RADIUS && y >= player.getY() - RADIUS && y <= player.getY() + RADIUS) {
+                        x -= OKOLIK;
+                        closeMode =true;
+                }
+                if (x <= player.getX() + RADIUS && x >= player.getX() && y >= player.getY() - RADIUS && y <= player.getY() + RADIUS) {
+                        x += OKOLIK;
+                        closeMode =true;
+                }
+                if (y <= player.getY() && y >= player.getY() - RADIUS && x >= player.getX() - RADIUS && x <= player.getX() + RADIUS) {
+                        y -= OKOLIK;
+                        closeMode =true;
+                }
+                if (y <= player.getY() + RADIUS && y >= player.getY() && x >= player.getX() - RADIUS && x <= player.getX() + RADIUS) {
+                        y += OKOLIK;
+                        closeMode =true;
+                }
 
-            }
-            if (y <= player.getY() && y >= player.getY() - RADIUS && x >= player.getX() - RADIUS && x <= player.getX() + RADIUS) {
-                y -= OKOLIK;
-                mode = true;
-            }
-            if (y <= player.getY() + RADIUS && y >= player.getY() && x >= player.getX() - RADIUS && x <= player.getX() + RADIUS) {
-                y += OKOLIK;
-                mode = true;
-            }
+                if (!closeMode &&!moving) {
 
-            if (!mode) {
-                cooldownMove--;
+                    cooldownMove--;
                 if (cooldownMove <= 0) {
-                    bud = random.nextInt(1, 6);
+                    randomMove = random.nextInt(1, 6);
                     cooldownMove = 200;
+                    moving = false;
                 }
                 if (cooldownMove <= 100) {
-                    switch (bud) {
+                    switch (randomMove) {
                         case 1:
-                            x +=speed;
-                            right=true;
-                            left=false;
+                            x += speed;
+                            moving = true;
                             break;
                         case 2:
-                            x -=speed;
-                            right=false;
-                            left=true;
+                            x -= speed;
+                            moving = true;
                             break;
                         case 3:
-                            y +=speed;
+                            y += speed;
+                            moving = true;
                             break;
                         case 4:
-                            y -=speed;
+                            y -= speed;
+                            moving = true;
                             break;
                         case 5:
+                            moving = false;
                             break;
                     }
                 }
             }
         }
-        ohraniceni();
+            border();
+            rotate(player);
         }
-    public void ohraniceni() {
+    private void border() {
         switch (borderx){
             case 0:
                 if (x <= 0&&border==false) {
+                    moving = true;
                     x--;
-                    left=true;
-                    right=false;
                     if (x <= -40) {
-                        right=true;
-                        left=false;
                         x = 630;
                         borderx = 1;
                         border = true;
                     }
                 }
                 if (x >= 550 && border == false) {
+                    moving = true;
                     x++;
-                    right=true;
-                    left=false;
                     if (x >= 630) {
-                        right=false;
-                        left=true;
                         x = -40;
                         borderx = 2;
                         border = true;
-
                     }
                 }
             break;
             case 1:
+                moving=true;
                 x--;
                 if (x <= 500) {
                     borderx = 0;
@@ -154,6 +152,7 @@ public abstract class EnemySettings {
                 }
             break;
             case 2:
+                moving=true;
                 x++;
                 if (x >= 50) {
                     borderx = 0;
@@ -163,7 +162,8 @@ public abstract class EnemySettings {
         }
         switch (bordery){
             case 0:
-                if (y <= 50&&border==false) {
+                if (y <= 100&&border==false) {
+                    moving=true;
                     y--;
                     if (y <= 0) {
                         y = 650;
@@ -172,6 +172,7 @@ public abstract class EnemySettings {
                     }
                 }
                 if (y >= 550&&border==false) {
+                    moving=true;
                     y++;
                     if (y >= 650) {
                         y = 0;
@@ -181,6 +182,7 @@ public abstract class EnemySettings {
                 }
             break;
             case 1:
+                moving=true;
                 y--;
                 if (y <= 550) {
                     bordery = 0;
@@ -188,12 +190,45 @@ public abstract class EnemySettings {
                 }
             break;
             case 2:
+                moving=true;
                 y++;
                 if (y >= 100) {
                     bordery = 0;
                     border=false;
                 }
             break;
+        }
+    }
+
+    private void rotate(Player player){
+        if (closeMode ==false&&running==false) {
+            if (player.getX() > x) {
+                otoc = 1;
+                posun = 0;
+            }
+            if (player.getX() < x) {
+                otoc = -1;
+                posun = 80;
+            }
+        }
+        if (closeMode ==true||running==true) {
+            timer --;
+            running=true;
+            moving = true;
+            if (player.getX() > x) {
+                otoc = -1;
+                posun = 80;
+                x--;
+            }
+            if (player.getX() < x) {
+                otoc = 1;
+                posun = 0;
+                x++;
+            }
+            if (timer<=0) {
+                timer = 50;
+                running=false;
+            }
         }
     }
 
@@ -207,10 +242,10 @@ public abstract class EnemySettings {
         public void damage(boolean damaged,int damagecounter){
         if (test){
             damage =damaged;
-            k1=damagecounter;
+            dmg =damagecounter;
             test=false;
         }
-        k1--;
+        dmg--;
         }
 
 
@@ -219,10 +254,10 @@ public abstract class EnemySettings {
             g.drawImage(image1[enemyAnimation()], x, y, width, height, null);
         }
         if (image2!=null) {
-            g.drawImage(image2[enemyAnimation()], x, y, width, height, null);
+            g.drawImage(image2[enemyAnimation()], x+posun, y, width*otoc, height, null);
         }
 
-            if (damage&&k1==1) {
+            if (damage&& dmg ==1) {
 
                 barwidth = width -2;
                 barheight= height -60;
@@ -238,9 +273,12 @@ public abstract class EnemySettings {
             }
         }
 
+    public boolean isMoving() {
+        return moving;
+    }
 
-    public int getK1() {
-        return k1;
+    public int getDmg() {
+        return dmg;
     }
 
 

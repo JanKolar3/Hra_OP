@@ -5,31 +5,31 @@ import java.awt.event.*;
 
 public class Shield implements MouseMotionListener, KeyListener {
 
-    Image[] SHIELDPUSH = SpriteLoader.getFrames("/shieldAnimationPush.png",16,16,4);
-    Image[] SHIELD = SpriteLoader.getFrames("/shieldAnimation.png",16,16,4);
+    Image[] SHIELDPUSH = SpriteLoader.getFrames("/Player/shieldAnimationPush.png",16,16,4);
+    Image[] SHIELD = SpriteLoader.getFrames("/Player/shieldAnimation.png",16,16,4);
 
 
-    Player player;
+    private Player player;
 
     private int cooldown=10,cooldownAktivace=100;
-    private int sx;
-    private int sy;
+    private int mousex;
+    private int mousey;
     private int x;
     private int y;
-    private int w;
-    private int h;
-    private int dx,dy;
-    private int otoceni, posun, zmenseni=1, posunh;
+    private int width;
+    private int height;
+    private int anglex, angley;
+    private int rotate, movex, hitboxSize =1, hitboxMove;
     private int radius = 50;
 
     private int index, indexPush;
 
     private int shieldMode=1;
 
-    private boolean je= false;
-    private boolean je1= false;
-    private boolean aktivace= false;
-    private boolean akt=false;
+    private boolean shieldReturn = false;
+    private boolean shiueldBounce = false;
+    private boolean aktivationBounce = false;
+    private boolean repeat =false;
 
 
 
@@ -37,100 +37,98 @@ public class Shield implements MouseMotionListener, KeyListener {
 
     public Shield(Player player, int s_w, int s_h) {
         this.player = player;
-        this.w = s_w;
-        this.h = s_h;
+        this.width = s_w;
+        this.height = s_h;
     }
 
 
     public void shieldRotate(){
         if (player != null) {
-            dx = sx - player.getX();
-            dy = sy - player.getY();
-            double angle = Math.atan2(dy, dx);
+            anglex = mousex - player.getX();
+            angley = mousey - player.getY();
+            double angle = Math.atan2(angley, anglex);
 
-            int shieldX = (int) (player.getX() + Math.cos(angle) * radius);
-            int shieldY = (int) (player.getY() + Math.sin(angle) * radius);
+            x = (int) (player.getX() + Math.cos(angle) * radius);
+            y = (int) (player.getY() + Math.sin(angle) * radius);
+            x += 10;
 
-            x =shieldX;
-            y =shieldY;
-            x +=10;
-
+            cooldown();
+            shieldAnimation();
         }
-        cooldown();
-        shieldAnimation();
     }
-    public void cooldown(){
-        if(je) {
+    private void cooldown(){
+        if(shieldReturn) {
             cooldown--;
-
             if (cooldown <= 0) {
                 radius--;
-
                 shieldMode = 1;
-
                 if (radius <= 50) {
                     radius = 50;
                     cooldown = 20;
-                    je = false;
+                    shieldReturn = false;
                 }
-
             }
         }
-        if (akt) {
+        if (repeat) {
             cooldownAktivace--;
             if (cooldownAktivace <= 0) {
                 cooldownAktivace = 100;
-                aktivace = false;
-                akt = false;
+                aktivationBounce = false;
+                repeat = false;
             }
         }
     }
 
-    public void shieldAnimation(){
+    private void shieldAnimation(){
             if (y >= player.getY()&& y <= player.getY()+40){
                 index=1;
                 indexPush=1;
-                zmenseni=2;
-                posunh=10;
+                hitboxSize =2;
+                hitboxMove =10;
                 if(x <=player.getX()+20){
-                    otoceni=-1;
-                    posun=50;
+                    rotate=-1;
+                    movex =50;
 
-                }else{ otoceni=1;posun=0;}
-            }else if(y >=player.getY()){index=0;indexPush=0;zmenseni=1;posunh=0;}
+                }else{ rotate=1;
+                    movex =0;}
+            }else if(y >=player.getY()){index=0;indexPush=0;
+                hitboxSize =1;
+                hitboxMove =0;}
 
         if (y <= player.getY()&& y >= player.getY()-40){
             index=2;
             indexPush=2;
-            zmenseni=2;
-            posunh=10;
+            hitboxSize =2;
+            hitboxMove =10;
             if(x <=player.getX()+20){
-                otoceni=-1;
-                posun=50;
+                rotate=-1;
+                movex =50;
 
-            }else {otoceni=1;posun=0;}
-        }else if (y <= player.getY()-40){index=3;indexPush=3;zmenseni=1;posunh=0;}
+            }else {rotate=1;
+                movex =0;}
+        }else if (y <= player.getY()-40){index=3;indexPush=3;
+            hitboxSize =1;
+            hitboxMove =0;}
     }
 
 
     public Rectangle hitBox() {
-            return new Rectangle(x +posunh, y, w /zmenseni, h);
+            return new Rectangle(x + hitboxMove, y, width / hitboxSize, height);
     }
     public boolean collision(ProjectileSettings projectileS){
         return projectileS.hitBox().intersects(hitBox());
     }
-    public void paint(Graphics g) {
-        if (!je) {
-            g.drawImage(SHIELD[index], x +posun, y, w *otoceni, h, null);
+    public void drawShield(Graphics g) {
+        if (!shieldReturn) {
+            g.drawImage(SHIELD[index], x + movex, y, width *rotate, height, null);
         }
-
-        if (je){
-            g.drawImage(SHIELDPUSH[indexPush], x +posun, y, w *otoceni, h, null);
-            if (je1) {
+        if (shieldReturn){
+            g.drawImage(SHIELDPUSH[indexPush], x + movex, y, width *rotate, height, null);
+            if (shiueldBounce) {
                 shieldMode = 2;
                 radius=65;
-                aktivace = true;
-                je1 = false;
+                aktivationBounce = true;
+                shiueldBounce = false;
             }
         }
     }
@@ -142,8 +140,8 @@ public class Shield implements MouseMotionListener, KeyListener {
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        sy =e.getY();
-        sx =e.getX();
+        mousey =e.getY();
+        mousex =e.getX();
     }
 
     public int getCooldownAktivace() {
@@ -165,18 +163,18 @@ public class Shield implements MouseMotionListener, KeyListener {
     public void setY(int y) {
         this.y = y;
     }
-    public int getW() {
-        return w;
+    public int getWidth() {
+        return width;
     }
 
-    public void setW(int w) {
-        this.w = w;
+    public void setWidth(int width) {
+        this.width = width;
     }
-    public int getH() {
-        return h;
+    public int getHeight() {
+        return height;
     }
-    public void setH(int h) {
-        this.h = h;
+    public void setHeight(int height) {
+        this.height = height;
     }
 
     @Override
@@ -187,15 +185,11 @@ public class Shield implements MouseMotionListener, KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         char znk = e.getKeyChar();
-        if (znk == 'r'&& !aktivace){
+        if (znk == 'r'&& !aktivationBounce){
 
-            je = true;
-            je1= true;
-            akt = true;
-
-
-//            System.out.println("RRRRR");
-
+            shiueldBounce = true;
+            shieldReturn = true;
+            repeat = true;
 
         }
 
@@ -212,12 +206,12 @@ public class Shield implements MouseMotionListener, KeyListener {
         return shieldMode;
     }
 
-    public boolean isAktivace() {
-        return aktivace;
+    public boolean isAktivationBounce() {
+        return aktivationBounce;
     }
 
-    public boolean isJe1() {
-        return je1;
+    public boolean isShiueldBounce() {
+        return shiueldBounce;
     }
 }
 
