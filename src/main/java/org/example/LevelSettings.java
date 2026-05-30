@@ -1,73 +1,41 @@
 package org.example;
 
 public class LevelSettings {
-    private int wave=6;
-    private int level=1;
-    private int max;
+    private int wave=11;
+    private int max=0;
     private int damage=1;
     private boolean victory=false;
 
     public void waveSettings() {
-        if (level<=1) {
-            if (wave > 0) {
-                wave--;
-            }
-            if (wave <= 0) {
-                level++;
-                wave = 5;
-                if (level==1) {
-                    damage = 2;
-                }
-            }
 
+        if (wave > 0) {
+            wave--;
         }
-        if (level>=3) {
+        if (wave <= 5) {
+                damage = 2;
+        }
+        if  (wave<=0){
             victory=true;
-            level=0;
             wave=5;
             max=1;
-
         }
     }
 
     public int enemyMax(){
-
-        switch (wave) {
-            case 5:
-
-            case 4:
-                max = 1;
-                break;
-            case 3:
-                max=2;
-                break;
-            case 2:
-                max=3;
-                break;
-            case 1:
-                max=4;
-                break;
-            case 0:
-                max=5;
-                break;
+        if (max <=6) {
+            max += 1;
         }
-
-    return max;
+        return max;
     }
     public void reset() {
         victory=false;
-        wave=5;
-        max=1;
-        level=0;
+        wave=11;
+        max=0;
         damage=1;
     }
 
     public boolean isVictory() {
         return victory;
-    }
-
-    public void setVictory(boolean victory) {
-        this.victory = victory;
     }
 
     public int getDamage() {
@@ -82,7 +50,4 @@ public class LevelSettings {
         return wave;
     }
 
-    public int getLevel() {
-        return level;
-    }
 }
