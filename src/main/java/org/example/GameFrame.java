@@ -5,7 +5,7 @@ import javax.swing.*;
 public class GameFrame extends JFrame {
 
     public GameFrame() {
-        setTitle("Game");
+        setTitle("The Last Shield");
         setSize(655, 675);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

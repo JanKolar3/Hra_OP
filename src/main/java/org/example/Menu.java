@@ -71,6 +71,9 @@ public class Menu extends JPanel implements MouseListener, MouseMotionListener {
             g.drawImage(i_button_play, startX, startY, startWidth, startHeight, null);
             g.drawImage(i_button_stop, exitX, exitY, exitWidht, exitHeight, null);
         }
+        g.setColor(Color.black);
+        g.setFont(new Font("Arial", Font.BOLD,20));
+        g.drawString("Menu - Q",270,600);
 
     }
 

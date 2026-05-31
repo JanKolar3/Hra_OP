@@ -8,6 +8,7 @@ public class PanelInfo extends JPanel implements KeyListener {
 
     Image[] HEALTHS = SpriteLoader.getFrames("/Info/healts.png",16,16,3);
     private final String OVER = "src/main/resources/Info/GameOver.png";
+    private final String VICTORY = "src/main/resources/Info/Victory.png";
     private final String POUSE = "src/main/resources/Info/pause.png";
     private int mode1,mode2,mode3;
     private int akt=100,akti=100-1;
@@ -15,13 +16,15 @@ public class PanelInfo extends JPanel implements KeyListener {
     private boolean victory = false;
     private boolean pause = false;
     private boolean paused =false;
-    private Image over;
-    private Image pouse;
+    private Image victoryImg;
+    private Image overImg;
+    private Image pouseImg;
 
     private String wave1,score1;
     public PanelInfo(){
-        over = new ImageIcon(OVER).getImage();
-        pouse = new ImageIcon(POUSE).getImage();
+        overImg = new ImageIcon(OVER).getImage();
+        pouseImg = new ImageIcon(POUSE).getImage();
+        victoryImg = new ImageIcon(VICTORY).getImage();
 
     }
 
@@ -98,25 +101,21 @@ public class PanelInfo extends JPanel implements KeyListener {
         g.drawString("Wave: "+wave1+" / 10", 330, 35);
 
         if (gameOver){
-            g.drawImage(over,0,0,640,640,null);
+            g.drawImage(overImg,0,0,640,640,null);
             g.setFont(new Font("Arial", Font.BOLD,50));
-            g.setColor(Color.RED);
-            g.drawString("Game Over", 200, 320);
-            g.drawString("Score: "+score1, 200, 400);
+            g.setColor(Color.blue);
+            g.drawString("Score: "+score1, 200, 600);
         }
 
         if (victory) {
+            g.drawImage(victoryImg,0,0,640,640,null);
             g.setFont(new Font("Arial", Font.BOLD,64));
-            g.setColor(Color.GREEN);
-            g.drawString("Victory", 150, 320);
-            g.drawString("Score: "+score1, 150, 400);
+            g.setColor(Color.black);
+            g.drawString("Score: "+score1, 200, 450);
         }
         if (pause) {
-            g.drawImage(pouse,0,0,655,675,null);
+            g.drawImage(pouseImg,0,0,655,675,null);
         }
-
-
-
     }
 
 

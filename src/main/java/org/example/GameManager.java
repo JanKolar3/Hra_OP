@@ -150,7 +150,6 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
                 }
             }
         }
-
         }
 
     public void reset(){
