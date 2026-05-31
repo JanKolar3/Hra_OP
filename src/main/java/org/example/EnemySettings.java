@@ -10,40 +10,33 @@ public abstract class EnemySettings {
     private final int OKOLIK=1;
     private final int RADIUS=120;
 
-    private final int OHRANICENI1 = 600;
-    private final int OHRANICENI2 = -42;
-
-    Random random = new Random();
+    private Random random = new Random();
 
     Image image1[];
     Image image2[];
 
     private int x,y,width,height;
 
-    private int barheight,barwidth;
+    private int barHeight, barWidth;
 
     private final int cooldown = 240;
-    private int shootcooldown = random.nextInt(cooldown);
+    private int shootCooldown = random.nextInt(20,cooldown);
 
     private final int speed;
-    private int animationCooldown=random.nextInt(30);
-    private int index1;
     private int randomMove;
     private int cooldownMove;
-    private int dmg;
+    private int damage;
     private int borderx=0;
     private int bordery=0;
 
     private boolean closeMode;
-    private boolean damage;
-    private boolean test = true;
+    private boolean damaged=false;
+    private boolean oneTime = true;
     private boolean border=false;
-
-    private boolean right =false;
-    private boolean left=false;
     private boolean moving=false;
-    private int otoc=-1;
-    private int posun=80;
+
+    private int rotate =-1;
+    private int moveX =80;
     private int timer = 50;
     private boolean running=false;
 
@@ -55,11 +48,11 @@ public abstract class EnemySettings {
         this.speed = speed;
     }
 
-        public void cooldownProj(Player player, ArrayList<ProjectileSettings> projectilS){
-            shootcooldown --;
-            if (shootcooldown<=0){
+        public void cooldownProjectile(Player player, ArrayList<ProjectileSettings> projectilS){
+            shootCooldown--;
+            if (shootCooldown <=0){
                 update(player,projectilS);
-                shootcooldown = cooldown;
+                shootCooldown = cooldown;
             }
         }
         public void update(Player player, ArrayList<ProjectileSettings> projectilS){}
@@ -84,7 +77,6 @@ public abstract class EnemySettings {
                         y += OKOLIK;
                         closeMode =true;
                 }
-
                 if (!closeMode &&!moving) {
 
                     cooldownMove--;
@@ -203,12 +195,12 @@ public abstract class EnemySettings {
     private void rotate(Player player){
         if (closeMode ==false&&running==false) {
             if (player.getX() > x) {
-                otoc = 1;
-                posun = 0;
+                rotate = 1;
+                moveX = 0;
             }
             if (player.getX() < x) {
-                otoc = -1;
-                posun = 80;
+                rotate = -1;
+                moveX = 80;
             }
         }
         if (closeMode ==true||running==true) {
@@ -216,13 +208,13 @@ public abstract class EnemySettings {
             running=true;
             moving = true;
             if (player.getX() > x) {
-                otoc = -1;
-                posun = 80;
+                rotate = -1;
+                moveX = 80;
                 x--;
             }
             if (player.getX() < x) {
-                otoc = 1;
-                posun = 0;
+                rotate = 1;
+                moveX = 0;
                 x++;
             }
             if (timer<=0) {
@@ -232,20 +224,19 @@ public abstract class EnemySettings {
         }
     }
 
-    public int enemyAnimation() {
+    public int enemyAnimation   () {
         return 0;
     }
 
         public Rectangle hitBox(){
             return new Rectangle(x +(getWidth()/4), y +(getWidth()/4), width /2, height /2);
         }
-        public void damage(boolean damaged,int damagecounter){
-        if (test){
-            damage =damaged;
-            dmg =damagecounter;
-            test=false;
+        public void damage(int damagecounter){
+        if (oneTime){
+            damage =damagecounter;
+            oneTime =false;
         }
-        dmg--;
+        damage--;
         }
 
 
@@ -254,22 +245,22 @@ public abstract class EnemySettings {
             g.drawImage(image1[enemyAnimation()], x, y, width, height, null);
         }
         if (image2!=null) {
-            g.drawImage(image2[enemyAnimation()], x+posun, y, width*otoc, height, null);
+            g.drawImage(image2[enemyAnimation()], x+ moveX, y, width* rotate, height, null);
         }
 
-            if (damage&& dmg ==1) {
+            if (damage ==1) {
 
-                barwidth = width -2;
-                barheight= height -60;
+                barWidth = width -2;
+                barHeight = height -60;
 
                 g.setColor(Color.gray);
-                g.fillRect(x, y - 20, barwidth, barheight);
+                g.fillRect(x, y - 20, barWidth, barHeight);
 
                 g.setColor(Color.red);
-                g.fillRect(x, y - 20, barwidth/2, barheight);
+                g.fillRect(x, y - 20, barWidth /2, barHeight);
 
                 g.setColor(Color.black);
-                g.drawRect(x - 1, y - 21, barwidth + 1, barheight+1);
+                g.drawRect(x - 1, y - 21, barWidth + 1, barHeight +1);
             }
         }
 
@@ -277,8 +268,8 @@ public abstract class EnemySettings {
         return moving;
     }
 
-    public int getDmg() {
-        return dmg;
+    public int getDamage() {
+        return damage;
     }
 
 
@@ -287,9 +278,6 @@ public abstract class EnemySettings {
         }
 
 
-        public int getHeight() {
-            return height;
-        }
 
         public int getX() {
             return x;
@@ -299,9 +287,6 @@ public abstract class EnemySettings {
             return y;
         }
 
-        public int getIndex() {
-        return index1;
-    }
 
     public void setX(int x) {
         this.x = x;
@@ -311,12 +296,6 @@ public abstract class EnemySettings {
         this.y = y;
     }
 
-    public boolean isLeft() {
-        return left;
-    }
 
-    public boolean isRight() {
-        return right;
-    }
 }
 

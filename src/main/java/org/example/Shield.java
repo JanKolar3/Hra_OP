@@ -11,15 +11,15 @@ public class Shield implements MouseMotionListener, KeyListener {
 
     private Player player;
 
-    private int cooldown=10,cooldownAktivace=100;
-    private int mousex;
-    private int mousey;
+    private int cooldown=10, cooldownAktivation =100;
+    private int mouseX;
+    private int mouseY;
     private int x;
     private int y;
     private int width;
     private int height;
-    private int anglex, angley;
-    private int rotate=1, movex=0, hitboxSize =1, hitboxMove;
+    private int angleX, angleY;
+    private int rotate=1, moveX =0, hitboxSize =1, hitboxMove;
     private int radius = 50;
 
     private int index, indexPush;
@@ -44,9 +44,9 @@ public class Shield implements MouseMotionListener, KeyListener {
 
     public void shieldRotate(){
         if (player != null) {
-            anglex = mousex - player.getX();
-            angley = mousey - player.getY();
-            double angle = Math.atan2(angley, anglex);
+            angleX = mouseX - player.getX();
+            angleY = mouseY - player.getY();
+            double angle = Math.atan2(angleY, angleX);
 
             x = (int) (player.getX() + Math.cos(angle) * radius);
             y = (int) (player.getY() + Math.sin(angle) * radius);
@@ -70,9 +70,9 @@ public class Shield implements MouseMotionListener, KeyListener {
             }
         }
         if (repeat) {
-            cooldownAktivace--;
-            if (cooldownAktivace <= 0) {
-                cooldownAktivace = 100;
+            cooldownAktivation--;
+            if (cooldownAktivation <= 0) {
+                cooldownAktivation = 100;
                 aktivationBounce = false;
                 repeat = false;
             }
@@ -87,10 +87,10 @@ public class Shield implements MouseMotionListener, KeyListener {
                 hitboxMove =10;
                 if(x <=player.getX()+20){
                     rotate=-1;
-                    movex =50;
+                    moveX =50;
 
                 }else{ rotate=1;
-                    movex =0;}
+                    moveX =0;}
             }else if(y >=player.getY()){index=0;indexPush=0;
                 hitboxSize =1;
                 hitboxMove =0;}
@@ -102,10 +102,10 @@ public class Shield implements MouseMotionListener, KeyListener {
             hitboxMove =10;
             if(x <=player.getX()+20){
                 rotate=-1;
-                movex =50;
+                moveX =50;
 
             }else {rotate=1;
-                movex =0;}
+                moveX =0;}
         }else if (y <= player.getY()-40){index=3;indexPush=3;
             hitboxSize =1;
             hitboxMove =0;}
@@ -120,10 +120,10 @@ public class Shield implements MouseMotionListener, KeyListener {
     }
     public void drawShield(Graphics g) {
         if (!shieldReturn) {
-            g.drawImage(SHIELD[index], x + movex, y, width *rotate, height, null);
+            g.drawImage(SHIELD[index], x + moveX, y, width *rotate, height, null);
         }
         if (shieldReturn){
-            g.drawImage(SHIELDPUSH[indexPush], x + movex, y, width *rotate, height, null);
+            g.drawImage(SHIELDPUSH[indexPush], x + moveX, y, width *rotate, height, null);
             if (shiueldBounce) {
                 shieldMode = 2;
                 radius=65;
@@ -140,12 +140,12 @@ public class Shield implements MouseMotionListener, KeyListener {
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        mousey =e.getY();
-        mousex =e.getX();
+        mouseY =e.getY();
+        mouseX =e.getX();
     }
 
-    public int getCooldownAktivace() {
-        return cooldownAktivace;
+    public int getCooldownAktivation() {
+        return cooldownAktivation;
     }
 
     public int getS_x() {

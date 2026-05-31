@@ -55,15 +55,15 @@ public class ProjectileSettings {
         return new Rectangle(x+(getWidth()/4),y+(getWidth()/4),width/2,height/2);
     }
 
-    public boolean collision(Player player){return player.hitBox().intersects(hitBox());}
+    public boolean collisionPlayer(Player player){return player.hitBox().intersects(hitBox());}
 
-    public boolean collision1(EnemySettings enemyS){return enemyS.hitBox().intersects(this.hitBox());}
+    public boolean collisionEnemy(EnemySettings enemyS){return enemyS.hitBox().intersects(this.hitBox());}
 
-    public boolean collision2(Shield shield){return shield.hitBox().intersects(hitBox());}
+    public boolean collisionShield(Shield shield){return shield.hitBox().intersects(hitBox());}
 
 
 
-    public void paintComponents(Graphics g){
+    public void drawProjectile(Graphics g){
         if (damage) {
             g.drawImage(image1, x, y, width, height, null);
         }
@@ -72,9 +72,7 @@ public class ProjectileSettings {
     }
 
 
-    public boolean isDestroy() {
-        return destroy;
-    }
+    public boolean isDestroy() {return destroy;}
 
     public int getX() {
         return x;
@@ -96,17 +94,7 @@ public class ProjectileSettings {
         return width;
     }
 
-    public int getHeight() {
-        return height;
-    }
-
-    public int getSpeed() {
-        return speed;
-    }
-
-    public int getMode() {
-        return mode;
-    }
+    public int getMode() {return mode;}
 
     public void setMode(int mode) {
         this.mode = mode;
@@ -116,7 +104,4 @@ public class ProjectileSettings {
         return damage;
     }
 
-    public void setSpeed(int speed) {
-        this.speed = speed;
-    }
 }

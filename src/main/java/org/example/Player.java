@@ -9,14 +9,14 @@ public class Player implements KeyListener {
     Image[] PLAYER = SpriteLoader.getFrames("/Player/Player.png",16,16,4);
 
     private int rotate = 1;
-    private int movex = 0;
+    private int moveX = 0;
 
     private int index = 0;
 
     private int x,y;
     private int width,height;
     private final int speed = 2;
-    private int cooldown=20,cooldownstay=0;
+    private int cooldown=20, cooldownStay =0;
     private boolean up=false,down=false,left=false,right=false;
     private int move;
 
@@ -65,10 +65,10 @@ public class Player implements KeyListener {
     }
     private void rotate(){
         if (left) {
-            movex = 80;
+            moveX = 80;
             rotate = -1;
         }else if (right){
-            movex = 0;rotate=1;}
+            moveX = 0;rotate=1;}
     }
     private void animation(){
         cooldown--;
@@ -79,22 +79,23 @@ public class Player implements KeyListener {
             }
             cooldown = 10;
         }
-        cooldownstay=0;
+        cooldownStay =0;
     }
 
     private void playerAnimation() {
         switch (move) {
             case 0:
-                cooldownstay++;
-                if (cooldownstay >=0){
-                if (cooldownstay > 20&&cooldownstay < 40) {
+                cooldownStay++;
+                if (cooldownStay >=0){
+                if (cooldownStay > 20&& cooldownStay < 40) {
                     index = 0;
                 }
-                    if (cooldownstay > 100) {
+                    if (cooldownStay > 100) {
                         index = 3;
-                        cooldownstay = 0;
+                        cooldownStay = 0;
                     }
-                }else {index = 1;cooldownstay=0;}
+                }else {index = 1;
+                    cooldownStay =0;}
                 cooldown=0;
                 break;
             case 1:
@@ -116,7 +117,7 @@ public class Player implements KeyListener {
 
 
     public void drawPlayer(Graphics g) {
-        g.drawImage(PLAYER[index],x+ movex,y,width*rotate,height,null );
+        g.drawImage(PLAYER[index],x+ moveX,y,width*rotate,height,null );
     }
 
 
