@@ -68,19 +68,18 @@ public class Menu extends JPanel implements MouseListener, MouseMotionListener {
     public void vykresleniMenu(Graphics g) {
 
         g.drawImage(i_menu,x,y,w,h,null);
-        g.drawImage(i_button_play,sx,sy,sw,sh,null);
-        g.drawImage(i_button_stop,ex,ey,ew,eh,null);
 
-        if (getLoccation()==1) {
+        if (loccation==1) {
             g.drawImage(i_button_playPush, sx, sy, sw, sh, null);
-
+            g.drawImage(i_button_stop, ex, ey, ew, eh, null);
         }
 
-        if (getLoccation()==2) {
+        if (loccation==2) {
             g.drawImage(i_button_stopPush, ex, ey, ew, eh, null);
+            g.drawImage(i_button_play, sx, sy, sw, sh, null);
         }
 
-        else if (getLoccation()==0) {
+        else if (loccation==0) {
             g.drawImage(i_button_play, sx, sy, sw, sh, null);
             g.drawImage(i_button_stop, ex, ey, ew, eh, null);
         }

@@ -199,9 +199,12 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
 
     @Override
     public void keyPressed(KeyEvent e) {
-        shield.keyPressed(e);
-        player.keyPressed(e);
-        info.keyPressed(e);
+        if (!info.isPause()) {
+            shield.keyPressed(e);
+            player.keyPressed(e);
+        }
+            info.keyPressed(e);
+
 
 
     }
@@ -210,6 +213,7 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
     public void keyReleased(KeyEvent e) {
         player.keyReleased(e);
         shield.keyReleased(e);
+        info.keyReleased(e);
 
     }
 

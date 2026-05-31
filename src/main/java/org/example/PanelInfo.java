@@ -14,7 +14,7 @@ public class PanelInfo extends JPanel implements KeyListener {
     private boolean gameOver = false;
     private boolean victory = false;
     private boolean pause = false;
-    private boolean poused=false;
+    private boolean paused =false;
     private Image over;
     private Image pouse;
 
@@ -132,24 +132,27 @@ public class PanelInfo extends JPanel implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         char key = e.getKeyChar();
-        if (key=='q'){
-            if (poused==false) {
-                pause = true;
-                poused=true;
+        if (!gameOver&&!victory) {
+            if (key == 'q') {
+                if (pause == false&&paused == false) {
+                    pause = true;
+                }
+                if (pause == true&&paused == true) {
+                    pause=false;
+                }
 
             }
-            else if(poused==true){
-                pause = false;
-                poused=false;
-            }
-
         }
 
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-
+        char key = e.getKeyChar();
+        if (key == 'q') {
+        if (paused==false){paused = true;}
+        else if (paused == true){paused=false;}
+        }
     }
 
     public boolean isPause() {
