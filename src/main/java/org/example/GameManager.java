@@ -33,7 +33,6 @@ public class GameManager extends JPanel implements KeyListener, MouseMotionListe
     private int x=0;
     private int y=0;
 
-
     public GameManager() {
         image1 = new ImageIcon(SOUBOR_POZADI).getImage();
         image2 = new ImageIcon(SOUBRO_OHRANI).getImage();
